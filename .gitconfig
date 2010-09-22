@@ -1,0 +1,5 @@
+[user]
+	name = Neil Williams
+	email = neil@quantumviolet.com
+[diff]
+	external = /home/neil/.bin/diff.sh

@@ -1,8 +1,13 @@
-" turn off vi compatibility
-set nocompatible
+" load pathogen
+filetype off
+call pathogen#runtime_append_all_bundles()
+filetype plugin indent on
 
-" line numbers
-set ruler
+" disable modelines for security
+set modelines=0
+
+" use utf8
+" set encoding=utf-8
 
 " show commands while typing
 set showcmd
@@ -10,6 +15,7 @@ set showcmd
 " tabulation
 set expandtab
 set smarttab
+set softtabstop=4
 set tabstop=4
 set shiftwidth=4
 
@@ -20,6 +26,13 @@ set smartindent
 " space around the current line
 set scrolloff=4
 
+" use metacharacters in regular expressions by default
+nnoremap / /\v
+vnoremap / /\v
+
+" global replacement by default
+set gdefault
+
 " case insensitive matching unless otherwise specified
 set ignorecase
 set smartcase
@@ -27,6 +40,9 @@ set smartcase
 " search while typing
 set hlsearch
 set incsearch
+
+" allow me to turn off highlighting after done with the search
+map <leader><space> :noh<cr>
 
 " file completion
 set wildmenu
@@ -41,22 +57,13 @@ set guitablabel=%-0.12t%m
 nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
 
-" highlight lines that are too long
-highlight OverLength ctermbg=red ctermfg=white guibg=red guifg=white
-match OverLength '\%81v.*'
-
-" highlight redundant whitespace and tabs
-highlight RedundantSpaces ctermbg=red guibg=red
-match RedundantSpaces /\s\+$\| \+\ze\t|\t/
-
 " gvim tabs
 map tl :tabnext<CR>
 map th :tabprev<CR>
 map <C-t> :tabnew<CR>
 
 let mapleader = ","
-map <leader>t :NERDTreeToggle<CR>
-map <leader>o goq
+map <leader>n :NERDTreeToggle<CR>
 
 " hide generated files from NERDTree
 let NERDTreeIgnore=['\.pyc$', '\~$', '^ui_', '^moc_', '\.png$', '\.gif$']
@@ -72,6 +79,10 @@ syntax enable
 filetype on
 filetype plugin on
 filetype indent on
+
+" use ack for searching within projects
+let g:ackprg="ack-grep -H --nocolor --nogroup --column"
+map <leader>a :Ack 
 
 " keep visual selection after indenting
 vmap > >gv
