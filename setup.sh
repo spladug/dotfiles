@@ -1,5 +1,7 @@
 #!/bin/bash
 
+DOTFILEDIR=$(dirname $(readlink -f $0))
+
 # determine if X is installed or not 
 # (tells us which vim to use)
 # ...there has to be a better way to do this
@@ -18,14 +20,13 @@ git submodule update
 
 # build the command-t c extension
 pushd .vim/bundle/command-t
-
 rake make
-
 popd
 
 # make a listing of what there is to link
-DOTFILEDIR=$(readlink -f $(pwd))
+pushd $DOTFILESDIR
 FILES=$(ls -a | grep "^\." | grep -v -e "^..\?$" -e ".git$" -e ".gitmodules$")
+popd 
 
 # backup any extant files
 BACKUPDIR=~/.dotfiles_backup
