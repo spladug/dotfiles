@@ -1,6 +1,11 @@
 #!/bin/bash
 
+WORKINGDIR=$(pwd)
 DOTFILEDIR=$(dirname $(readlink -f $0))
+
+# make a listing of what there is to link
+cd $DOTFILEDIR
+FILES=$(ls -a | grep "^\." | grep -v -e "^..\?$" -e ".git$" -e ".gitmodules$")
 
 # determine if X is installed or not 
 # (tells us which vim to use)
@@ -19,14 +24,8 @@ git submodule init
 git submodule update
 
 # build the command-t c extension
-pushd .vim/bundle/command-t
+cd .vim/bundle/command-t
 rake make
-popd
-
-# make a listing of what there is to link
-pushd $DOTFILESDIR
-FILES=$(ls -a | grep "^\." | grep -v -e "^..\?$" -e ".git$" -e ".gitmodules$")
-popd 
 
 # backup any extant files
 BACKUPDIR=~/.dotfiles_backup
@@ -43,3 +42,6 @@ done
 for file in $FILES; do
     ln -s ${DOTFILEDIR}/${file} ~/${file}
 done
+
+# all done, go back to where we started
+cd $WORKINGDIR
