@@ -102,7 +102,9 @@ function seperator {
     COLOR=$RED
   fi
 
-  echo "${COLOR}________________________________________________________________________________$RST"
+  echo -n $COLOR
+  printf '_%.0s' `seq 1 $COLUMNS`
+  echo -n $RST
 }
 
 export -f seperator
