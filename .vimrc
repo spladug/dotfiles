@@ -7,7 +7,7 @@ filetype plugin indent on
 set modelines=0
 
 " use utf8
-" set encoding=utf-8
+set encoding=utf-8
 
 " show commands while typing
 set showcmd
@@ -22,6 +22,10 @@ set shiftwidth=4
 " indentation
 set autoindent
 set smartindent
+
+" python tweaks 
+au FileType python set complete+=k~/.vim/syntax/python.vim isk+=.,(
+let python_slow_sync=1
 
 " space around the current line
 set scrolloff=4

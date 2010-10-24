@@ -17,7 +17,7 @@ else
 fi
 
 # install the prereqs
-sudo aptitude install $VIMPACKAGE ruby-dev rake build-essential
+sudo aptitude install $VIMPACKAGE ruby-dev rake ttf-bitstream-vera
 
 # check out the submodules
 git submodule init
