@@ -1,3 +1,10 @@
 #!/bin/bash
 
-meld $2 $5
+case $OSTYPE in 
+    linux-gnu)
+        meld $2 $5
+        ;;
+    darwin*)
+        opendiff "$2" "$5" -merge "$2"
+        ;;
+esac

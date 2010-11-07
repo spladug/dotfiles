@@ -58,6 +58,13 @@ fi
 # use a private bin
 PATH=~/.bin:$PATH
 
+# platform-specific extra directories
+case $OSTYPE in
+    darwin*)
+        PATH=/opt/local/bin:~/.gem/ruby/1.8/bin:$PATH
+        ;;
+esac
+
 # default file permission of -rw-r----- (drwxr-----)
 umask 027
 
@@ -103,18 +110,16 @@ function seperator {
   fi
 
   echo -n $COLOR
-  printf '_%.0s' `seq 1 $COLUMNS`
+  case $OSTYPE in
+    linux-gnu)
+      printf '_%.0s' `seq 1 $COLUMNS`
+      ;;
+    darwin*)
+      jot -s "" -b "_" $COLUMNS -n
+      ;;
+  esac
   echo -n $RST
 }
 
-export -f seperator
-
-function indicate-virtualenv {
-    if [ -n "$VIRTUAL_ENV" ]; then
-        name=$(basename $VIRTUAL_ENV)
-        echo "${YLW}[${name}] ${RST}: "
-    fi
-}
-
-export PS1='$(seperator)\n${MAG}\u${RST}@${BLU}\h${RST} : $(indicate-virtualenv)${WHT}\w${RST}\n\$ '
+export PS1='$(seperator)\n${MAG}\u${RST}@${BLU}\h${RST} : ${WHT}\w${RST}\n\$ '
 
