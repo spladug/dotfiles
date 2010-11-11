@@ -68,6 +68,13 @@ esac
 # default file permission of -rw-r----- (drwxr-----)
 umask 027
 
+function sudo() {
+    local UMASK=$(umask);
+    umask 022;
+    sh -c "sudo $*";
+    umask $UMASK
+}
+
 ########################################################################
 # colorized prompt stuff
 ########################################################################
