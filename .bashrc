@@ -55,6 +55,9 @@ fi
 ########################################################################
 # basic neil stuff
 ########################################################################
+# vim mode for editing
+set -o vi
+
 # use a private bin
 PATH=~/.bin:$PATH
 
@@ -130,3 +133,7 @@ function seperator {
 
 export PS1='$(seperator)\n${MAG}\u${RST}@${BLU}\h${RST} : ${WHT}\w${RST}\n\$ '
 
+##### some aliases are local to a specific machine
+if [ -f ~/.local_aliases ]; then
+    . ~/.local_aliases
+fi

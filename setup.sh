@@ -8,13 +8,13 @@ case $OSTYPE in
         # (tells us which vim to use)
         # ...there has to be a better way to do this
         if [ -f /usr/bin/startx ]; then
-            VIMPACKAGE=vim-gnome
+            VIMPACKAGE=vim-gnome ttf-bitstream-vera
         else
             VIMPACKAGE=vim-nox
         fi
 
         # install the prereqs
-        sudo aptitude install $VIMPACKAGE ruby-dev rake ttf-bitstream-vera
+        sudo aptitude install $VIMPACKAGE ruby-dev rake 
         ;;
     darwin*)
         READLINK=greadlink

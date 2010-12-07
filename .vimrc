@@ -24,7 +24,7 @@ set autoindent
 set smartindent
 
 " python tweaks 
-au FileType python set complete+=k~/.vim/syntax/python.vim isk+=.,(
+au FileType python set complete+=k~/.vim/syntax/python.vim 
 let python_slow_sync=1
 
 " space around the current line
@@ -55,7 +55,6 @@ set wildmode=list:longest
 " configure gvim
 set guioptions-=T
 set guioptions-=m
-set guitablabel=%-0.12t%m
 
 " scroll a bit faster
 nnoremap <C-e> 3<C-e>
@@ -71,6 +70,7 @@ map <leader>n :NERDTreeToggle<CR>
 
 " hide generated files from NERDTree
 let NERDTreeIgnore=['\.pyc$', '\~$', '^ui_', '^moc_', '\.png$', '\.gif$']
+set wildignore+=*.pyc,*~,*.png,*.gif
 
 " fix backspace
 set backspace=indent,eol,start
@@ -85,8 +85,15 @@ filetype plugin on
 filetype indent on
 
 " use ack for searching within projects
-let g:ackprg="ack-grep -H --nocolor --nogroup --column"
+let g:ackprg="ack -H --nocolor --nogroup --column"
 map <leader>a :Ack 
+
+" highlight columns
+highlight OverLength ctermbg=red ctermfg=white guibg=#592929
+match OverLength /\%81v.\+/
+
+highlight ColorColumn ctermbg=grey ctermfg=white guibg=#2c3032
+set cc=81
 
 " keep visual selection after indenting
 vmap > >gv
