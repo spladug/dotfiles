@@ -2,7 +2,7 @@
 
 # platform-specific stuff 
 case $OSTYPE in
-    linux-gnu)
+    linux-gnu*)
         READLINK=readlink
         # determine if X is installed or not 
         # (tells us which vim to use)

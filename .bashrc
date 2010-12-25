@@ -121,7 +121,7 @@ function seperator {
 
   echo -n $COLOR
   case $OSTYPE in
-    linux-gnu)
+    linux-gnu*)
       printf '_%.0s' `seq 1 $COLUMNS`
       ;;
     darwin*)
