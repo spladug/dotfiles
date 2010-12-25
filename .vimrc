@@ -92,8 +92,6 @@ map <leader>a :Ack
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 match OverLength /\%81v.\+/
 
-highlight ColorColumn ctermbg=grey ctermfg=white guibg=#2c3032
-set cc=81
 
 " keep visual selection after indenting
 vmap > >gv
