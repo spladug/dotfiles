@@ -99,26 +99,45 @@ else
 fi
 
 function seperator {
-  if [ $? -eq 0 ]; then
-    COLOR=$GRN
-  else
-    COLOR=$RED
-  fi
+    if [ $? -eq 0 ]; then
+        COLOR=$GRN
+    else
+        COLOR=$RED
+    fi
 
-  echo -n $COLOR
-  case $OSTYPE in
-    linux-gnu*)
-      printf '_%.0s' `seq 1 $COLUMNS`
-      ;;
-    darwin*)
-      jot -s "" -b "_" $COLUMNS -n
-      ;;
-  esac
-  echo -n $RST
+    if [[ $timer_result > 60 ]]; then
+        echo "${RED}>>> elapsed time ${timer_result}s"
+    elif [[ $timer_result > 15 ]]; then
+        echo "${YLW}>>> elapsed time ${timer_result}s"
+    elif [[ $timer_result > 0 ]]; then
+        echo "${GRN}>>> elapsed time ${timer_result}s"
+    fi
+
+    echo -n $COLOR
+    case $OSTYPE in
+        linux-gnu*)
+            printf '_%.0s' `seq 1 $COLUMNS`
+        ;;
+        darwin*)
+            jot -s "" -b "_" $COLUMNS -n
+        ;;
+    esac
+    echo -n $RST
 }
 
-export PS1='$(seperator)\n${MAG}\u${RST}@${BLU}\h${RST} : ${WHT}\w${RST}\n\$ '
-export PS1='$(seperator)\n${MAG}\u${RST}@${BLU}\h${RST} : ${WHT}\w$(__git_ps1 "${YLW} on branch %s")${RST}\n\$ '
+function timer_start {
+    timer=${timer:-$SECONDS}
+}
+
+function timer_stop {
+    timer_result=$(($SECONDS - $timer))
+    unset timer
+}
+
+trap 'timer_start' DEBUG
+PROMPT_COMMAND=timer_stop
+
+export PS1='$(seperator)\n${MAG}\u${RST}@${BLU}\h${RST} in ${WHT}\w$(__git_ps1 "${YLW} on branch %s")${RST}\n\$ '
 
 ##### load host-local configurations
 if [ -f ~/.bashrc.local ]; then
