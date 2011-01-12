@@ -1,5 +1,8 @@
 # ~/.bashrc: executed by bash(1) for non-login shells.
 
+export GIT_PS1_SHOWDIRTYSTATE=1
+source ~/.dotfiles/git-completion.sh
+
 ########################################################################
 # Stuff from the standard debian/ubuntu .bashrc
 ########################################################################
@@ -115,6 +118,7 @@ function seperator {
 }
 
 export PS1='$(seperator)\n${MAG}\u${RST}@${BLU}\h${RST} : ${WHT}\w${RST}\n\$ '
+export PS1='$(seperator)\n${MAG}\u${RST}@${BLU}\h${RST} : ${WHT}\w$(__git_ps1 "${YLW} on branch %s")${RST}\n\$ '
 
 ##### load host-local configurations
 if [ -f ~/.bashrc.local ]; then

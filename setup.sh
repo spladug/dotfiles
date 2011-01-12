@@ -31,7 +31,7 @@ DOTFILEDIR=$(dirname $($READLINK -f $0))
 
 # make a listing of what there is to link
 cd $DOTFILEDIR
-FILES=$(ls -a | grep "^\." | grep -v -e "^..\?$" -e ".git$" -e ".gitmodules$")
+FILES=$(ls -a | grep "^\." | grep -v -e "^..\?$" -e ".git")
 
 # check out the submodules
 git submodule init
