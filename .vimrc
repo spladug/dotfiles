@@ -69,8 +69,8 @@ let mapleader = ","
 map <leader>n :NERDTreeToggle<CR>
 
 " hide generated files from NERDTree
-let NERDTreeIgnore=['\.pyc$', '\~$', '^ui_', '^moc_', '\.png$', '\.gif$']
-set wildignore+=*.pyc,*~,*.png,*.gif
+let NERDTreeIgnore=['\.pyc$', '\~$', '\.png$', '\.gif$', '\.o$', '\.so$']
+set wildignore+=*.pyc,*~,*.png,*.gif,*.so,*.o
 
 " fix backspace
 set backspace=indent,eol,start
@@ -105,4 +105,6 @@ augroup neils_commands
     au BufEnter [Mm]akefile* set noexpandtab
 
     au BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
+
+    au BufRead *.pig set syntax=pig
 augroup END

@@ -44,33 +44,16 @@ if [ -f ~/.bash_aliases ]; then
     . ~/.bash_aliases
 fi
 
-# enable programmable completion features (you don't need to enable
-# this, if it's already enabled in /etc/bash.bashrc and /etc/profile
-# sources /etc/bash.bashrc).
-# NEIL: currently disabled cus i hate this
-#if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
-#    . /etc/bash_completion
-#fi
-
 ########################################################################
 # basic neil stuff
 ########################################################################
-# vim mode for editing
-set -o vi
-
 # use a private bin
 PATH=~/.bin:$PATH
-
-# platform-specific extra directories
-case $OSTYPE in
-    darwin*)
-        PATH=/opt/local/bin:~/.gem/ruby/1.8/bin:$PATH
-        ;;
-esac
 
 # default file permission of -rw-r----- (drwxr-----)
 umask 027
 
+# make the permissions more permissive when using sudo
 function sudo() {
     local UMASK=$(umask);
     umask 022;
@@ -133,7 +116,7 @@ function seperator {
 
 export PS1='$(seperator)\n${MAG}\u${RST}@${BLU}\h${RST} : ${WHT}\w${RST}\n\$ '
 
-##### some aliases are local to a specific machine
-if [ -f ~/.local_aliases ]; then
-    . ~/.local_aliases
+##### load host-local configurations
+if [ -f ~/.bashrc.local ]; then
+    . ~/.bashrc.local
 fi

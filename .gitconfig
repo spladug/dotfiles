@@ -1,7 +1,0 @@
-[user]
-	name = Neil Williams
-	email = neil@quantumviolet.com
-[diff]
-	external = $HOME/.bin/diff.sh
-[core]
-	editor = /usr/bin/vim
