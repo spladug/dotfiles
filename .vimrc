@@ -95,6 +95,9 @@ map <leader>a :Ack
 highlight OverLength ctermbg=red ctermfg=white guibg=#592929
 match OverLength /\%81v.\+/
 
+" trailing whitespace is bad
+hi ExtraWhitespace guifg=#eeeeec guibg=#880000
+autocmd BufWinEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 
 " keep visual selection after indenting
 vmap > >gv
