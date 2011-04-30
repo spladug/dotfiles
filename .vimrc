@@ -70,7 +70,7 @@ map <leader>n :NERDTreeToggle<CR>
 
 " hide generated files from NERDTree
 let NERDTreeIgnore=['\.pyc$', '\~$', '\.png$', '\.gif$', '\.o$', '\.so$']
-set wildignore+=*.pyc,*~,*.png,*.gif,*.so,*.o
+set wildignore+=*.pyc,*~,*.png,*.gif,*.so,*.o,*.html.py,*.compact.py,*.mobile.py,*.htmllite.py
 
 " fix backspace
 set backspace=indent,eol,start

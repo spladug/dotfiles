@@ -137,6 +137,9 @@ PROMPT_COMMAND=timer_stop
 
 export PS1='$(seperator)\n${MAG}\u${RST}@${BLU}\h${RST} in ${WHT}\w$(__git_ps1 "${YLW} on branch %s")${RST}\n\$ '
 
+# bash completion extensions for tmux
+source ~/.dotfiles/tmux-completion.sh
+
 ##### load host-local configurations
 if [ -f ~/.bashrc.local ]; then
     . ~/.bashrc.local
