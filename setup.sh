@@ -1,5 +1,7 @@
 #!/bin/bash
 
+set -e
+
 # platform-specific stuff 
 case $OSTYPE in
     linux-gnu*)
@@ -8,7 +10,7 @@ case $OSTYPE in
         # (tells us which vim to use)
         # ...there has to be a better way to do this
         if [ -f /usr/bin/startx ]; then
-            VIMPACKAGE=vim-gnome ttf-bitstream-vera
+            VIMPACKAGE="vim-gnome ttf-bitstream-vera"
         else
             VIMPACKAGE=vim-nox
         fi
