@@ -3,6 +3,9 @@
 export GIT_PS1_SHOWDIRTYSTATE=1
 source ~/.dotfiles/git-completion.sh
 
+set -o vi
+bind -m vi-insert "\C-l":clear-screen
+
 ########################################################################
 # Stuff from the standard debian/ubuntu .bashrc
 ########################################################################
