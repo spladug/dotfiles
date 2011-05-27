@@ -9,6 +9,17 @@ let g:pydiction_location = '~/.vim/bundle/pydiction/complete-dict'
 " if pyflakes uses quickfix, the ack plugin gets overridden
 let g:pyflakes_use_quickfix = 0 
 
+" toggle between relative and absolute line numbers with C-l
+function! g:ToggleNuMode()
+    if(&rnu == 1)
+        set nu
+    else
+        set rnu
+    endif
+endfunc
+
+nnoremap <C-L> :call g:ToggleNuMode()<cr>
+
 " disable modelines for security
 set modelines=0
 

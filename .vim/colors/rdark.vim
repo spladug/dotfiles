@@ -28,7 +28,8 @@ endif
 
 " Default Colors
 hi Normal guifg=#babdb6 guibg=#1e2426
-hi NonText guifg=#2c3032 guibg=#2c3032 gui=none
+" hi NonText guifg=#2c3032 guibg=#2c3032 gui=none
+hi NonText guifg=#656763 guibg=#1e2426 gui=none
 hi Cursor guibg=#babdb6
 hi ICursor guibg=#babdb6
 
