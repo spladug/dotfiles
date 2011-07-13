@@ -84,6 +84,7 @@ map <C-t> :tabnew<CR>
 
 let mapleader = ","
 map <leader>n :NERDTreeToggle<CR>
+map <leader>f :NERDTreeFind<CR>
 
 " hide generated files from NERDTree
 let NERDTreeIgnore=['\.pyc$', '\~$', '\.png$', '\.gif$', '\.o$', '\.so$']
