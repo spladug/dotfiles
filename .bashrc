@@ -107,11 +107,19 @@ function seperator {
     else
         COLOR=$RED
     fi
-
-    if [[ $timer_result > 60 ]]; then
-        echo "${RED}>>> elapsed time ${timer_result}s"
-    elif [[ $timer_result > 10 ]]; then
-        echo "${YLW}>>> elapsed time ${timer_result}s"
+	if [[ $timer_result < 60 && $timer_result > 10 ]]; then
+		echo "${GRN}>>> elapsed time ${timer_result}s"
+	elif [[ $timer_result -ge 60 ]]; then
+		let "timer_minutes = $timer_result / 60"
+		let "timer_seconds = $timer_result % 60"
+		
+		if [[ $timer_minutes -ge 60 ]]; then
+			let "timer_hours = $timer_minutes / 60"
+			let "timer_minutes = $timer_minutes % 60"
+			echo "${RED}>>> elapsed time ${timer_hours}h${timer_minutes}m${timer_seconds}s"
+		else
+			echo "${YLW}>>> elapsed time ${timer_minutes}m${timer_seconds}s"
+		fi
     fi
 
     echo -n $COLOR
