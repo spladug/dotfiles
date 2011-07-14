@@ -86,6 +86,14 @@ let mapleader = ","
 map <leader>n :NERDTreeToggle<CR>
 map <leader>f :NERDTreeFind<CR>
 
+" make split navigation a bit cleaner
+map <leader>" :split<CR>
+map <leader>% :vsplit<CR>
+map <C-j> <C-w>j
+map <C-k> <C-w>k
+map <C-h> <C-w>h
+map <C-l> <C-w>l
+
 " hide generated files from NERDTree
 let NERDTreeIgnore=['\.pyc$', '\~$', '\.png$', '\.gif$', '\.o$', '\.so$']
 set wildignore+=*.pyc,*~,*.png,*.gif,*.so,*.o,*.html.py,*.compact.py,*.mobile.py,*.htmllite.py
