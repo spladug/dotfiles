@@ -96,7 +96,7 @@ map <C-l> <C-w>l
 
 " hide generated files from NERDTree
 let NERDTreeIgnore=['\.pyc$', '\~$', '\.png$', '\.gif$', '\.o$', '\.so$']
-set wildignore+=*.pyc,*~,*.png,*.gif,*.so,*.o,*.html.py,*.compact.py,*.mobile.py,*.htmllite.py
+set wildignore+=*.pyc,*~,*.png,*.gif,*.so,*.o,*.html.py,*.compact.py,*.mobile.py,*.htmllite.py,*/build/*
 
 " fix backspace
 set backspace=indent,eol,start
@@ -111,7 +111,7 @@ filetype plugin on
 filetype indent on
 
 " use ack for searching within projects
-let g:ackprg="ack -H --nocolor --nogroup --column"
+let g:ackprg="ack -H --nocolor --nogroup --column --ignore-dir=build"
 map <leader>a :Ack 
 
 " highlight columns
