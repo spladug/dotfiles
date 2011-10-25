@@ -3,7 +3,8 @@ if has("win32")
 elseif has("gui_macvim")
     set guifont=Menlo\ Regular:h16
 else
-    set guifont=Bitstream\ Vera\ Sans\ Mono\ 12
+    set guifont=Bitstream\ Vera\ Sans\ Mono\ 10
+    set nowrap
 endif
 
 colorscheme rdark
