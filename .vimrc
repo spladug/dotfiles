@@ -50,10 +50,6 @@ let python_slow_sync=1
 " space around the current line
 set scrolloff=4
 
-" use metacharacters in regular expressions by default
-nnoremap / /\v
-vnoremap / /\v
-
 " global replacement by default
 set gdefault
 
