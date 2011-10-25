@@ -1,3 +1,4 @@
 --smart-case
 --type-add=python=.pyx
 --ignore-dir=data
+--ignore-dir=build
