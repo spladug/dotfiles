@@ -20,6 +20,9 @@ endfunc
 
 nnoremap <C-L> :call g:ToggleNuMode()<cr>
 
+" continue to show the piece of text you're in the process of changing
+set cpoptions=$
+
 " disable modelines for security
 set modelines=0
 
