@@ -95,7 +95,7 @@ map <C-l> <C-w>l
 
 " hide generated files from NERDTree
 let NERDTreeIgnore=['\.pyc$', '\~$', '\.png$', '\.gif$', '\.o$', '\.so$']
-set wildignore+=*.pyc,*~,*.png,*.gif,*.so,*.o,*.html.py,*.compact.py,*.mobile.py,*.htmllite.py,*/build/*
+set wildignore+=*.pyc,*~,*.png,*.gif,*.so,*.o,*.html.py,*.compact.py,*.mobile.py,*.htmllite.py,*/build/*,*/.git/*
 
 " fix backspace
 set backspace=indent,eol,start
@@ -124,6 +124,10 @@ autocmd BufWinEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 " keep visual selection after indenting
 vmap > >gv
 vmap < <gv
+
+" configure ctrl-p
+let g:ctrlp_map = '<leader>t'
+let g:ctrlp_working_path_mode = 2
 
 " but don't expand tabs for makefiles
 augroup neils_commands
