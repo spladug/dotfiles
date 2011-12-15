@@ -39,10 +39,6 @@ FILES=$(ls -a | grep "^\." | grep -v -e "^..\?$" -e ".git")
 git submodule init
 git submodule update
 
-# build the command-t c extension
-cd .vim/bundle/command-t
-rake make
-
 # backup any extant files
 BACKUPDIR=~/.dotfiles_backup
 
