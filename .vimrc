@@ -68,6 +68,9 @@ map <leader><space> :noh<cr>
 set wildmenu
 set wildmode=list:longest
 
+" make tilde (case swap) an operator for maximum awesome
+set tildeop
+
 " configure gvim
 set guioptions-=T
 set guioptions-=m
