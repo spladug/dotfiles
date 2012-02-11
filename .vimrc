@@ -130,7 +130,7 @@ vmap < <gv
 
 " configure ctrl-p
 let g:ctrlp_map = '<leader>t'
-let g:ctrlp_working_path_mode = 2
+let g:ctrlp_working_path_mode = 0
 
 " but don't expand tabs for makefiles
 augroup neils_commands
