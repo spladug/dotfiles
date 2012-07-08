@@ -54,7 +54,7 @@ fi
 # basic neil stuff
 ########################################################################
 # use a private bin
-PATH=~/.bin:$PATH
+PATH=~/bin:$PATH
 
 # default file permission of -rw-r----- (drwxr-----)
 umask 027
