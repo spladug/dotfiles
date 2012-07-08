@@ -3,7 +3,7 @@ if has("win32")
 elseif has("gui_macvim")
     set guifont=Menlo\ Regular:h16
 else
-    set guifont=Bitstream\ Vera\ Sans\ Mono\ 10
+    set guifont=Bitstream\ Vera\ Sans\ Mono\ 9
     set nowrap
 endif
 
