@@ -135,10 +135,18 @@ function timer_stop {
     unset timer
 }
 
+function display_virtualenv {
+    if [[ ! -z $VIRTUAL_ENV ]]; then
+        short_name=$(basename $VIRTUAL_ENV)
+        echo ${MAG}$short_name${RST}
+    fi
+}
+
 trap 'timer_start' DEBUG
 PROMPT_COMMAND=timer_stop
 
-export PS1='$(seperator)\n${MAG}\u${RST}@${BLU}\h${RST} in ${WHT}\w$(__git_ps1 "${YLW} on branch %s")${RST}\n\$ '
+export VIRTUAL_ENV_DISABLE_PROMPT="yes"
+export PS1='$(seperator)\n${MAG}\u${RST}@${BLU}\h${RST} in ${WHT}\w$(__git_ps1 "${YLW} on branch %s")${RST} $(display_virtualenv)\n\$ '
 
 # bash completion extensions for tmux
 source ~/.dotfiles/tmux-completion.sh
