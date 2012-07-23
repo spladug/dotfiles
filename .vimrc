@@ -3,9 +3,6 @@ filetype off
 call pathogen#runtime_append_all_bundles()
 filetype plugin indent on
 
-" tell pydiction where to look
-let g:pydiction_location = '~/.vim/bundle/pydiction/complete-dict'
-
 " if pyflakes uses quickfix, the ack plugin gets overridden
 let g:pyflakes_use_quickfix = 0 
 
