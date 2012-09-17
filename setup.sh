@@ -16,7 +16,7 @@ case $OSTYPE in
         fi
 
         # install the prereqs
-        sudo aptitude install $VIMPACKAGE make ruby-dev rake 
+        sudo apt-get install $VIMPACKAGE make ruby-dev rake 
         ;;
     darwin*)
         READLINK=greadlink
