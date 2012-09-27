@@ -16,14 +16,14 @@ case $OSTYPE in
         fi
 
         # install the prereqs
-        sudo apt-get install $VIMPACKAGE make ruby-dev rake 
+        # sudo apt-get install $VIMPACKAGE make ruby-dev rake 
         ;;
     darwin*)
         READLINK=greadlink
         ;;
     *)
-        echo "Unknown platform"
-        exit 1
+        echo "Unknown platform. Dealing without apt."
+        READLINK=readlink
         ;;
 esac
 
@@ -35,24 +35,30 @@ DOTFILEDIR=$(dirname $($READLINK -f $0))
 cd $DOTFILEDIR
 FILES=$(ls -a | grep "^\." | grep -v -e "^..\?$" -e ".git")
 
-# check out the submodules
-git submodule init
-git submodule update
+if which git >> /dev/null
+then
+    # check out the submodules
+    git submodule init
+    git submodule update
 
-# pyflakes has its own submodule
-pushd .vim/bundle/pyflakes-vim
-git submodule init
-git submodule update
-popd
+    # pyflakes has its own submodule
+    (
+    cd .vim/bundle/pyflakes-vim
+    git submodule init
+    git submodule update
+    )
+else
+    echo "Git not found. Doing my best without."
+fi
 
 # backup any extant files
 BACKUPDIR=~/.dotfiles_backup
 
-for file in $FILES; do
+for file in $FILES bin; do
     if [ -e ~/$file ]; then
         echo "backing up $file..."
         mkdir -p $BACKUPDIR
-        mv ~/$file $BACKUPDIR/
+        mv --backup=numbered ~/$file $BACKUPDIR/
     fi
 done
 
