@@ -22,8 +22,8 @@ case $OSTYPE in
         READLINK=greadlink
         ;;
     *)
-        echo "Unknown platform"
-        exit 1
+        echo "Unknown platform. Dealing without apt."
+        READLINK=readlink
         ;;
 esac
 
@@ -42,10 +42,11 @@ then
     git submodule update
 
     # pyflakes has its own submodule
-    pushd .vim/bundle/pyflakes-vim
+    (
+    cd .vim/bundle/pyflakes-vim
     git submodule init
     git submodule update
-    popd
+    )
 else
     echo "Git not found. Doing my best without."
 fi
