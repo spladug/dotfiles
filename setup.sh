@@ -16,7 +16,7 @@ case $OSTYPE in
         fi
 
         # install the prereqs
-        sudo apt-get install $VIMPACKAGE make ruby-dev rake 
+        # sudo apt-get install $VIMPACKAGE make ruby-dev rake 
         ;;
     darwin*)
         READLINK=greadlink
@@ -35,15 +35,20 @@ DOTFILEDIR=$(dirname $($READLINK -f $0))
 cd $DOTFILEDIR
 FILES=$(ls -a | grep "^\." | grep -v -e "^..\?$" -e ".git")
 
-# check out the submodules
-git submodule init
-git submodule update
+if which git >> /dev/null
+then
+    # check out the submodules
+    git submodule init
+    git submodule update
 
-# pyflakes has its own submodule
-pushd .vim/bundle/pyflakes-vim
-git submodule init
-git submodule update
-popd
+    # pyflakes has its own submodule
+    pushd .vim/bundle/pyflakes-vim
+    git submodule init
+    git submodule update
+    popd
+else
+    echo "Git not found. Doing my best without."
+fi
 
 # backup any extant files
 BACKUPDIR=~/.dotfiles_backup
