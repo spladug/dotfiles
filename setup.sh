@@ -54,11 +54,11 @@ fi
 # backup any extant files
 BACKUPDIR=~/.dotfiles_backup
 
-for file in $FILES; do
+for file in $FILES bin; do
     if [ -e ~/$file ]; then
         echo "backing up $file..."
         mkdir -p $BACKUPDIR
-        mv ~/$file $BACKUPDIR/
+        mv --backup=numbered ~/$file $BACKUPDIR/
     fi
 done
 
