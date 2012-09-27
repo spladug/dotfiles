@@ -101,6 +101,24 @@ else
     WHT=""
 fi
 
+# Colour hash for hostname.
+
+declare -a COLOUR_ARRAY
+
+COLOUR_ARRAY[1]=$RED
+COLOUR_ARRAY[2]=$GRN
+COLOUR_ARRAY[3]=$YLW
+COLOUR_ARRAY[4]=$BLU
+COLOUR_ARRAY[5]=$MAG
+COLOUR_ARRAY[6]=$CYN
+COLOUR_ARRAY[7]=$WHT
+COLOUR_ARRAY[8]=$(tput setab 7) # non-bold white (grey)
+COLOUR_ARRAY[9]=$(tput setaf 3)  # non-bold yellow (orange)
+COLOUR_ARRAY[0]=$(tput setaf 2) # non-bold green
+
+HOST_COLOUR=${COLOUR_ARRAY[$(hostname | cksum | head --bytes 1)]}
+USER_COLOUR=${COLOUR_ARRAY[$(echo $USER | cksum | head --bytes 1)]}
+
 function seperator {
     if [ $? -eq 0 ]; then
         COLOR=$GRN
@@ -147,7 +165,7 @@ trap 'timer_start' DEBUG
 PROMPT_COMMAND=timer_stop
 
 export VIRTUAL_ENV_DISABLE_PROMPT="yes"
-export PS1='$(seperator)\n${MAG}\u${RST}@${BLU}\h${RST} in ${WHT}\w$(__git_ps1 "${YLW} on branch %s")${RST} $(display_virtualenv)\n\$ '
+export PS1='$(seperator)\n${USER_COLOUR}\u${RST}@${HOST_COLOUR}\h${RST} in ${WHT}\w$(__git_ps1 "${YLW} on branch %s")${RST} $(display_virtualenv)\n\$ '
 
 # bash completion extensions for tmux
 source ~/.dotfiles/tmux-completion.sh
