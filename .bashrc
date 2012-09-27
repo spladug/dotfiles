@@ -124,6 +124,7 @@ function seperator {
         ;;
     esac
     echo -n $RST
+    history -a
 }
 
 function timer_start {
