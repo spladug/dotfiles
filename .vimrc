@@ -139,3 +139,7 @@ augroup neils_commands
 
     au BufRead *.pig set syntax=pig
 augroup END
+
+" configuration for syntastic
+let g:syntastic_check_on_open=1  " don't wait 'til saving the file to check syntax
+let g:syntastic_enable_signs=0  " get rid of the sign that screws up the left side

@@ -16,7 +16,7 @@ case $OSTYPE in
         fi
 
         # install the prereqs
-        sudo apt-get install $VIMPACKAGE make ruby-dev rake 
+        sudo apt-get install $VIMPACKAGE make ruby-dev rake pyflakes
         ;;
     darwin*)
         READLINK=greadlink
