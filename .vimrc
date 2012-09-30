@@ -43,6 +43,8 @@ set smartindent
 " python tweaks 
 au FileType python set complete+=k~/.vim/syntax/python.vim 
 let python_slow_sync=1
+au FileType python set colorcolumn=80
+highlight ColorColumn ctermbg=darkgrey ctermfg=white
 
 " space around the current line
 set scrolloff=4
@@ -112,10 +114,6 @@ filetype indent on
 " use ack for searching within projects
 let g:ackprg="ack -H --nocolor --nogroup --column --ignore-dir=build"
 map <leader>a :Ack 
-
-" highlight columns
-highlight OverLength ctermbg=red ctermfg=white guibg=#592929
-match OverLength /\%81v.\+/
 
 " trailing whitespace is bad
 hi ExtraWhitespace guifg=#eeeeec guibg=#880000
