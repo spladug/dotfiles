@@ -127,6 +127,10 @@ vmap < <gv
 let g:ctrlp_map = '<leader>t'
 let g:ctrlp_working_path_mode = 0
 
+" the default spelling colors are terrible for terminal (red on red)
+highlight clear SpellBad
+highlight SpellBad term=standout ctermfg=1 term=underline cterm=underline
+
 " but don't expand tabs for makefiles
 augroup neils_commands
     au!
