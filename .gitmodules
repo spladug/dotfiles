@@ -16,3 +16,6 @@
 [submodule ".vim/bundle/syntastic"]
 	path = .vim/bundle/syntastic
 	url = https://github.com/scrooloose/syntastic.git
+[submodule ".vim/bundle/puppet-syntax"]
+	path = .vim/bundle/puppet-syntax
+	url = https://github.com/puppetlabs/puppet-syntax-vim.git
