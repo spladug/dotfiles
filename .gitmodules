@@ -19,3 +19,6 @@
 [submodule ".vim/bundle/puppet-syntax"]
 	path = .vim/bundle/puppet-syntax
 	url = https://github.com/puppetlabs/puppet-syntax-vim.git
+[submodule ".vim/bundle/pathogen"]
+	path = .vim/bundle/pathogen
+	url = https://github.com/tpope/vim-pathogen.git

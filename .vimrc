@@ -1,7 +1,6 @@
 " load pathogen
-filetype off
-call pathogen#runtime_append_all_bundles()
-filetype plugin indent on
+runtime bundle/pathogen/autoload/pathogen.vim
+call pathogen#infect()
 
 " toggle between relative and absolute line numbers with C-l
 function! g:ToggleNuMode()
