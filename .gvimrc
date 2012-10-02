@@ -7,8 +7,8 @@ else
     set nowrap
 endif
 
+" pleasing oranges and greens on grey
 colorscheme rdark
-highlight ColorColumn guibg=#2c3032
 
 set number
 set numberwidth=4

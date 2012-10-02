@@ -10,6 +10,7 @@
 " Changelog:
 "   0.5 - fixed the Pmenu colors
 "   0.6 - added SignColumn colors
+"   0.7 - prettier NonText color and ColorColumn colors (--spladug)
 
 set background=dark
 
@@ -28,10 +29,10 @@ endif
 
 " Default Colors
 hi Normal guifg=#babdb6 guibg=#1e2426
-" hi NonText guifg=#2c3032 guibg=#2c3032 gui=none
 hi NonText guifg=#656763 guibg=#1e2426 gui=none
 hi Cursor guibg=#babdb6
 hi ICursor guibg=#babdb6
+hi ColorColumn guibg=#2c3032
 
 " Search
 hi Search guifg=#2e3436 guibg=#fcaf3e
