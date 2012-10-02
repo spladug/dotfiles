@@ -1,8 +1,5 @@
 #!/bin/bash
 
-# lots of colors!
-export TERM=xterm-256color
-
 # hook up the new ssh agent socket for the running tmux
 if [ "x$SSH_AUTH_SOCK" != "x" ]; then
     NEW_AUTH_SOCK=$HOME/.ssh-auth-sock-tmux

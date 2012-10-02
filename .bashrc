@@ -6,6 +6,8 @@ source ~/.dotfiles/git-completion.sh
 set -o vi
 bind -m vi-insert "\C-l":clear-screen
 
+export TERM='xterm-256color'
+
 ########################################################################
 # Stuff from the standard debian/ubuntu .bashrc
 ########################################################################

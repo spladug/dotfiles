@@ -2,6 +2,9 @@
 runtime bundle/pathogen/autoload/pathogen.vim
 call pathogen#infect()
 
+" 256 color version of rdark
+colorscheme rdark-terminal
+
 " don't wrap text
 set nowrap
 
