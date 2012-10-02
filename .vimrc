@@ -2,17 +2,6 @@
 runtime bundle/pathogen/autoload/pathogen.vim
 call pathogen#infect()
 
-" toggle between relative and absolute line numbers with C-l
-function! g:ToggleNuMode()
-    if(&rnu == 1)
-        set nu
-    else
-        set rnu
-    endif
-endfunc
-
-nnoremap <C-L> :call g:ToggleNuMode()<cr>
-
 " don't wrap text
 set nowrap
 
