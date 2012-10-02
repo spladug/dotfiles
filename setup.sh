@@ -2,30 +2,27 @@
 
 set -e
 
-# platform-specific stuff 
-case $OSTYPE in
-    linux-gnu*)
-        READLINK=readlink
-        # determine if X is installed or not 
-        # (tells us which vim to use)
-        # ...there has to be a better way to do this
-        if [ -f /usr/bin/startx ]; then
-            VIMPACKAGE="vim-gnome ttf-bitstream-vera"
+# where is the GNU readlink?
+if which greadlink > /dev/null; then
+    READLINK=greadlink
+else
+    READLINK=readlink
+fi
+
+# install extra packages if on debian/ubuntu and desired
+if which whiptail > /dev/null; then
+    if whiptail --yesno "install additional packages for vim?" 10 60 \
+                --yes-button "install" \
+                --no-button "skip"; then
+        if dpkg -l xorg > /dev/null; then
+            VIM="vim-gnome ttf-bitstream-vera"
         else
-            VIMPACKAGE=vim-nox
+            VIM="vim-nox"
         fi
 
-        # install the prereqs
-        sudo apt-get install $VIMPACKAGE pyflakes
-        ;;
-    darwin*)
-        READLINK=greadlink
-        ;;
-    *)
-        echo "Unknown platform"
-        exit 1
-        ;;
-esac
+        sudo apt-get install $VIM pyflakes
+    fi
+fi
 
 # figure out where we are
 WORKINGDIR=$(pwd)
@@ -57,6 +54,3 @@ done
 
 # also do the bin
 ln -s ${DOTFILEDIR}/bin ~/bin
-
-# all done, go back to where we started
-cd $WORKINGDIR
