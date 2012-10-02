@@ -33,6 +33,7 @@ hi NonText guifg=#656763 guibg=#1e2426 gui=none
 hi Cursor guibg=#babdb6
 hi ICursor guibg=#babdb6
 hi ColorColumn guibg=#2c3032
+hi ExtraWhitespace guifg=#eeeeec guibg=#880000
 
 " Search
 hi Search guifg=#2e3436 guibg=#fcaf3e

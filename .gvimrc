@@ -10,3 +10,7 @@ set numberwidth=4
 
 " a nice default window size for the silly operating systems
 set columns=84
+
+" disable menubar and toolbar
+set guioptions-=T
+set guioptions-=m

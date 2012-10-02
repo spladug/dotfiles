@@ -61,10 +61,6 @@ set wildmode=list:longest
 " make tilde (case swap) an operator for maximum awesome
 set tildeop
 
-" configure gvim
-set guioptions-=T
-set guioptions-=m
-
 " scroll a bit faster
 nnoremap <C-e> 3<C-e>
 nnoremap <C-y> 3<C-y>
@@ -104,7 +100,7 @@ let g:ackprg="ack -H --nocolor --nogroup --column --ignore-dir=build"
 map <leader>a :Ack 
 
 " trailing whitespace is bad
-hi ExtraWhitespace guifg=#eeeeec guibg=#880000
+hi ExtraWhitespace ctermfg=white ctermbg=red
 autocmd BufWinEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 
 " keep visual selection after indenting
