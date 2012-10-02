@@ -39,12 +39,6 @@ FILES=$(ls -a | grep "^\." | grep -v -e "^..\?$" -e ".git")
 git submodule init
 git submodule update
 
-# pyflakes has its own submodule
-pushd .vim/bundle/pyflakes-vim
-git submodule init
-git submodule update
-popd
-
 # backup any extant files
 BACKUPDIR=~/.dotfiles_backup
 
