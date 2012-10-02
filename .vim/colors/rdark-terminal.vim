@@ -47,7 +47,7 @@ hi Statement term=bold cterm=NONE ctermbg=bg ctermfg=74
 hi PreProc term=underline cterm=NONE ctermbg=bg ctermfg=215
 hi Type term=underline cterm=NONE ctermbg=bg ctermfg=188
 hi LineNr term=underline cterm=NONE ctermbg=16 ctermfg=59
-hi ExtraWhitespace term=NONE cterm=NONE ctermbg=bg ctermfg=fg
+hi ExtraWhitespace term=NONE cterm=NONE ctermfg=white ctermbg=red
 hi Visual term=reverse cterm=NONE ctermbg=102 ctermfg=255
 
 hi Pmenu term=NONE cterm=NONE ctermbg=16 ctermfg=250

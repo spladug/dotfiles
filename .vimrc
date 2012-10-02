@@ -2,78 +2,69 @@
 runtime bundle/pathogen/autoload/pathogen.vim
 call pathogen#infect()
 
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" general configuration
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" syntax highlighting on and colorfy
+syntax enable
+filetype plugin indent on
+
 " 256 color version of rdark
 colorscheme rdark-terminal
 
-" don't wrap text
-set nowrap
+" basic options
+set nowrap " don't wrap text
+set list listchars=tab:>·,trail:· " make tabs and trailing whitespace visible
+set cpoptions=$ " continue to show the piece of text you're in the process of changing
+set modelines=0 " disable modelines for security
+set encoding=utf-8 " use utf8 file encoding
+set showcmd " show commands while typing
+set scrolloff=4 " space around the current line
+set gdefault " global replacement by default
+set smartcase " case insensitive searches unless we specify a capital letter
+set hlsearch " highlight search results
+set incsearch " search while still typing
+set wildmenu " show command line completions
+set wildmode=list:longest " list possible entries and autocomplete longest substring
+set backspace=indent,eol,start " allow backspace to cut through autoindent, ends of lines, and the start of insert mode
+set visualbell " flash the screen instead of beeping
+set autoindent " continue indentation if not told otherwise
 
-" make tabs and trailing whitespace visible
-set list listchars=tab:>·,trail:·
-
-" continue to show the piece of text you're in the process of changing
-set cpoptions=$
-
-" disable modelines for security
-set modelines=0
-
-" use utf8
-set encoding=utf-8
-
-" show commands while typing
-set showcmd
-
-" tabulation
+" default tabulation
 set expandtab
 set smarttab
 set softtabstop=4
 set tabstop=4
 set shiftwidth=4
 
-" indentation
-set autoindent
-set smartindent
+" hide generated files
+set wildignore+=*build/*,*data/*,*git/*,*.pyc,*.png,*.gif,*.so,*.o,*~,
 
-" python tweaks 
-au FileType python set complete+=k~/.vim/syntax/python.vim 
+" slower python syntax parsing (does a better job at multiline docstrings)
 let python_slow_sync=1
-au FileType python set colorcolumn=80
-highlight ColorColumn ctermbg=darkgrey ctermfg=white
 
-" space around the current line
-set scrolloff=4
+" ack
+let g:ackprg="ack -H --nocolor --nogroup --column --ignore-dir=build"
+map <leader>a :Ack 
 
-" global replacement by default
-set gdefault
+" ctrl-p
+let g:ctrlp_map = '<leader>t'
+let g:ctrlp_working_path_mode = 0
 
-" case insensitive matching unless otherwise specified
-set ignorecase
-set smartcase
+" syntastic
+let g:syntastic_check_on_open=1  " don't wait 'til saving the file to check syntax
+let g:syntastic_enable_signs=0  " get rid of the sign that screws up the left side
 
-" search while typing
-set hlsearch
-set incsearch
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" mappings
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" make comma the leader character
+let mapleader = ","
 
-" allow me to turn off highlighting after done with the search
-map <leader><space> :noh<cr>
-
-" file completion
-set wildmenu
-set wildmode=list:longest
-
-" make tilde (case swap) an operator for maximum awesome
-set tildeop
-
-" scroll a bit faster
-nnoremap <C-e> 3<C-e>
-nnoremap <C-y> 3<C-y>
-
-" gvim tabs
+" tab navigation
 map tl :tabnext<CR>
 map th :tabprev<CR>
 map <C-t> :tabnew<CR>
-
-let mapleader = ","
 
 " make split navigation a bit cleaner
 map <leader>" :split<CR>
@@ -83,53 +74,28 @@ map <C-k> <C-w>k
 map <C-h> <C-w>h
 map <C-l> <C-w>l
 
-" hide generated files
-set wildignore+=*.pyc,*~,*.png,*.gif,*.so,*.o,*.html.py,*.compact.py,*.mobile.py,*.htmllite.py,*/build/*,*/.git/*
-
-" fix backspace
-set backspace=indent,eol,start
-
-" don't ding me, bro
-set visualbell
-
-" syntax highlighting on and colorfy
-syntax enable
-filetype on
-filetype plugin on
-filetype indent on
-
-" use ack for searching within projects
-let g:ackprg="ack -H --nocolor --nogroup --column --ignore-dir=build"
-map <leader>a :Ack 
-
-" trailing whitespace is bad
-hi ExtraWhitespace ctermfg=white ctermbg=red
-autocmd BufWinEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-
 " keep visual selection after indenting
 vmap > >gv
 vmap < <gv
 
-" configure ctrl-p
-let g:ctrlp_map = '<leader>t'
-let g:ctrlp_working_path_mode = 0
-
-" the default spelling colors are terrible for terminal (red on red)
-highlight clear SpellBad
-highlight SpellBad term=standout ctermfg=1 term=underline cterm=underline
-
-" but don't expand tabs for makefiles
-augroup neils_commands
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+" autocommands
+"""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+augroup spladug
     au!
 
-    au BufEnter * let &titlestring=expand("%:p")." - VIM"
-    au BufEnter [Mm]akefile* set noexpandtab
+    " make the window title something useful
+    au BufEnter * let &titlestring=expand("%:t")
 
-    au BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
+    " mark trailing whitespace
+    au BufWinEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 
+    " don't try to expand tabs in makefiles (where they're significant)
+    au FileType make set noexpandtab
+
+    " python specific stuff
+    au FileType python set colorcolumn=80  " helps with pep-8
+
+    " turn on pig syntax highlighting
     au BufRead *.pig set syntax=pig
 augroup END
-
-" configuration for syntastic
-let g:syntastic_check_on_open=1  " don't wait 'til saving the file to check syntax
-let g:syntastic_enable_signs=0  " get rid of the sign that screws up the left side
