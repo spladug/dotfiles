@@ -3,9 +3,6 @@ filetype off
 call pathogen#runtime_append_all_bundles()
 filetype plugin indent on
 
-" if pyflakes uses quickfix, the ack plugin gets overridden
-let g:pyflakes_use_quickfix = 0 
-
 " toggle between relative and absolute line numbers with C-l
 function! g:ToggleNuMode()
     if(&rnu == 1)
