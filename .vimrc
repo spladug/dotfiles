@@ -17,6 +17,12 @@ endfunc
 
 nnoremap <C-L> :call g:ToggleNuMode()<cr>
 
+" don't wrap text
+set nowrap
+
+" make tabs and trailing whitespace visible
+set list listchars=tab:>·,trail:·
+
 " continue to show the piece of text you're in the process of changing
 set cpoptions=$
 
