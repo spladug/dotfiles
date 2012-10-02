@@ -14,7 +14,6 @@ colorscheme rdark-terminal
 
 " basic options
 set nowrap " don't wrap text
-set list listchars=tab:>·,trail:· " make tabs and trailing whitespace visible
 set cpoptions=$ " continue to show the piece of text you're in the process of changing
 set modelines=0 " disable modelines for security
 set encoding=utf-8 " use utf8 file encoding
@@ -95,6 +94,7 @@ augroup spladug
 
     " python specific stuff
     au FileType python set colorcolumn=80  " helps with pep-8
+    au FileType python set list listchars=tab:>·,trail:· " make tabs and trailing whitespace visible
 
     " turn on pig syntax highlighting
     au BufRead *.pig set syntax=pig
