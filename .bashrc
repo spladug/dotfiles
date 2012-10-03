@@ -1,62 +1,43 @@
-# ~/.bashrc: executed by bash(1) for non-login shells.
-
-export GIT_PS1_SHOWDIRTYSTATE=1
-source ~/.dotfiles/git-completion.sh
-
-set -o vi
-bind -m vi-insert "\C-l":clear-screen
-
-export TERM='xterm-256color'
-
-########################################################################
-# Stuff from the standard debian/ubuntu .bashrc
-########################################################################
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-# don't put duplicate lines in the history. See bash(1) for more options
-# ... or force ignoredups and ignorespace
-HISTCONTROL=ignoredups:ignorespace
+# a place to put my own binaries!
+export PATH=~/bin:$PATH
+
+# use vi editing mode instead of default emacs
+set -o vi
+# but don't lose C-l as the "clear the screen" key
+bind -m vi-insert "\C-l":clear-screen
 
 # append to the history file, don't overwrite it
 shopt -s histappend
-
-# for setting history length see HISTSIZE and HISTFILESIZE in bash(1)
-HISTSIZE=1000
-HISTFILESIZE=2000
 
 # check the window size after each command and, if necessary,
 # update the values of LINES and COLUMNS.
 shopt -s checkwinsize
 
+export TERM='xterm-256color' # pretty pretty colors
+export HISTCONTROL=ignoreboth # don't save commands that start with space characters and don't save dupes
+export HISTSIZE=1000 # keep the history file from growing gigantic
+export HISTFILESIZE=2000
+
 # make less more friendly for non-text input files, see lesspipe(1)
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
 
-# colorize ls
+# enable color output
 if [ -x /usr/bin/dircolors ]; then
     test -r ~/.dircolors && eval "$(dircolors -b ~/.dircolors)" || eval "$(dircolors -b)"
     alias ls='ls --color=auto'
     alias grep='grep --color=auto'
-    alias fgrep='fgrep --color=auto'
-    alias egrep='egrep --color=auto'
 fi
 
-alias ll='ls -alF'
-alias l='ls -CF'
-
-# Alias definitions.
-# You may want to put all your additions into a separate file like
-# ~/.bash_aliases, instead of adding them here directly.
-# See /usr/share/doc/bash-doc/examples in the bash-doc package.
-if [ -f ~/.bash_aliases ]; then
-    . ~/.bash_aliases
+# advanced tab-completion for various commands in bash
+if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+    . /etc/bash_completion
 fi
 
-########################################################################
-# basic neil stuff
-########################################################################
-# use a private bin
-PATH=~/bin:$PATH
+# extra completions
+source ~/.dotfiles/tmux-completion.sh
 
 # default file permission of -rw-r----- (drwxr-----)
 umask 027
@@ -69,19 +50,8 @@ function sudo() {
     umask $UMASK
 }
 
-########################################################################
-# colorized prompt stuff
-########################################################################
+# define some color variables that make things pretty if possible
 if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
-# We have color support; assume it's compliant with Ecma-48
-# (ISO/IEC-6429). (Lack of such support is extremely rare, and such
-# a case would tend to support setf rather than setaf.)
-    color_prompt=yes
-else
-    color_prompt=
-fi
-
-if [ "$color_prompt" = yes ]; then
     BLD=$(tput bold)
     RST=$(tput sgr0)
     RED=$BLD$(tput setaf 1)
@@ -103,17 +73,31 @@ else
     WHT=""
 fi
 
-function seperator {
-    if [ $? -eq 0 ]; then
-        COLOR=$GRN
-    else
-        COLOR=$RED
-    fi
+# automatically say how long a command took if it ran for longer than ten seconds
+function timer_start {
+    timer=${timer:-$SECONDS}
+}
+
+function timer_stop {
+    timer_result=$(($SECONDS - $timer))
+    unset timer
 
     if [[ $timer_result > 60 ]]; then
         echo "${RED}>>> elapsed time ${timer_result}s"
     elif [[ $timer_result > 10 ]]; then
         echo "${YLW}>>> elapsed time ${timer_result}s"
+    fi
+}
+
+trap 'timer_start' DEBUG
+PROMPT_COMMAND=timer_stop
+
+# a colorized prompt with a green or red separator depending on the success / failure of the previous command
+function seperator {
+    if [[ $? -eq 0 ]]; then
+        COLOR=$GRN
+    else
+        COLOR=$RED
     fi
 
     echo -n $COLOR
@@ -128,15 +112,6 @@ function seperator {
     echo -n $RST
 }
 
-function timer_start {
-    timer=${timer:-$SECONDS}
-}
-
-function timer_stop {
-    timer_result=$(($SECONDS - $timer))
-    unset timer
-}
-
 function display_virtualenv {
     if [[ ! -z $VIRTUAL_ENV ]]; then
         short_name=$(basename $VIRTUAL_ENV)
@@ -144,16 +119,11 @@ function display_virtualenv {
     fi
 }
 
-trap 'timer_start' DEBUG
-PROMPT_COMMAND=timer_stop
-
-export VIRTUAL_ENV_DISABLE_PROMPT="yes"
+export VIRTUAL_ENV_DISABLE_PROMPT="yes" # tell virtualenv's activate scripts we don't want it messing with PS1
+export GIT_PS1_SHOWDIRTYSTATE=1 # show * and + when repository is dirty
 export PS1='$(seperator)\n${MAG}\u${RST}@${BLU}\h${RST} in ${WHT}\w$(__git_ps1 "${YLW} on branch %s")${RST} $(display_virtualenv)\n\$ '
 
-# bash completion extensions for tmux
-source ~/.dotfiles/tmux-completion.sh
-
-##### load host-local configurations
+# load host-local configurations
 if [ -f ~/.bashrc.local ]; then
     . ~/.bashrc.local
 fi
