@@ -48,11 +48,14 @@ rot3 = numpy.bmat([
     [rot3_edges, zeros((4,4))],
     [zeros((4,4)), rot3_corners]])
 
+inv_rot3
+
 # Simply twist the top.
 turn = numpy.roll(numpy.identity(4), 1, 1)
 turn = numpy.bmat([
     [turn, zeros((4,4))],
     [zeros((4,4)), turn]])
+inv_turn = turn.T
 
 # Target transform
 
@@ -66,26 +69,75 @@ target = bmat([
     [identity(4), zeros((4,4))],
     [zeros((4,4)), target_corners]])
 
-# Actually, screw it: let's get the bits in the right place first.
-rot3 = abs(rot3)
-target = abs(target)
 
-def search(found, chain, depth, cb):
-    start = chain[-1]
-    if depth <= 0:
-        return found
-    if found.get(str(start), [0,[]])[0] >= depth:
-        return found
-    found[str(start)] = [depth, chain]
-    search(found, [chain[0]+'r'] + chain[1:] + [round(numpy.dot(start, rot3))], depth - 6, cb)
-    search(found, [chain[0]+'t'] + chain[1:] + [round(numpy.dot(start, turn))], depth - 1, cb)
+
+import Queue
+import Threading
+
+# (cost, (path, transform))
+def add_cost(path, transform, found):
+    cost = 0
+    cost += path.count('r') * 6
+    cost += path.count('t') * 1
+    
+    if (abs(transform)[:4, :4] == identity(4)).all():
+        cost -= 25
+        path = path + 'I'
+
+    if found.get(str(transform), (numpy.Inf, ('',[])))[0] <= cost:
+        return None
+    found[str(transform)] = (cost, (path, transform))
+
+    return (cost, (path, transform))
+
+def clean_queue(queue):
+    queue.mutex.acquire()
+    queue.queue = queue.queue[:len(queue.queue)//2]
+    queue.mutex.release()
+
+
+def best_first_search(queue, cost_function, iterations, found):
+    for i in xrange(iterations):
+        try:
+            cost, (chain, transform) = queue.get_nowait()
+        except Queue.Empty:
+            break
+
+        try:
+            for item in generate_children(chain, transform, found):
+                if item is not None:
+                    queue.put_nowait(item)
+        except Queue.Full:
+            clean_queue(queue)
+            # dump it back into the queue so that it gets re-processed
+            queue.put_nowait((cost, (chain, transform)))
+
+
+def search(iterations)
+    queue = Queue.PriorityQueue(maxsize=100)
+    queue.put_nowait(add_cost("", identity(8)))
+    found = {}
+
+    threads = [threading.Thread(target=best_first_search, args=(queue, add_cost, iterations//4, found))
+            for i in xrange(4)]
+
+    for t in threads:
+        t.wait()
+
     return found
 
-chains = search({}, ['', numpy.identity(8)], 40, str)
+def generate_children(chain, transform, found):
+    yield add_cost(chain + "r", round(numpy.dot(start, rot3)), found)
+    yield add_cost(chain + "r'", round(numpy.dot(start, inv_rot3)), found)
+    yield add_cost(chain + "t", round(numpy.dot(start, turn)), found)
+    yield add_cost(chain + "t'", round(numpy.dot(start, inv_turn)), found)
 
-for depth, chain in chains.values():
-    if (chain[-1][:4, :4] == identity(4)).all():
-        print depth, chain[0]
+
+chains = search(50)
+
+for cost, chain in chains.values():
+    if (abs(chain[-1][:4, :4]) == identity(4)).all():
+        print cost, chain[0]
 
     if chain[0] == 'rrtttrrttt':
         print chain[-1]
