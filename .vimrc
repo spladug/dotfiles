@@ -20,7 +20,8 @@ set encoding=utf-8 " use utf8 file encoding
 set showcmd " show commands while typing
 set scrolloff=4 " space around the current line
 set gdefault " global replacement by default
-set smartcase " case insensitive searches unless we specify a capital letter
+set ignorecase " case insensitive searches
+set smartcase " unless we specify a capital letter
 set hlsearch " highlight search results
 set incsearch " search while still typing
 set wildmenu " show command line completions
