@@ -92,12 +92,16 @@ augroup spladug
     " mark trailing whitespace
     au BufWinEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 
-    " don't try to expand tabs in makefiles (where they're significant)
+    " 'make' specific stuff
+    au FileType make setlocal softtabstop=8 tabstop=8 shiftwidth=8
     au FileType make setlocal noexpandtab
 
     " python specific stuff
     au FileType python setlocal colorcolumn=80  " helps with pep-8
     au FileType python setlocal list listchars=tab:>·,trail:· " make tabs and trailing whitespace visible
+
+    " html stuff
+    au FileType html setlocal softtabstop=2 tabstop=2 shiftwidth=2
 
     " turn on pig syntax highlighting
     au BufRead *.pig setlocal syntax=pig
