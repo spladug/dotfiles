@@ -45,7 +45,6 @@ let python_slow_sync=1
 
 " ack
 let g:ackprg="ack -H --nocolor --nogroup --column --ignore-dir=build"
-map <leader>a :Ack 
 
 " ctrl-p
 let g:ctrlp_map = '<leader>t'
@@ -77,6 +76,9 @@ map <C-l> <C-w>l
 " keep visual selection after indenting
 vmap > >gv
 vmap < <gv
+
+" ,a is the "ack" command
+map <leader>a :Ack 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " autocommands
