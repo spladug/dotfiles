@@ -93,12 +93,12 @@ augroup spladug
     au BufWinEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 
     " don't try to expand tabs in makefiles (where they're significant)
-    au FileType make set noexpandtab
+    au FileType make setlocal noexpandtab
 
     " python specific stuff
-    au FileType python set colorcolumn=80  " helps with pep-8
-    au FileType python set list listchars=tab:>·,trail:· " make tabs and trailing whitespace visible
+    au FileType python setlocal colorcolumn=80  " helps with pep-8
+    au FileType python setlocal list listchars=tab:>·,trail:· " make tabs and trailing whitespace visible
 
     " turn on pig syntax highlighting
-    au BufRead *.pig set syntax=pig
+    au BufRead *.pig setlocal syntax=pig
 augroup END
