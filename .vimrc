@@ -103,6 +103,9 @@ augroup spladug
     " html stuff
     au FileType html setlocal softtabstop=2 tabstop=2 shiftwidth=2
 
+    " puppet stuff
+    au FileType puppet setlocal softtabstop=2 tabstop=2 shiftwidth=2
+
     " turn on pig syntax highlighting
     au BufRead *.pig setlocal syntax=pig
 augroup END
