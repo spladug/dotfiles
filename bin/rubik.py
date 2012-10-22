@@ -4,8 +4,9 @@ I'm trying to solve the top level of a rubik cube.
 A lot of this code is scientist code, and won't make sense.
 """
 
+import threading
 import numpy
-from numpy import zeros, bmat, identity
+from numpy import zeros, bmat, identity, matrix
 
 # Don't really know how to describe the transforms in words.
 # In this representation, + means correctly orientated, - means flipped.
@@ -48,7 +49,7 @@ rot3 = numpy.bmat([
     [rot3_edges, zeros((4,4))],
     [zeros((4,4)), rot3_corners]])
 
-inv_rot3
+inv_rot3 = matrix(rot3) ** -1
 
 # Simply twist the top.
 turn = numpy.roll(numpy.identity(4), 1, 1)
@@ -72,23 +73,22 @@ target = bmat([
 
 
 import Queue
-import Threading
 
 # (cost, (path, transform))
 def add_cost(path, transform, found):
     cost = 0
     cost += path.count('r') * 6
     cost += path.count('t') * 1
-    
+
     if (abs(transform)[:4, :4] == identity(4)).all():
         cost -= 25
         path = path + 'I'
 
     if found.get(str(transform), (numpy.Inf, ('',[])))[0] <= cost:
         return None
-    found[str(transform)] = (cost, (path, transform))
+    found[str(transform)] = (cost, path, transform)
 
-    return (cost, (path, transform))
+    return (cost, path, transform)
 
 def clean_queue(queue):
     queue.mutex.acquire()
@@ -99,49 +99,58 @@ def clean_queue(queue):
 def best_first_search(queue, cost_function, iterations, found):
     for i in xrange(iterations):
         try:
-            cost, (chain, transform) = queue.get_nowait()
+            cost, path, transform = queue.get_nowait()
         except Queue.Empty:
             break
 
         try:
-            for item in generate_children(chain, transform, found):
+            for item in generate_children(path, transform, found):
                 if item is not None:
                     queue.put_nowait(item)
         except Queue.Full:
             clean_queue(queue)
             # dump it back into the queue so that it gets re-processed
-            queue.put_nowait((cost, (chain, transform)))
+            queue.put_nowait((cost, path, transform))
 
 
-def search(iterations)
-    queue = Queue.PriorityQueue(maxsize=100)
-    queue.put_nowait(add_cost("", identity(8)))
-    found = {}
+def search(iterations, queue=None, found=None):
+    if found is None:
+        found = {}
+    if queue is None:
+        queue = Queue.PriorityQueue(maxsize=100)
+        queue.put_nowait(add_cost("", identity(8), found))
 
     threads = [threading.Thread(target=best_first_search, args=(queue, add_cost, iterations//4, found))
             for i in xrange(4)]
 
     for t in threads:
-        t.wait()
+        t.start()
 
-    return found
+    for t in threads:
+        t.join()
 
-def generate_children(chain, transform, found):
-    yield add_cost(chain + "r", round(numpy.dot(start, rot3)), found)
-    yield add_cost(chain + "r'", round(numpy.dot(start, inv_rot3)), found)
-    yield add_cost(chain + "t", round(numpy.dot(start, turn)), found)
-    yield add_cost(chain + "t'", round(numpy.dot(start, inv_turn)), found)
+    return queue, found
+
+def generate_children(path, transform, found):
+    yield add_cost(path + "r", round(numpy.dot(transform, rot3)), found)
+    yield add_cost(path + "r'", round(numpy.dot(transform, inv_rot3)), found)
+    yield add_cost(path + "t", round(numpy.dot(transform, turn)), found)
+    yield add_cost(path + "t'", round(numpy.dot(transform, inv_turn)), found)
 
 
-chains = search(50)
+queue, chains = search(500)
+identities = {}
 
-for cost, chain in chains.values():
-    if (abs(chain[-1][:4, :4]) == identity(4)).all():
-        print cost, chain[0]
-
-    if chain[0] == 'rrtttrrttt':
-        print chain[-1]
-
+for cost, path, transform in sorted(chains.values()):
+    if (abs(transform[4:, 4:]) == numpy.array(
+      [[1,0,0,0],
+       [0,0,0,1],
+       [0,1,0,0],
+       [0,0,1,0]])).all(): # and \
+     #(abs(chain[-1][4:, 4:]) == numpy.roll(numpy.identity(4), 2, 1)).all():
+        print cost, path
+        print abs(transform[4:, 4:])
+        identities[path] = cost, path, transform
 
 
 
