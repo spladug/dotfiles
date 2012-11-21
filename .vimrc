@@ -111,4 +111,7 @@ augroup spladug
 
     " turn on pig syntax highlighting
     au BufRead *.pig setlocal syntax=pig
+
+    " turn on markdown syntax highlighting
+    au BufRead *.md setlocal filetype=markdown
 augroup END
