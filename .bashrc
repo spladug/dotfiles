@@ -36,17 +36,6 @@ if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     . /etc/bash_completion
 fi
 
-# default file permission of -rw-r----- (drwxr-----)
-umask 027
-
-# make the permissions more permissive when using sudo
-function sudo() {
-    local UMASK=$(umask);
-    umask 022;
-    sh -c "sudo $*";
-    umask $UMASK
-}
-
 # define some color variables that make things pretty if possible
 if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
     BLD=$(tput bold)
