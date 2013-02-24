@@ -98,16 +98,8 @@ function seperator {
     echo -n $RST
 }
 
-function display_virtualenv {
-    if [[ ! -z $VIRTUAL_ENV ]]; then
-        short_name=$(basename $VIRTUAL_ENV)
-        echo ${MAG}$short_name${RST}
-    fi
-}
-
-export VIRTUAL_ENV_DISABLE_PROMPT="yes" # tell virtualenv's activate scripts we don't want it messing with PS1
 export GIT_PS1_SHOWDIRTYSTATE=1 # show * and + when repository is dirty
-export PS1='$(seperator)\n${MAG}\u${RST}@${BLU}\h${RST} in ${WHT}\w$(__git_ps1 "${YLW} on branch %s")${RST} $(display_virtualenv)\n\$ '
+export PS1='$(seperator)\n${MAG}\u${RST}@${BLU}\h${RST} in ${WHT}\w$(__git_ps1 "${YLW} on branch %s")${RST}\n\$ '
 
 # load host-local configurations
 if [ -f ~/.bashrc.local ]; then
