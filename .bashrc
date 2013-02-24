@@ -98,8 +98,14 @@ function seperator {
     echo -n $RST
 }
 
+function display_cryptenv {
+    if [[ ! -z $CRYPTENV ]]; then
+        echo -n ${BLD}${RED}cryptenv:$CRYPTENV${RST}
+    fi
+}
+
 export GIT_PS1_SHOWDIRTYSTATE=1 # show * and + when repository is dirty
-export PS1='$(seperator)\n${MAG}\u${RST}@${BLU}\h${RST} in ${WHT}\w$(__git_ps1 "${YLW} on branch %s")${RST}\n\$ '
+export PS1='$(seperator)\n${MAG}\u${RST}@${BLU}\h${RST} in ${WHT}\w$(__git_ps1 "${YLW} on branch %s")${RST} $(display_cryptenv)\n\$ '
 
 # load host-local configurations
 if [ -f ~/.bashrc.local ]; then
