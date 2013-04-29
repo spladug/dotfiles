@@ -115,8 +115,7 @@ COLOUR_ARRAY[8]=$(tput setab 7) # non-bold white (grey)
 COLOUR_ARRAY[9]=$(tput setaf 3)  # non-bold yellow (orange)
 COLOUR_ARRAY[0]=$(tput setaf 2) # non-bold green
 
-HOST_COLOUR=${COLOUR_ARRAY[$(hostname | cksum | head --bytes 1)]}
-USER_COLOUR=${COLOUR_ARRAY[$(echo $USER | cksum | head --bytes 1)]}
+USER_HOST_COLOUR=${COLOUR_ARRAY[$(echo "${USER}@${HOSTNAME}" | md5sum | sed s/[abcdef]*// | head --bytes 1)]}
 
 function seperator {
     if [ $? -eq 0 ]; then
@@ -183,7 +182,7 @@ trap 'timer_start' DEBUG
 PROMPT_COMMAND=timer_stop
 
 export VIRTUAL_ENV_DISABLE_PROMPT="yes"
-export PS1='$(seperator)\n${USER_COLOUR}\u${RST}@${HOST_COLOUR}\h${RST} in ${WHT}\w$(__git_ps1 "${YLW} on branch %s")${RST} $(display_virtualenv)\n\$ '
+export PS1='$(seperator)\n${USER_HOST_COLOUR}\u@\h${RST} in ${WHT}\w$(__git_ps1 "${YLW} on branch %s")${RST} $(display_virtualenv)\n\$ '
 
 # bash completion extensions for tmux
 source ~/.dotfiles/tmux-completion.sh
