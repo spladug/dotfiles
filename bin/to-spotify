@@ -1,0 +1,53 @@
+#!/usr/bin/python -u
+
+import os
+import string
+import sys
+import termios
+import traceback
+import tty
+
+fd = sys.stdin.fileno()
+old_settings = termios.tcgetattr(fd)
+tty.setraw(fd)
+
+def get_word():
+    buf=['']
+    while True:
+        buf.append(sys.stdin.read(1));
+        if buf[-1].isspace():
+            return ''.join(buf)
+    if buf[-1] not in string.printable:
+        return None
+    return ''.join(buf)
+
+def loop():
+    print 'loop()\r'
+    while True:
+        word = get_word()
+        print word, '\r'
+
+        if word is None:
+            break
+        if not 'spotify' in word:
+            continue
+
+        _http_etc, type, identifier = word.strip().rsplit('/', 2)
+        uri = "spotify:%(type)s:%(identifier)s" % locals()
+
+        print uri, '\r'
+        command = "adb shell am start -a android.intent.action.VIEW -d " + uri
+
+        print command, '\r'
+        os.system(command)
+        print 'done\r'
+    print 'exiting\r'
+
+try:
+    loop()
+except Exception, e:
+    traceback.print_last()
+    print e
+finally:
+    termios.tcsetattr(fd, termios.TCSADRAIN, old_settings)
+    print
