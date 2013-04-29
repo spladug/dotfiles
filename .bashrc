@@ -11,7 +11,9 @@ source ~/.dotfiles/git-completion.sh
 
 # don't put duplicate lines in the history. See bash(1) for more options
 # ... or force ignoredups and ignorespace
-HISTCONTROL=ignoredups:ignorespace:erasedups
+HISTCONTROL=ignoreboth:erasedups
+
+export HISTTIMEFORMAT='%F %T '
 
 # append to the history file, don't overwrite it
 shopt -s histappend
@@ -139,7 +141,26 @@ function seperator {
         ;;
     esac
     echo -n $RST
-    history -a
+
+    # FIXME: should probably append to a different file per $$ and merge the result,
+    # or look at:
+    # http://stackoverflow.com/questions/338285/prevent-duplicates-from-being-saved-in-bash-history
+    # For now, I'm just obsessively versioning the whole thing, so that I don't lose data.
+    # Will dedup later.
+    # I guess what I want is some kind of incremental search-tree backed history format,
+    # (mapping search string to list of (filename, offset), in order?)
+    # that can be written to by multiple processes at the same time. Should probs look at sqlite?
+    #
+    # Actually, fuck it: let's just use the built-in append-on-close, and use backup files.
+    # Note that this creates crufty 2000-line files in ~, but I can't find a better solution
+    # right now.
+    history -w ~/.bash_history_$$
+    if [ -d ~/src/misc/.git ]
+    then
+        cp ~/.bash_history_$$ ~/.bash_history ~/src/misc/
+        (cd ~/src/misc && git add --all && \
+            git commit --allow-empty --quiet -m "history from $$" )
+    fi
 }
 
 function timer_start {
