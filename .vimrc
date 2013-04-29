@@ -33,7 +33,7 @@ set showcmd
 set expandtab
 set smarttab
 set softtabstop=4
-set tabstop=4
+set tabstop=8
 set shiftwidth=4
 
 " indentation
@@ -129,12 +129,13 @@ vmap < <gv
 let g:ctrlp_map = '<leader>t'
 let g:ctrlp_working_path_mode = 0
 
-" but don't expand tabs for makefiles
+" but don't expand tabs for makefiles or php files.
 augroup neils_commands
     au!
 
     au BufEnter * let &titlestring=expand("%:p")." - VIM"
     au BufEnter [Mm]akefile* set noexpandtab
+    au BufEnter *.php set noexpandtab
 
     au BufRead *.py set smartindent cinwords=if,elif,else,for,while,try,except,finally,def,class
 

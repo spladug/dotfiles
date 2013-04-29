@@ -19,3 +19,7 @@ if has("colorcolumn")
 endif
 
 set list listchars=tab:>·,trail:·
+
+set showtabline=2
+
+set guioptions+=m
