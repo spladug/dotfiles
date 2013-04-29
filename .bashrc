@@ -53,8 +53,8 @@ fi
 # use a private bin
 PATH=~/bin:$PATH
 
-# default file permission of -rw-r----- (drwxr-----)
-umask 027
+# default file permission of -rw-r--r-- (drwxr--r--)
+umask 022
 
 # make the permissions more permissive when using sudo
 function sudo() {
