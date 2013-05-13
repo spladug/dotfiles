@@ -29,7 +29,7 @@ virt-install \
         auto=true \
         hostname=${1} \
         domain=vagrant.truphone.com \
-        url=https://raw.github.com/alsuren/veewee/master/templates/Debian-6.0-amd64-netboot/preseed.cfg \
+        url=http://192.168.122.171/src/veewee/templates/Debian-7.0-amd64-netboot/preseed.cfg \
         text \
         console=tty1 \
         console=ttyS0,115200 \
