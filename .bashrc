@@ -153,12 +153,17 @@ function seperator {
     # Actually, fuck it: let's just use the built-in append-on-close, and use backup files.
     # Note that this creates crufty 2000-line files in ~, but I can't find a better solution
     # right now.
-    history -w ~/.bash_history_$$
-    if [ -d ~/src/misc/.git ]
+    SHELL_LOCAL_HISTORY=".bash_history_$$"
+    history -a ~/${SHELL_LOCAL_HISTORY}.tmp
+    if [ -f ~/${SHELL_LOCAL_HISTORY}.tmp ]
     then
-        cp ~/.bash_history_$$ ~/.bash_history ~/src/misc/
-        (cd ~/src/misc && git add --all && \
-            git commit --allow-empty --quiet -m "history from $$" )
+        mv ~/${SHELL_LOCAL_HISTORY}.tmp ~/${SHELL_LOCAL_HISTORY}
+        if [ -d ~/src/misc/.git ]
+        then
+            cp ~/${SHELL_LOCAL_HISTORY} ~/.bash_history ~/src/misc/
+            (cd ~/src/misc && git add ${SHELL_LOCAL_HISTORY} .bash_history && \
+                git commit --allow-empty --quiet -m "history from ${SHELL_LOCAL_HISTORY}" )
+        fi
     fi
 }
 
