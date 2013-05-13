@@ -15,16 +15,23 @@ fi
 virt-install \
     --connect=qemu:///system \
     --name=${1} \
-    --ram=1024 \
+    --ram=256 \
     --vcpus=1 \
-    -f /var/lib/libvirt/images/${1}.img \
-    -s 5 \
-    -l http://ftp.debian.org/debian/dists/squeeze/main/installer-amd64/ \
+    --disk path=/var/lib/libvirt/images/${1}.img,size=2 \
+    --location http://ftp.debian.org/debian/dists/wheezy/main/installer-amd64/ \
     --vnc \
     --os-type=linux \
     --virt-type=qemu \
     --noautoconsole \
     --hvm \
     --network=network:default \
-    --extra-args="auto=true hostname=${1} domain= url=http://www.debian.org/releases/squeeze/example-preseed.txt text console=tty1 console=ttyS0,115200"
+    --extra-args="\
+        auto=true \
+        hostname=${1} \
+        domain=vagrant.truphone.com \
+        url=https://raw.github.com/alsuren/veewee/master/templates/Debian-6.0-amd64-netboot/preseed.cfg \
+        text \
+        console=tty1 \
+        console=ttyS0,115200 \
+ "
 
