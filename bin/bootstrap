@@ -1,0 +1,43 @@
+#!/bin/sh
+#
+# A script to install Debian Sequeeze on a KVM guest
+# using automatic installation from installable distribution
+# image on an HTTP server
+#
+# Taken from http://garfield001.wordpress.com/2012/05/30/creating-kvm-guests
+
+if [ $# -ne 1 ]
+then
+    echo "Usage: $0 guest-name"
+    exit 1
+fi
+
+PRESEED_URL=http://192.168.122.171/src/veewee/templates/Debian-6.0.7-amd64-netboot/preseed.cfg
+
+echo "checking that preseed url is reachable"
+curl ${PRESEED_URL} >> /dev/null || exit 1
+echo "done."
+
+virt-install \
+    --connect=qemu:///system \
+    --name=${1} \
+    --ram=256 \
+    --vcpus=1 \
+    --disk path=/dev/sda,cache=writeback \
+    --location http://ftp.debian.org/debian/dists/wheezy/main/installer-amd64/ \
+    --vnc \
+    --os-type=linux \
+    --virt-type=kvm \
+    --noautoconsole \
+    --hvm \
+    --network=network:default \
+    --extra-args="\
+        auto=true \
+        hostname=${1} \
+        domain=vagrant.truphone.com \
+        url=${PRESEED_URL} \
+        text \
+        console=tty1 \
+        console=ttyS0,115200 \
+ "
+
