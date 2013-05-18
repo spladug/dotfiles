@@ -12,12 +12,6 @@ then
     exit 1
 fi
 
-PRESEED_URL=http://192.168.122.171/src/veewee/templates/Debian-6.0.7-amd64-netboot/preseed.cfg
-
-echo "checking that preseed url is reachable"
-curl ${PRESEED_URL} >> /dev/null || exit 1
-echo "done."
-
 virt-install \
     --connect=qemu:///system \
     --name=${1} \
@@ -34,8 +28,5 @@ virt-install \
     --extra-args="\
         hostname=${1} \
         domain=truphone.local \
-        text \
-        console=tty1 \
-        console=ttyS0,115200 \
  "
 
