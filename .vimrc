@@ -49,6 +49,7 @@ let g:ackprg="ack -H --nocolor --nogroup --column --ignore-dir=build"
 " ctrl-p
 let g:ctrlp_map = '<leader>t'
 let g:ctrlp_working_path_mode = 0
+let g:ctrlp_follow_symlinks = 1
 
 " syntastic
 let g:syntastic_check_on_open=1  " don't wait 'til saving the file to check syntax
