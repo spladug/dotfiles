@@ -44,7 +44,7 @@ set wildignore+=*build/*,*data/*,*git/*,*.pyc,*.png,*.gif,*.so,*.o,*~,
 let python_slow_sync=1
 
 " ack
-let g:ackprg="ack -H --nocolor --nogroup --column --ignore-dir=build"
+let g:ackprg="ack-grep -H --nocolor --nogroup --column --ignore-dir=build"
 
 " ctrl-p
 let g:ctrlp_map = '<leader>t'
