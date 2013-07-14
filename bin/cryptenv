@@ -10,20 +10,28 @@ if [ ! -f /var/lib/cryptenv/$1 ]; then
     exit 1
 fi
 
-#if [ -d /media/$1 ]; then
-    #echo "$(basename $0): fs \"$1\" appears to be already mounted!"
-    #exit 1
-#fi
-
+# trigger sudo caching
 sudo whoami > /dev/null
 
 set -e -x
 
-LODEV=$(sudo losetup -f)
-sudo losetup $LODEV /var/lib/cryptenv/$1
-sudo cryptsetup luksOpen $LODEV $1
-sudo mkdir /media/$1
-sudo mount /dev/mapper/$1 /media/$1
+LODEV=$(sudo losetup -j /var/lib/cryptenv/$1 | cut -f 1 -d :)
+if [ -z "$LODEV" ]; then
+    LODEV=$(sudo losetup -f)
+    sudo losetup $LODEV /var/lib/cryptenv/$1
+fi
+
+if ! sudo cryptsetup status $1 > /dev/null; then
+    sudo cryptsetup luksOpen $LODEV $1
+fi
+
+if [ ! -d /media/$1 ]; then
+    sudo mkdir /media/$1
+fi
+
+if ! mount | grep -q /dev/mapper/$1; then
+    sudo mount /dev/mapper/$1 /media/$1
+fi
 
 CRYPTENV=$1 bash
 
