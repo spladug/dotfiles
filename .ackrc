@@ -1,4 +1,5 @@
 --smart-case
+--follow
 --type-add=python=.pyx
 --type-set=puppet=.pp
 --ignore-dir=data
