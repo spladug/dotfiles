@@ -78,6 +78,9 @@ map <C-l> <C-w>l
 vmap > >gv
 vmap < <gv
 
+" ,b is the "buffer finder"
+map <leader>b :CtrlPBuffer<CR>
+
 " ,a is the "ack" command
 map <leader>a :Ack 
 
