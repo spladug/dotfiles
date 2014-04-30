@@ -29,6 +29,8 @@ set wildmode=list:longest " list possible entries and autocomplete longest subst
 set backspace=indent,eol,start " allow backspace to cut through autoindent, ends of lines, and the start of insert mode
 set visualbell " flash the screen instead of beeping
 set autoindent " continue indentation if not told otherwise
+set relativenumber " show line numbers, relative to current line
+set number " but ensure we also have the real line number for the current line
 
 " default tabulation
 set expandtab
