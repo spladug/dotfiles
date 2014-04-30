@@ -117,6 +117,10 @@ augroup spladug
     " go stuff
     au FileType go setlocal noexpandtab
 
+    " javascript
+    au FileType javascript setlocal colorcolumn=80
+    au FileType javascript setlocal softtabstop=2 tabstop=2 shiftwidth=2
+
     " turn on pig syntax highlighting
     au BufRead *.pig setlocal syntax=pig
 
