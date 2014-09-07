@@ -24,6 +24,9 @@ if which whiptail > /dev/null; then
     fi
 fi
 
+# use the xft-supporting version of dmenu
+# update-alternatives --set dmenu /usr/bin/dmenu.xft
+
 # figure out where we are
 WORKINGDIR=$(pwd)
 DOTFILEDIR=$(dirname $($READLINK -f $0))

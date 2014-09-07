@@ -1,0 +1,50 @@
+general {
+    output_format = "i3bar"
+    colors = true
+    interval = 1
+
+    color_good = "#8ae234"
+    color_degraded = "#fcaf3e"
+    color_bad = "#729fcf"
+}
+
+order += "battery 0"
+battery 0 {
+    format = "%status: %percentage %remaining %consumption"
+    last_full_capacity = true
+    integer_battery_capacity = true
+    low_threshold = 15
+    threshold_type = time
+}
+
+order += "path_exists VPN"
+path_exists VPN {
+    path = "/proc/sys/net/ipv4/conf/tun0"
+}
+
+order += "wireless wlan0"
+wireless wlan0 {
+    format_up = "wlan0: %quality on %essid @ %ip"
+    format_down = "wlan0: down"
+}
+
+order += "ethernet eth0"
+ethernet eth0 {
+    format_up = "eth0: %ip"
+    format_down = "eth0: down"
+}
+
+order += "volume master"
+volume master {
+    device = "default"
+    mixer = "Master"
+    mixer_idx = 0
+
+    format = "♪: %volume"
+    format_muted = "♪: ⌀"
+}
+
+order += "time"
+time {
+    format = "%a %d %b %H:%M:%S"
+}
