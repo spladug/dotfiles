@@ -47,65 +47,10 @@ if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
     MAG=$(tput setaf 5)
     CYN=$(tput setaf 6)
     WHT=$BLD$(tput setaf 7)
-else
-    BLD=""
-    RST=""
-    RED=""
-    GRN=""
-    YLW=""
-    BLU=""
-    MAG=""
-    CYN=""
-    WHT=""
 fi
 
-# automatically say how long a command took if it ran for longer than ten seconds
-function timer_start {
-    timer=${timer:-$SECONDS}
-}
-
-function timer_stop {
-    timer_result=$(($SECONDS - $timer))
-    unset timer
-
-    if [[ $timer_result > 60 ]]; then
-        echo "${RED}>>> elapsed time ${timer_result}s"
-    elif [[ $timer_result > 10 ]]; then
-        echo "${YLW}>>> elapsed time ${timer_result}s"
-    fi
-}
-
-trap 'timer_start' DEBUG
-PROMPT_COMMAND=timer_stop
-
-# a colorized prompt with a green or red separator depending on the success / failure of the previous command
-function seperator {
-    if [[ $? -eq 0 ]]; then
-        COLOR=$GRN
-    else
-        COLOR=$RED
-    fi
-
-    echo -n $COLOR
-    case $OSTYPE in
-        linux-gnu*)
-            printf '_%.0s' `seq 1 $COLUMNS`
-        ;;
-        darwin*)
-            jot -s "" -b "_" $COLUMNS -n
-        ;;
-    esac
-    echo -n $RST
-}
-
-function display_cryptenv {
-    if [[ ! -z $CRYPTENV ]]; then
-        echo -n ${BLD}${RED}cryptenv:$CRYPTENV${RST}
-    fi
-}
-
 export GIT_PS1_SHOWDIRTYSTATE=1 # show * and + when repository is dirty
-export PS1='$(seperator)\n${MAG}\u${RST}@${BLU}\h${RST} in ${WHT}\w$(__git_ps1 "${YLW} on branch %s")${RST} $(display_cryptenv)\n\$ '
+export PS1='\n${MAG}\u${RST}@${BLU}\h${RST} in ${WHT}\w$(__git_ps1 "${YLW} on branch %s")${RST}\n\$ '
 
 # load host-local configurations
 if [ -f ~/.bashrc.local ]; then
