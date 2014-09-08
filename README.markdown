@@ -7,11 +7,7 @@ Installation
 This repository is meant to be cloned into its own directory. It can be cloned
 anywhere but I put it in ~/src/dotfiles.
 
-To set it up once cloned, run the following:
-
-    git clone git://github.com/spladug/dotfiles.git ~/src/dotfiles/
-    sh ~/src/dotfiles/setup.sh
-
-The setup script assumes a debian-based distribution and will install the
-necessary prerequisites as well as set up the vim modules. Symbolic links will
-be created from your home directory  to the individual files in the repo.
+There are two stages of install. The "install-configs" script will do a minimal
+unprivileged install.  The "install-gui" script will configure a customized
+desktop environment and requires root privileges to do so. The latter script
+assumes and requires a debian-like system.

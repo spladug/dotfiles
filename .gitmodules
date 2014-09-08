@@ -1,27 +1,27 @@
-[submodule ".vim/bundle/fugitive"]
-	path = .vim/bundle/fugitive
-	url = http://github.com/tpope/vim-fugitive.git
-[submodule ".vim/bundle/ack"]
-	path = .vim/bundle/ack
-	url = git://github.com/mileszs/ack.vim.git
-[submodule ".vim/bundle/nerdcommenter"]
-	path = .vim/bundle/nerdcommenter
-	url = git://github.com/scrooloose/nerdcommenter.git
-[submodule ".vim/bundle/gitv"]
-	path = .vim/bundle/gitv
-	url = git://github.com/gregsexton/gitv.git
-[submodule ".vim/bundle/ctrlp"]
-	path = .vim/bundle/ctrlp
+[submodule "vim/bundle/ack"]
+	path = vim/bundle/ack
+	url = https://github.com/mileszs/ack.vim.git
+[submodule "vim/bundle/fugitive"]
+	path = vim/bundle/fugitive
+	url = https://github.com/tpope/vim-fugitive.git
+[submodule "vim/bundle/nerdcommenter"]
+	path = vim/bundle/nerdcommenter
+	url = https://github.com/scrooloose/nerdcommenter.git
+[submodule "vim/bundle/gitv"]
+	path = vim/bundle/gitv
+	url = https://github.com/gregsexton/gitv.git
+[submodule "vim/bundle/ctrlp"]
+	path = vim/bundle/ctrlp
 	url = https://github.com/kien/ctrlp.vim.git
-[submodule ".vim/bundle/syntastic"]
-	path = .vim/bundle/syntastic
+[submodule "vim/bundle/syntastic"]
+	path = vim/bundle/syntastic
 	url = https://github.com/scrooloose/syntastic.git
-[submodule ".vim/bundle/puppet-syntax"]
-	path = .vim/bundle/puppet-syntax
+[submodule "vim/bundle/puppet-syntax"]
+	path = vim/bundle/puppet-syntax
 	url = https://github.com/puppetlabs/puppet-syntax-vim.git
-[submodule ".vim/bundle/pathogen"]
-	path = .vim/bundle/pathogen
+[submodule "vim/bundle/pathogen"]
+	path = vim/bundle/pathogen
 	url = https://github.com/tpope/vim-pathogen.git
-[submodule ".vim/bundle/vim-less"]
-	path = .vim/bundle/vim-less
-	url = git@github.com:groenewege/vim-less.git
+[submodule "vim/bundle/vim-less"]
+	path = vim/bundle/vim-less
+	url = https://github.com/groenewege/vim-less.git

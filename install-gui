@@ -1,0 +1,34 @@
+#!/bin/bash -e
+
+source helpers.sh
+
+cat <<PACKAGES | xargs sudo apt-get install
+vim-gnome
+ttf-bitstream-vera
+pyflakes
+
+i3
+PACKAGES
+
+###### gvim
+install_dotfile gvimrc
+
+###### GNOME+i3
+# configs
+install_xdg_config i3
+install_xdg_config i3status
+
+# use the xft-supporting version of dmenu
+sudo update-alternatives --set dmenu /usr/bin/dmenu.xft
+
+# add login options for GNOME+i3
+cat <<XSESSION | sudo tee /usr/share/xsessions/gnome-i3.desktop > /dev/null
+[Desktop Entry]
+Name=GNOME with i3
+Comment=improved dynamic tiling window manager
+Exec=gnome-session --session i3
+Type=Application
+XSESSION
+
+# disable the nautilus desktop window
+gsettings set org.gnome.desktop.background show-desktop-icons false
