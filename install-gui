@@ -8,6 +8,7 @@ ttf-bitstream-vera
 pyflakes
 
 i3
+gnome-settings-daemon
 PACKAGES
 
 ###### gvim
@@ -21,13 +22,19 @@ install_xdg_config i3status
 # use the xft-supporting version of dmenu
 sudo update-alternatives --set dmenu /usr/bin/dmenu.xft
 
-# add login options for GNOME+i3
+# add session option for GNOME+i3
+cat <<GNOMESESSION | sudo tee /usr/share/gnome-session/sessions/gnome-i3.session > /dev/null
+[GNOME Session]
+Name=gnome-i3
+RequiredComponents=gnome-settings-daemon;i3;
+GNOMESESSION
+
 cat <<XSESSION | sudo tee /usr/share/xsessions/gnome-i3.desktop > /dev/null
 [Desktop Entry]
 Name=GNOME with i3
 Comment=improved dynamic tiling window manager
-Exec=gnome-session --session i3
-Type=Application
+Exec=gnome-session --session=gnome-i3
+Type=XSession
 XSESSION
 
 # disable the nautilus desktop window
