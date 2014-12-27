@@ -23,6 +23,7 @@ function install_dotfile {
     local TARGET=${2:-$HOME/.$FILE}
 
     _back_up $TARGET
+    mkdir -p $(dirname $TARGET)
     ln -s $DOTFILE_ROOT/$FILE $TARGET
 }
 
