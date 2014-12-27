@@ -7,6 +7,8 @@ vim-gnome
 ttf-bitstream-vera
 pyflakes
 
+ttf-mscorefonts-installer
+
 i3
 gnome-settings-daemon
 PACKAGES
