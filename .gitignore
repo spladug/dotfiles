@@ -1,8 +1,1 @@
-.bin/
 *.swp
-*.pyc
-.netrwhist
-.xmonad/xmonad-x86_64-linux
-.xmonad/*.errors
-.xmonad/*.o
-.xmonad/*.hi
