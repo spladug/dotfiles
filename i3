@@ -17,7 +17,9 @@ client.focused_inactive     #311642     #311642     #666666     #311642
 for_window [class="Dwb"] border none
 for_window [class="Firefox" window_role="browser"] border none
 for_window [class="Gnome-terminal"] border 1pixel
-
+for_window [window_role="pop-up"] floating enable
+for_window [window_role="task_dialog"] floating enable
+for_window [title="Preferences$"] floating enable
 
 ###### key bindings
 # Use Mouse+$mod to drag floating windows to their wanted position
