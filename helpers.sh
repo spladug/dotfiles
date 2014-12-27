@@ -3,6 +3,12 @@
 DOTFILE_ROOT=$(dirname $(readlink -f $0))
 
 
+if [[ $EUID -eq 0 ]]; then
+    echo "Please run this installer as yourself, not root."
+    exit 1
+fi
+
+
 function _back_up {
     local FILE=$1
 
