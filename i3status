@@ -44,7 +44,13 @@ volume master {
     format_muted = "♪: ⌀"
 }
 
-order += "time"
-time {
-    format = "%a %d %b %H:%M:%S"
+order += "tztime utc"
+tztime utc {
+    format = "%H:%M:%S %Z"
+    timezone = "UTC"
+}
+
+order += "tztime local"
+tztime local {
+    format = "%a %d %b %H:%M:%S %Z"
 }
