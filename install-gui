@@ -11,6 +11,7 @@ ttf-mscorefonts-installer
 
 i3
 gnome-settings-daemon
+redshift-gtk
 PACKAGES
 
 ###### gvim
