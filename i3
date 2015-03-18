@@ -127,10 +127,10 @@ bindsym $mod+r mode "resize"
 
 
 ####### control audio volume without gnome
-#bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +5%
-#bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -- -5%
-#bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle
-#bindsym XF86AudioMicMute exec pactl set-source-mute 1 toggle
+bindsym XF86AudioRaiseVolume exec pactl set-sink-volume 0 +5%
+bindsym XF86AudioLowerVolume exec pactl set-sink-volume 0 -- -5%
+bindsym XF86AudioMute exec pactl set-sink-mute 0 toggle
+bindsym XF86AudioMicMute exec pactl set-source-mute 1 toggle
 
 
 ###### move workspaces among screens
