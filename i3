@@ -12,6 +12,7 @@ new_window normal 1
 client.focused              $purple     $purple     #ffffff     $purple
 client.focused_inactive     #311642     #311642     #666666     #311642
 
+exec --no-startup-id xsetroot -solid '#333333'
 
 ##### window customization
 for_window [class="Dwb"] border none
