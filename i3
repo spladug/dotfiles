@@ -37,6 +37,7 @@ bindsym $mod+Shift+q kill
 
 # start dmenu (a program launcher)
 bindsym $mod+p exec dmenu_run -i -b -fn "$font-$font_size" -nb "$gray" -nf '#babdb6' -sb "$purple" -sf '#ffffff' -p 'run> '
+bindsym $mod+Shift+p exec passmenu --type -i -b -fn "$font-$font_size" -nb "$gray" -nf '#babdb6' -sb "$purple" -sf '#ffffff' -p 'password> '
 
 # change focus
 bindsym $mod+h focus left

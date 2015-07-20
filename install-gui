@@ -42,3 +42,7 @@ XSESSION
 
 # disable the nautilus desktop window
 gsettings set org.gnome.desktop.background show-desktop-icons false
+
+# make gnome-keyring-daemon time out unlocked gpg keys
+gsettings set org.gnome.crypto.cache gpg-cache-method "'idle'"
+gsettings set org.gnome.crypto.cache gpg-cache-ttl 300
