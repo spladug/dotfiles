@@ -63,7 +63,7 @@ let g:syntastic_python_checkers = ['pyflakes']  " don't use pylint
 " mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " make comma the leader character
-let mapleader = ","
+let mapleader = " "
 
 " tab navigation
 map tl :tabnext<CR>
