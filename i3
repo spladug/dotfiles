@@ -42,7 +42,7 @@ bindsym $mod+p exec dmenu_run -i -b -fn "$font-$font_size" -nb "$gray" -nf '#bab
 bindsym $mod+h focus left
 bindsym $mod+j focus down
 bindsym $mod+k focus up
-bindsym $mod++l focus right
+bindsym $mod+l focus right
 
 # move focused window
 bindsym $mod+Shift+h move left
