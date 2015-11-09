@@ -18,12 +18,15 @@ exec --no-startup-id redshift-gtk
 ##### window customization
 for_window [class="Dwb"] border none
 for_window [class="Firefox" window_role="browser"] border none
+for_window [class="google-chrome" window_role="browser"] border none
 for_window [class="Gnome-terminal"] border 1pixel
 for_window [title="GVIM$"] border 1pixel
 for_window [window_role="pop-up"] floating enable
 for_window [window_role="task_dialog"] floating enable
 for_window [title="Preferences$"] floating enable
 for_window [title="Chromium$"] border none
+for_window [title="Enter Passphrase"] floating enable
+for_window [class="update-manager"] floating enable
 
 ###### key bindings
 # Use Mouse+$mod to drag floating windows to their wanted position
