@@ -127,6 +127,9 @@ augroup spladug
     " turn on markdown syntax highlighting
     au BufRead *.md setlocal filetype=markdown
 
+    " reStructuredText
+    au FileType rst setlocal softtabstop=3 tabstop=3 shiftwidth=3
+
     " golang
     au BufRead *.go setlocal filetype=go
 augroup END
