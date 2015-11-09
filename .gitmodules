@@ -28,3 +28,6 @@
 [submodule "vim/bundle/rust"]
 	path = vim/bundle/rust
 	url = https://github.com/rust-lang/rust.vim
+[submodule "vim/bundle/thrift"]
+	path = vim/bundle/thrift
+	url = https://github.com/solarnz/thrift.vim.git
