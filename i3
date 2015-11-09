@@ -12,7 +12,11 @@ new_window normal 1
 client.focused              $purple     $purple     #ffffff     $purple
 client.focused_inactive     #311642     #311642     #666666     #311642
 
+# register this session with gdm so we don't time out
+exec --no-startup-id dbus-send --session --print-reply=literal --dest=org.gnome.SessionManager "/org/gnome/SessionManager" org.gnome.SessionManager.RegisterClient "string:i3" "string:$DESKTOP_AUTOSTART_ID"
+# set a nice gray background
 exec --no-startup-id xsetroot -solid '#333333'
+# calming red tones for night owls
 exec --no-startup-id redshift-gtk
 
 ##### window customization
