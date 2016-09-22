@@ -104,25 +104,22 @@ augroup spladug
     au BufWinEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 
     " 'make' specific stuff
-    au FileType make setlocal softtabstop=8 tabstop=8 shiftwidth=8
-    au FileType make setlocal noexpandtab
+    au FileType make setlocal softtabstop=8 tabstop=8 shiftwidth=8 noexpandtab
 
     " python specific stuff
-    au FileType python setlocal colorcolumn=80  " helps with pep-8
-    au FileType python setlocal list listchars=tab:>·,trail:· " make tabs and trailing whitespace visible
+    au FileType python setlocal colorcolumn=80 list listchars=tab:>·,trail:·
 
     " html stuff
     au FileType html setlocal softtabstop=2 tabstop=2 shiftwidth=2
 
     " puppet stuff
-    au FileType puppet setlocal softtabstop=2 tabstop=2 shiftwidth=2
+    au FileType puppet setlocal softtabstop=2 tabstop=2 shiftwidth=2 colorcolumn=80
 
     " go stuff
     au FileType go setlocal noexpandtab
 
     " javascript
-    au FileType javascript setlocal colorcolumn=80
-    au FileType javascript setlocal softtabstop=2 tabstop=2 shiftwidth=2
+    au FileType javascript setlocal softtabstop=2 tabstop=2 shiftwidth=2 colorcolumn=80
 
     " turn on pig syntax highlighting
     au BufRead *.pig setlocal syntax=pig
