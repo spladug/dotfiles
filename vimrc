@@ -59,6 +59,9 @@ let g:syntastic_enable_signs=0  " get rid of the sign that screws up the left si
 
 let g:syntastic_python_checkers = ['pyflakes']  " don't use pylint
 
+" autoformat terraform on save
+let g:terraform_fmt_on_save = 1
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
