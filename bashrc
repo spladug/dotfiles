@@ -4,11 +4,6 @@
 # a place to put my own binaries!
 export PATH=~/bin:$PATH
 
-# use vi editing mode instead of default emacs
-set -o vi
-# but don't lose C-l as the "clear the screen" key
-bind -m vi-insert "\C-l":clear-screen
-
 # append to the history file, don't overwrite it
 shopt -s histappend
 
