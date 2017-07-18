@@ -8,5 +8,4 @@ git submodule update
 install_dotfile bashrc
 install_dotfile vim
 install_dotfile vimrc
-install_dotfile tmux.conf
 install_dotfile bin ~/bin

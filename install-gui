@@ -14,6 +14,8 @@ gnome-settings-daemon
 redshift-gtk
 PACKAGES
 
+install_xdg_config terminator
+
 ###### gvim
 install_dotfile gvimrc
 
