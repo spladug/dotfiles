@@ -10,6 +10,9 @@ pyflakes
 ttf-mscorefonts-installer
 
 redshift-gtk
+
+pass
+xdotool
 PACKAGES
 
 install_xdg_config terminator
