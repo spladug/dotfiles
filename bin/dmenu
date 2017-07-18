@@ -1,0 +1,2 @@
+#!/bin/sh
+exec /usr/bin/dmenu_run -i -b -fn "DejaVu Sans Mono-9" -nb "#1e2426" -nf "#babdb6" -sb "#632d85" -sf "#ffffff" -p "run > "

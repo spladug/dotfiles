@@ -9,38 +9,20 @@ pyflakes
 
 ttf-mscorefonts-installer
 
-i3
-gnome-settings-daemon
 redshift-gtk
 PACKAGES
 
 install_xdg_config terminator
 
-###### GNOME+i3
-# configs
-install_xdg_config i3
-install_xdg_config i3status
+function set_custom_binding {
+    gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom${1}/ name "${2}"
+    gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom${1}/ command "${3}"
+    gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom${1}/ binding "${4}"
+}
 
-# use the xft-supporting version of dmenu
-sudo update-alternatives --set dmenu /usr/bin/dmenu.xft
-
-# add session option for GNOME+i3
-cat <<GNOMESESSION | sudo tee /usr/share/gnome-session/sessions/gnome-i3.session > /dev/null
-[GNOME Session]
-Name=gnome-i3
-RequiredComponents=gnome-settings-daemon;i3;
-GNOMESESSION
-
-cat <<XSESSION | sudo tee /usr/share/xsessions/gnome-i3.desktop > /dev/null
-[Desktop Entry]
-Name=GNOME with i3
-Comment=improved dynamic tiling window manager
-Exec=gnome-session --session=gnome-i3
-Type=XSession
-XSESSION
-
-# disable the nautilus desktop window
-gsettings set org.gnome.desktop.background show-desktop-icons false
+gsettings set org.gnome.settings-daemon.plugins.media-keys terminal '<Shift><Alt>Return'
+set_custom_binding 0 "dmenu" "${DOTFILE_ROOT}/bin/dmenu" "<Alt>p"
+set_custom_binding 1 "passmenu" "${DOTFILE_ROOT}/bin/passmenu" "<Shift><Alt>p"
 
 # make gnome-keyring-daemon time out unlocked gpg keys
 gsettings set org.gnome.crypto.cache gpg-cache-method "'idle'"
