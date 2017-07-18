@@ -1,9 +1,6 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-# a place to put my own binaries!
-export PATH=~/bin:$PATH
-
 # append to the history file, don't overwrite it
 shopt -s histappend
 
@@ -46,6 +43,9 @@ fi
 
 export GIT_PS1_SHOWDIRTYSTATE=1 # show * and + when repository is dirty
 export PS1='\n${MAG}\u${RST}@${BLU}\h${RST} in ${WHT}\w$(__git_ps1 "${YLW} on branch %s")${RST}\n\$ '
+
+# set PATH so it includes user's private bin directories
+PATH="$HOME/bin:$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
 
 # load host-local configurations
 if [ -f ~/.bashrc.local ]; then
