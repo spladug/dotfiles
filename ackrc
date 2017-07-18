@@ -1,5 +1,0 @@
---smart-case
---follow
---type-add=python=.pyx
---type-set=puppet=.pp
---type-set=erb=.erb
