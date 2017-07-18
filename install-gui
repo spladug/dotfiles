@@ -3,7 +3,7 @@
 source helpers.sh
 
 cat <<PACKAGES | xargs sudo apt-get install -y
-vim-gnome
+vim-nox
 ttf-bitstream-vera
 pyflakes
 
@@ -15,9 +15,6 @@ redshift-gtk
 PACKAGES
 
 install_xdg_config terminator
-
-###### gvim
-install_dotfile gvimrc
 
 ###### GNOME+i3
 # configs
