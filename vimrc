@@ -40,7 +40,7 @@ set tabstop=4
 set shiftwidth=4
 
 " hide generated files
-set wildignore+=*build/*,*data/*,*git/*,*.pyc,*.png,*.gif,*.so,*.o,*~,
+set wildignore+=*.git/*,*.pyc,*.png,*.gif,*.so,*.o,*~,
 
 " slower python syntax parsing (does a better job at multiline docstrings)
 let python_slow_sync=1
@@ -52,6 +52,7 @@ let g:ackprg="ack-grep -H --nocolor --nogroup --column --ignore-dir=build"
 let g:ctrlp_map = '<leader>t'
 let g:ctrlp_working_path_mode = 0
 let g:ctrlp_follow_symlinks = 1
+let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
 
 " syntastic
 let g:syntastic_check_on_open=1  " don't wait 'til saving the file to check syntax
