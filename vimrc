@@ -45,8 +45,8 @@ set wildignore+=*.git/*,*.pyc,*.png,*.gif,*.so,*.o,*~,
 " slower python syntax parsing (does a better job at multiline docstrings)
 let python_slow_sync=1
 
-" ack
-let g:ackprg="ack-grep -H --nocolor --nogroup --column --ignore-dir=build"
+" ripgrep
+let g:rg_highlight = 1
 
 " ctrl-p
 let g:ctrlp_map = '<leader>t'
@@ -89,8 +89,8 @@ vmap < <gv
 " ,b is the "buffer finder"
 map <leader>b :CtrlPBuffer<CR>
 
-" ,a is the "ack" command
-map <leader>a :Ack 
+" ,a is the "ack" command (now ripgrep)
+map <leader>a :Rg 
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " autocommands
