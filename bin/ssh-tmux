@@ -1,8 +1,0 @@
-#!/bin/bash
-
-if [ "x$1" = "x" ]; then
-    echo "no host specified"
-    exit 1
-fi
-
-ssh -t $1 '~/bin/tmux-attach'
