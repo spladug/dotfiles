@@ -17,16 +17,9 @@ PACKAGES
 
 install_xdg_config terminator
 
-function set_custom_binding {
-    gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom${1}/ name "${2}"
-    gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom${1}/ command "${3}"
-    gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom${1}/ binding "${4}"
-}
-
 gsettings set org.gnome.settings-daemon.plugins.media-keys terminal '<Shift><Alt>Return'
-set_custom_binding 0 "dmenu" "${DOTFILE_ROOT}/bin/dmenu" "<Alt>p"
-set_custom_binding 1 "passmenu" "${DOTFILE_ROOT}/bin/passmenu" "<Shift><Alt>p"
 
-# make gnome-keyring-daemon time out unlocked gpg keys
-gsettings set org.gnome.crypto.cache gpg-cache-method "'idle'"
-gsettings set org.gnome.crypto.cache gpg-cache-ttl 300
+gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name "passmenu"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command "${DOTFILE_ROOT}/bin/passmenu"
+gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding "<Shift><Alt>p"
