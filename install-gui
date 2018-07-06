@@ -4,15 +4,19 @@ source helpers.sh
 
 cat <<PACKAGES | xargs sudo apt-get install -y
 vim-nox
-ttf-bitstream-vera
-pyflakes
 
+ttf-bitstream-vera
 ttf-mscorefonts-installer
 
 redshift-gtk
 
+pwgen
+git
 pass
 xdotool
+suckless-tools
+
+terminator
 PACKAGES
 
 install_xdg_config terminator
