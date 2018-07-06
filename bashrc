@@ -51,3 +51,5 @@ PATH="$HOME/bin:$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
 if [ -f ~/.bashrc.local ]; then
     . ~/.bashrc.local
 fi
+
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)

@@ -8,7 +8,8 @@ vim-nox
 ttf-bitstream-vera
 ttf-mscorefonts-installer
 
-redshift-gtk
+scdaemon
+pcscd
 
 pwgen
 git
