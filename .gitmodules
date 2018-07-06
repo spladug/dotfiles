@@ -27,7 +27,7 @@
 	url = https://github.com/rust-lang/rust.vim
 [submodule "vim/bundle/thrift"]
 	path = vim/bundle/thrift
-	url = git@github.com:solarnz/thrift.vim.git
+	url = https://github.com/solarnz/thrift.vim.git
 [submodule "vim/bundle/terraform"]
 	path = vim/bundle/terraform
 	url = https://github.com/hashivim/vim-terraform.git
