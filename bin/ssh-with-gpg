@@ -1,0 +1,20 @@
+#!/bin/sh
+
+HOST=$1
+shift
+SSH_OPTIONS=$@
+
+LOCAL_SOCKET=$(gpgconf --list-dirs agent-extra-socket)
+
+REMOTE_HOME=$(ssh ${SSH_OPTIONS} ${HOST} echo \$HOME)
+REMOTE_SOCKET="${REMOTE_HOME}/.gnupg/S.gpg-agent"
+ssh ${SSH_OPTIONS} ${HOST} rm ${REMOTE_SOCKET}
+
+cat ~/.gnupg/publickey.txt | ssh ${SSH_OPTIONS} ${HOST} gpg --import
+
+exec ssh \
+    -X \
+    ${SSH_OPTIONS} \
+    -oExitOnForwardFailure=yes \
+    -R ${REMOTE_SOCKET}:${LOCAL_SOCKET} \
+    ${HOST}
