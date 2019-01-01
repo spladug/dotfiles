@@ -10,9 +10,6 @@
 [submodule "vim/bundle/syntastic"]
 	path = vim/pack/spladug/start/syntastic
 	url = https://github.com/scrooloose/syntastic.git
-[submodule "vim/bundle/puppet-syntax"]
-	path = vim/pack/spladug/start/puppet-syntax
-	url = https://github.com/puppetlabs/puppet-syntax-vim.git
 [submodule "vim/bundle/rust"]
 	path = vim/pack/spladug/start/rust
 	url = https://github.com/rust-lang/rust.vim
@@ -25,3 +22,6 @@
 [submodule "vim/bundle/ripgrep"]
 	path = vim/pack/spladug/start/ripgrep
 	url = https://github.com/jremmen/vim-ripgrep
+[submodule "vim/pack/spladug/start/vim-puppet"]
+	path = vim/pack/spladug/start/vim-puppet
+	url = https://github.com/rodjek/vim-puppet
