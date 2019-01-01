@@ -16,9 +16,6 @@
 [submodule "vim/bundle/puppet-syntax"]
 	path = vim/pack/spladug/start/puppet-syntax
 	url = https://github.com/puppetlabs/puppet-syntax-vim.git
-[submodule "vim/bundle/vim-less"]
-	path = vim/pack/spladug/start/vim-less
-	url = https://github.com/groenewege/vim-less.git
 [submodule "vim/bundle/rust"]
 	path = vim/pack/spladug/start/rust
 	url = https://github.com/rust-lang/rust.vim
