@@ -4,9 +4,6 @@
 [submodule "vim/bundle/nerdcommenter"]
 	path = vim/pack/spladug/start/nerdcommenter
 	url = https://github.com/scrooloose/nerdcommenter.git
-[submodule "vim/bundle/gitv"]
-	path = vim/pack/spladug/start/gitv
-	url = https://github.com/gregsexton/gitv.git
 [submodule "vim/bundle/ctrlp"]
 	path = vim/pack/spladug/start/ctrlp
 	url = https://github.com/ctrlpvim/ctrlp.vim.git
