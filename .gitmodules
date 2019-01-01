@@ -1,36 +1,33 @@
 [submodule "vim/bundle/fugitive"]
-	path = vim/bundle/fugitive
+	path = vim/pack/spladug/start/fugitive
 	url = https://github.com/tpope/vim-fugitive.git
 [submodule "vim/bundle/nerdcommenter"]
-	path = vim/bundle/nerdcommenter
+	path = vim/pack/spladug/start/nerdcommenter
 	url = https://github.com/scrooloose/nerdcommenter.git
 [submodule "vim/bundle/gitv"]
-	path = vim/bundle/gitv
+	path = vim/pack/spladug/start/gitv
 	url = https://github.com/gregsexton/gitv.git
 [submodule "vim/bundle/ctrlp"]
-	path = vim/bundle/ctrlp
+	path = vim/pack/spladug/start/ctrlp
 	url = https://github.com/ctrlpvim/ctrlp.vim.git
 [submodule "vim/bundle/syntastic"]
-	path = vim/bundle/syntastic
+	path = vim/pack/spladug/start/syntastic
 	url = https://github.com/scrooloose/syntastic.git
 [submodule "vim/bundle/puppet-syntax"]
-	path = vim/bundle/puppet-syntax
+	path = vim/pack/spladug/start/puppet-syntax
 	url = https://github.com/puppetlabs/puppet-syntax-vim.git
-[submodule "vim/bundle/pathogen"]
-	path = vim/bundle/pathogen
-	url = https://github.com/tpope/vim-pathogen.git
 [submodule "vim/bundle/vim-less"]
-	path = vim/bundle/vim-less
+	path = vim/pack/spladug/start/vim-less
 	url = https://github.com/groenewege/vim-less.git
 [submodule "vim/bundle/rust"]
-	path = vim/bundle/rust
+	path = vim/pack/spladug/start/rust
 	url = https://github.com/rust-lang/rust.vim
 [submodule "vim/bundle/thrift"]
-	path = vim/bundle/thrift
+	path = vim/pack/spladug/start/thrift
 	url = https://github.com/solarnz/thrift.vim.git
 [submodule "vim/bundle/terraform"]
-	path = vim/bundle/terraform
+	path = vim/pack/spladug/start/terraform
 	url = https://github.com/hashivim/vim-terraform.git
 [submodule "vim/bundle/ripgrep"]
-	path = vim/bundle/ripgrep
+	path = vim/pack/spladug/start/ripgrep
 	url = https://github.com/jremmen/vim-ripgrep

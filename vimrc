@@ -1,7 +1,3 @@
-" load pathogen
-runtime bundle/pathogen/autoload/pathogen.vim
-execute pathogen#infect()
-
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " general configuration
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
