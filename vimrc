@@ -52,9 +52,10 @@ let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standar
 
 " syntastic
 let g:syntastic_check_on_open=1  " don't wait 'til saving the file to check syntax
-let g:syntastic_enable_signs=0  " get rid of the sign that screws up the left side
 
-let g:syntastic_python_checkers = ['pyflakes']  " don't use pylint
+let g:syntastic_python_checkers = ['pyflakes', 'pycodestyle', 'pydocstyle']
+let g:syntastic_python_pycodestyle_args = '--max-line-length=100'
+let g:syntastic_python_pydocstyle_args = '--ignore=D100,D101,D102,D103,D104,D105,D106,D107'
 
 " autoformat terraform on save
 let g:terraform_fmt_on_save = 1
@@ -104,7 +105,7 @@ augroup spladug
     au FileType make setlocal softtabstop=8 tabstop=8 shiftwidth=8 noexpandtab
 
     " python specific stuff
-    au FileType python setlocal colorcolumn=80 list listchars=tab:>·,trail:·
+    au FileType python setlocal colorcolumn=100 list listchars=tab:>·,trail:·
 
     " html stuff
     au FileType html setlocal softtabstop=2 tabstop=2 shiftwidth=2
