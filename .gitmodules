@@ -25,3 +25,6 @@
 [submodule "vim/pack/spladug/start/vim-puppet"]
 	path = vim/pack/spladug/start/vim-puppet
 	url = https://github.com/rodjek/vim-puppet
+[submodule "vim/pack/spladug/start/python-syntax"]
+	path = vim/pack/spladug/start/python-syntax
+	url = https://github.com/vim-python/python-syntax.git
