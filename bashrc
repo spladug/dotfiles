@@ -42,7 +42,13 @@ if [ -x /usr/bin/tput ] && tput setaf 1 >&/dev/null; then
 fi
 
 export GIT_PS1_SHOWDIRTYSTATE=1 # show * and + when repository is dirty
-export PS1='\n${MAG}\u${RST}@${BLU}\h${RST} in ${WHT}\w$(__git_ps1 "${YLW} on branch %s")${RST}\n\$ '
+export VIRTUAL_ENV_DISABLE_PROMPT=1 # assuming direct control
+__virtualenv_ps1 () {
+    if [[ -n "$VIRTUAL_ENV" ]]; then
+        echo " ${BLD}${CYN}in venv ${VIRTUAL_ENV##*/}${RST}"
+    fi
+}
+export PS1='\n${MAG}\u${RST}@${BLU}\h${RST} in ${WHT}\w$(__virtualenv_ps1)$(__git_ps1 "${YLW} on branch %s")${RST}\n\$ '
 
 # set PATH so it includes user's private bin directories
 PATH="$HOME/bin:$HOME/.local/bin:$HOME/.cargo/bin:$PATH"
