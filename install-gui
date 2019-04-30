@@ -30,3 +30,6 @@ gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/or
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command "${DOTFILE_ROOT}/bin/passmenu"
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding "<Shift><Alt>p"
 gsettings set org.freedesktop.ibus.panel.emoji hotkey "['<Control><Shift>j']"
+
+sudo update-alternatives --set editor /usr/bin/vim.nox
+sudo update-alternatives --set x-terminal-emulator /usr/bin/terminator
