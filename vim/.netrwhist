@@ -1,6 +1,0 @@
-let g:netrw_dirhistmax  =10
-let g:netrw_dirhist_cnt =4
-let g:netrw_dirhist_1='/home/me/src/baseplate-cookiecutter/baseplate_cookiecutter/{{cookiecutter.project_slug}}/{{cookiecutter.module_name}}'
-let g:netrw_dirhist_2='/tmp/folly/folly'
-let g:netrw_dirhist_3='/home/me/src/onevm/diagnose.d'
-let g:netrw_dirhist_4='/home/me/src/onevm/scripts/outside'
