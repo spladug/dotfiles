@@ -1,9 +1,6 @@
 [submodule "vim/bundle/fugitive"]
 	path = vim/pack/spladug/start/fugitive
 	url = https://github.com/tpope/vim-fugitive.git
-[submodule "vim/bundle/nerdcommenter"]
-	path = vim/pack/spladug/start/nerdcommenter
-	url = https://github.com/scrooloose/nerdcommenter.git
 [submodule "vim/bundle/ctrlp"]
 	path = vim/pack/spladug/start/ctrlp
 	url = https://github.com/ctrlpvim/ctrlp.vim.git
@@ -28,3 +25,6 @@
 [submodule "vim/pack/spladug/start/python-syntax"]
 	path = vim/pack/spladug/start/python-syntax
 	url = https://github.com/vim-python/python-syntax.git
+[submodule "vim/pack/spladug/start/commentary"]
+	path = vim/pack/spladug/start/commentary
+	url = https://github.com/tpope/vim-commentary.git
