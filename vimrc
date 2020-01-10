@@ -66,7 +66,7 @@ source $VIMRUNTIME/ftplugin/man.vim
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
-" make comma the leader character
+" make space the leader character
 let mapleader = " "
 
 " tab navigation
