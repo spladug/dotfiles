@@ -60,6 +60,9 @@ let g:syntastic_python_pydocstyle_args = '--ignore=D100,D101,D102,D103,D104,D105
 " autoformat terraform on save
 let g:terraform_fmt_on_save = 1
 
+" enable the :Man command for viewing unix manpages
+source $VIMRUNTIME/ftplugin/man.vim
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
