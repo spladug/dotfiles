@@ -69,11 +69,6 @@ source $VIMRUNTIME/ftplugin/man.vim
 " make space the leader character
 let mapleader = " "
 
-" tab navigation
-map tl :tabnext<CR>
-map th :tabprev<CR>
-map <C-t> :tabnew<CR>
-
 " make split navigation a bit cleaner
 map <leader>" :split<CR>
 map <leader>% :vsplit<CR>
