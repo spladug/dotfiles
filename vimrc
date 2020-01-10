@@ -44,11 +44,8 @@ let python_slow_sync=1
 " ripgrep
 let g:rg_highlight = 1
 
-" ctrl-p
-let g:ctrlp_map = '<leader>t'
-let g:ctrlp_working_path_mode = 0
-let g:ctrlp_follow_symlinks = 1
-let g:ctrlp_user_command = ['.git', 'cd %s && git ls-files -co --exclude-standard']
+" fzf
+set rtp+=/usr/share/doc/fzf/examples/
 
 " syntastic
 let g:syntastic_check_on_open=1  " don't wait 'til saving the file to check syntax
@@ -81,9 +78,10 @@ map <C-l> <C-w>l
 vmap > >gv
 vmap < <gv
 
-" ,b is the "buffer finder"
-map <leader>b :CtrlPBuffer<CR>
-
+" ,t is the file finder
+map <leader>t :Files<CR>
+" ,b is the buffer finder
+map <leader>b :Buffer<CR>
 " ,a is the "ack" command (now ripgrep)
 map <leader>a :Rg 
 

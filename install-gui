@@ -18,6 +18,8 @@ pass
 xdotool
 suckless-tools
 
+fzf
+
 terminator
 PACKAGES
 
