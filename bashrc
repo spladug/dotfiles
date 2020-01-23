@@ -51,7 +51,7 @@ __virtualenv_ps1 () {
 export PS1='\n${MAG}\u${RST}@${BLU}\h${RST} in ${WHT}\w$(__virtualenv_ps1)$(__git_ps1 "${YLW} on branch %s")${RST}\n\$ '
 
 man() {
-    /usr/bin/man -w "$*" && vi -c ":Man $*" -c 'silent only'
+    /usr/bin/man -w "$@" && vi -c ":Man $*" -c 'silent only'
 }
 
 # set PATH so it includes user's private bin directories
