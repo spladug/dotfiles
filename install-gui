@@ -1,40 +1,6 @@
 #!/bin/bash -e
 
-source helpers.sh
-
-cat <<PACKAGES | xargs sudo apt-get install -y
-vim-nox
-
-ttf-bitstream-vera
-ttf-mscorefonts-installer
-fonts-firacode
-
-scdaemon
-pcscd
-
-pwgen
-git
-pass
-xdotool
-suckless-tools
-
-fzf
-
-terminator
-PACKAGES
-
-install_xdg_config terminator
-
-gsettings set org.gnome.settings-daemon.plugins.media-keys terminal '<Shift><Alt>Return'
-
 gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']"
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name "passmenu"
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command "${DOTFILE_ROOT}/bin/passmenu"
 gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding "<Shift><Alt>p"
-gsettings set org.freedesktop.ibus.panel.emoji hotkey "['<Control><Shift>j']"
-
-gsettings set org.gnome.shell.extensions.desktop-icons show-home false
-gsettings set org.gnome.shell.extensions.desktop-icons show-trash false
-
-sudo update-alternatives --set editor /usr/bin/vim.nox
-sudo update-alternatives --set x-terminal-emulator /usr/bin/terminator

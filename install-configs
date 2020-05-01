@@ -1,11 +1,3 @@
 #!/bin/bash -e
 
-source helpers.sh
-
-git submodule init
-git submodule update
-
-install_dotfile bashrc
-install_dotfile vim
-install_dotfile vimrc
 install_dotfile bin ~/bin
