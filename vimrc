@@ -138,6 +138,9 @@ augroup spladug
     " reStructuredText
     au FileType rst setlocal softtabstop=3 tabstop=3 shiftwidth=3
 
+    " YAML
+    au FileType yaml setlocal softtabstop=2 tabstop=2 shiftwidth=2
+
     " golang
     au BufRead *.go setlocal filetype=go
 augroup END
