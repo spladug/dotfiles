@@ -1,13 +1,9 @@
 Neil's dotfiles
 ===============
 
-Installation
-------------
+The files in this repository configure a Desktop Ubuntu 20.04 system to Neil's
+taste.
 
 This repository is meant to be cloned into its own directory. It can be cloned
-anywhere but I put it in ~/src/dotfiles.
-
-There are two stages of install. The "install-configs" script will do a minimal
-unprivileged install.  The "install-gui" script will configure a customized
-desktop environment and requires root privileges to do so. The latter script
-assumes and requires a debian-like system.
+anywhere but I put it in `~/src/dotfiles`. Once cloned, run `install.sh` to
+symlink the files into place.

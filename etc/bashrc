@@ -1,0 +1,53 @@
+# If not running interactively, don't do anything
+[ -z "$PS1" ] && return
+
+#######################
+# configure XDG variables (XDG_RUNTIME_DIR is expected to come from PAM)
+export XDG_CONFIG_HOME=$HOME/.config
+export XDG_CACHE_HOME=$HOME/.cache
+export XDG_DATA_HOME=$HOME/.local/share
+
+#######################
+# configure the shell itself
+HISTCONTROL=ignoreboth # don't save commands that start with space characters and don't save dupes
+HISTFILE="${XDG_DATA_HOME}/bash/history"
+HISTFILESIZE=2000
+HISTSIZE=1000
+
+shopt -s histappend
+shopt -s checkwinsize
+
+VIRTUAL_ENV_DISABLE_PROMPT=1 # assuming direct control
+__venv_ps1 () {
+    if [[ -n "$VIRTUAL_ENV" ]]; then
+        echo " with venv ${VIRTUAL_ENV##*/}"
+    fi
+}
+GIT_PS1_SHOWDIRTYSTATE=1 # show * and + when repository is dirty
+PS1='\nin \[\e[1;34m\]\w\[\e[1;35m\]$(__venv_ps1)\[\e[1;33m\]$(__git_ps1 " on branch %s")\[\e[0;37m\]\n\$ '
+
+if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
+    source /etc/bash_completion
+fi
+
+#######################
+# set necessary environment variables for various programs
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
+export GNUPGHOME="$XDG_DATA_HOME"/gnupg
+export LESSHISTFILE=-
+export PASSWORD_STORE_DIR="$XDG_DATA_HOME"/pass
+export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+export TERM="xterm-256color"
+export VIMINIT="source ${XDG_CONFIG_HOME}/vim/vimrc"
+
+#######################
+# aliases
+alias docker='podman'
+alias grep='grep --color=auto'
+alias ls='ls --color=auto'
+
+#######################
+# custom functions
+man() {
+    /usr/bin/man -w "$@" && vi -c ":Man $*" -c 'silent only'
+}

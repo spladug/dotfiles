@@ -1,6 +1,16 @@
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " general configuration
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
+
+" pedantically move everything into XDG base directory locations
+set backupdir=$XDG_DATA_HOME/vim/backup
+set directory=$XDG_DATA_HOME/vim/swap
+set packpath+=$XDG_CONFIG_HOME/vim
+set runtimepath=$XDG_CONFIG_HOME/vim,$VIMRUNTIME,$XDG_CONFIG_HOME/vim/after
+set undodir=$XDG_DATA_HOME/vim/undo
+set viewdir=$XDG_DATA_HOME/vim/view
+set viminfo+='1000,n$XDG_DATA_HOME/vim/viminfo
+
 " syntax highlighting on and colorfy
 syntax enable
 filetype plugin indent on

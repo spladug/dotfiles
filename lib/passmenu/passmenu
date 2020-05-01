@@ -2,7 +2,7 @@
 
 shopt -s nullglob globstar
 
-prefix=~/.password-store
+prefix=$HOME/.local/share/pass
 password_files=( "$prefix"/**/*.gpg )
 password_files=( "${password_files[@]#"$prefix"/}" )
 password_files=( "${password_files[@]%.gpg}" )

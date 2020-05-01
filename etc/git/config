@@ -1,0 +1,9 @@
+[user]
+	name = Neil Williams
+	email = neil@reddit.com
+[blame]
+	ignoreRevsFile = .git-blame-ignore-revs
+[diff]
+	algorithm = histogram
+[core]
+	excludesfile = /home/spladug/.config/git/ignore

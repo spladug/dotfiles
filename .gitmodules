@@ -1,27 +1,27 @@
 [submodule "vim/bundle/fugitive"]
-	path = vim/pack/spladug/start/fugitive
+	path = etc/vim/pack/spladug/start/fugitive
 	url = https://github.com/tpope/vim-fugitive.git
 [submodule "vim/bundle/syntastic"]
-	path = vim/pack/spladug/start/syntastic
+	path = etc/vim/pack/spladug/start/syntastic
 	url = https://github.com/scrooloose/syntastic.git
 [submodule "vim/bundle/rust"]
-	path = vim/pack/spladug/start/rust
+	path = etc/vim/pack/spladug/start/rust
 	url = https://github.com/rust-lang/rust.vim
 [submodule "vim/bundle/thrift"]
-	path = vim/pack/spladug/start/thrift
+	path = etc/vim/pack/spladug/start/thrift
 	url = https://github.com/solarnz/thrift.vim.git
 [submodule "vim/bundle/terraform"]
-	path = vim/pack/spladug/start/terraform
+	path = etc/vim/pack/spladug/start/terraform
 	url = https://github.com/hashivim/vim-terraform.git
 [submodule "vim/pack/spladug/start/vim-puppet"]
-	path = vim/pack/spladug/start/vim-puppet
+	path = etc/vim/pack/spladug/start/vim-puppet
 	url = https://github.com/rodjek/vim-puppet
 [submodule "vim/pack/spladug/start/python-syntax"]
-	path = vim/pack/spladug/start/python-syntax
+	path = etc/vim/pack/spladug/start/python-syntax
 	url = https://github.com/vim-python/python-syntax.git
 [submodule "vim/pack/spladug/start/commentary"]
-	path = vim/pack/spladug/start/commentary
+	path = etc/vim/pack/spladug/start/commentary
 	url = https://github.com/tpope/vim-commentary.git
 [submodule "vim/pack/spladug/start/fzf"]
-	path = vim/pack/spladug/start/fzf
+	path = etc/vim/pack/spladug/start/fzf
 	url = https://github.com/junegunn/fzf.vim.git
