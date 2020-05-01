@@ -62,4 +62,5 @@ if [ -f ~/.bashrc.local ]; then
     . ~/.bashrc.local
 fi
 
+export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
 export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
