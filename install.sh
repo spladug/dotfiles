@@ -73,8 +73,18 @@ function do_install {
     # pull in the vim modules etc.
     git submodule update --init
 
-    sudo apt-get update
-    sudo apt-get install -y "${required_packages[@]}"
+    local package_needs_installation=no
+    for package in "${PUPPET_REQUIREMENTS[@]}"; do
+        if ! dpkg -s "${package}" 2>/dev/null | grep -q 'install ok installed'; then
+            package_needs_installation=yes
+            break
+        fi
+    done
+
+    if [[ "$package_needs_installation" = "yes" ]]; then
+        sudo apt-get update
+        sudo apt-get install -y "${required_packages[@]}"
+    fi
 
     install bin .local/bin
     install lib/passmenu .local/lib/passmenu
@@ -91,7 +101,9 @@ function do_install {
 
     install_xdg_config vim
     ensure_xdg_data_dir vim/{undo,swap,backup}
-    sudo update-alternatives --set editor /usr/bin/vim.nox
+    if [[ ! /etc/alternatives/editor -ef /usr/bin/vim.nox ]]; then
+        sudo update-alternatives --set editor /usr/bin/vim.nox
+    fi
 
     gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']"
     gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name "passmenu"
