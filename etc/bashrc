@@ -32,6 +32,7 @@ fi
 
 #######################
 # set necessary environment variables for various programs
+export PATH=~/.local/bin:$PATH
 export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.git/*"'
 export GNUPGHOME="$XDG_DATA_HOME"/gnupg
 export LESSHISTFILE=-
