@@ -45,6 +45,7 @@ export VIMINIT="source ${XDG_CONFIG_HOME}/vim/vimrc"
 alias docker='podman'
 alias grep='grep --color=auto'
 alias ls='ls --color=auto'
+alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
 
 #######################
 # custom functions
