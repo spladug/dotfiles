@@ -86,6 +86,9 @@ function do_install {
 
     install_xdg_config regolith
 
+    install_xdg_config environment.d
+    systemctl --user daemon-reload
+
     install_xdg_config vim
     ensure_xdg_data_dir vim/{undo,swap,backup}
     sudo update-alternatives --set editor /usr/bin/vim.nox
