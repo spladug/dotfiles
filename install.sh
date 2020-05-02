@@ -10,6 +10,7 @@ fi
 readonly progname=$(basename "$0")
 readonly root=$(dirname "$(readlink -f "$0")")
 readonly required_packages=(
+    awscli
     fonts-firacode
     fzf
     pcscd
