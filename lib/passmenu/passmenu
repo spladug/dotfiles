@@ -2,9 +2,11 @@
 
 shopt -s nullglob globstar
 
-prefix=$HOME/.local/share/pass
-password_files=( "$prefix"/**/*.gpg )
-password_files=( "${password_files[@]#"$prefix"/}" )
+export GNUPGHOME="$HOME/.local/share/gnupg"
+export PASSWORD_STORE_DIR="$HOME/.local/share/pass"
+
+password_files=( "${PASSWORD_STORE_DIR}"/**/*.gpg )
+password_files=( "${password_files[@]#"${PASSWORD_STORE_DIR}"/}" )
 password_files=( "${password_files[@]%.gpg}" )
 
 password_file=$(printf '%s\n' "${password_files[@]}" | rofi -dmenu -p 'Password ')
