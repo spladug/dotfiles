@@ -57,6 +57,9 @@ SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 export SSH_AUTH_SOCK
 export TERM="xterm-256color"
 export VIMINIT="source ${XDG_CONFIG_HOME}/vim/vimrc"
+export AWS_VAULT_BACKEND=pass
+export AWS_VAULT_PASS_PASSWORD_STORE_DIR=$PASSWORD_STORE_DIR
+export AWS_VAULT_PASS_PREFIX=aws
 
 #######################
 # aliases
