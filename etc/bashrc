@@ -17,14 +17,30 @@ HISTSIZE=1000
 shopt -s histappend
 shopt -s checkwinsize
 
-VIRTUAL_ENV_DISABLE_PROMPT=1 # assuming direct control
-__venv_ps1 () {
-    if [[ -n "$VIRTUAL_ENV" ]]; then
-        echo " with venv ${VIRTUAL_ENV##*/}"
+export VIRTUAL_ENV_DISABLE_PROMPT=1 # assuming direct control
+export GIT_PS1_SHOWDIRTYSTATE=1 # show * and + when repository is dirty
+function _prompt {
+    # shellcheck disable=SC2181
+    if [[ $? -eq 0 ]]; then
+        local status="😃"
+    else
+        local status="😞"
     fi
+
+    local yellow='\[\e[0;33m\]'
+    local blue='\[\e[0;34m\]'
+    local magenta='\[\e[0;35m\]'
+    local cyan='\[\e[0;36m\]'
+    local white='\[\e[0;37m\]'
+
+    local venv=''
+    if [[ -n "$VIRTUAL_ENV" ]]; then
+        local venv=" ${magenta}with venv ${VIRTUAL_ENV##*/}"
+    fi
+
+    PS1="\n${status} ${cyan}at $(date +%H:%M:%S) ${blue}in \w${venv}${yellow}$(__git_ps1 " on branch %s")${white}\n\$ "
 }
-GIT_PS1_SHOWDIRTYSTATE=1 # show * and + when repository is dirty
-PS1='\nin \[\e[1;34m\]\w\[\e[1;35m\]$(__venv_ps1)\[\e[1;33m\]$(__git_ps1 " on branch %s")\[\e[0;37m\]\n\$ '
+PROMPT_COMMAND=_prompt
 
 if [ -f /etc/bash_completion ] && ! shopt -oq posix; then
     source /etc/bash_completion
@@ -37,7 +53,8 @@ export FZF_DEFAULT_COMMAND='rg --files --no-ignore --hidden --follow --glob "!.g
 export GNUPGHOME="$XDG_DATA_HOME"/gnupg
 export LESSHISTFILE=-
 export PASSWORD_STORE_DIR="$XDG_DATA_HOME"/pass
-export SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
+export SSH_AUTH_SOCK
 export TERM="xterm-256color"
 export VIMINIT="source ${XDG_CONFIG_HOME}/vim/vimrc"
 
