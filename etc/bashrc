@@ -27,18 +27,40 @@ function _prompt {
         local status="😞"
     fi
 
+    local red='\[\e[0;31m\]'
+    local green='\[\e[0;32m\]'
     local yellow='\[\e[0;33m\]'
     local blue='\[\e[0;34m\]'
     local magenta='\[\e[0;35m\]'
     local cyan='\[\e[0;36m\]'
     local white='\[\e[0;37m\]'
+    local black_on_red='\[\e[1;30;41m\]'
 
     local venv=''
     if [[ -n "$VIRTUAL_ENV" ]]; then
         local venv=" ${magenta}with venv ${VIRTUAL_ENV##*/}"
     fi
 
-    PS1="\n${status} ${cyan}at $(date +%H:%M:%S) ${blue}in \w${venv}${yellow}$(__git_ps1 " on branch %s")${white}\n\$ "
+    local aws=''
+    if [[ -n "$AWS_SESSION_EXPIRATION" ]]; then
+        local now
+        local expiration
+
+        now=$(date +%s)
+        expiration=$(date --date="$AWS_SESSION_EXPIRATION" +%s)
+        local time_left=$((expiration - now))
+
+        if [[ $time_left -gt 60 ]]; then
+            aws=" ${green}with AWS creds ($((time_left/60))m)"
+        elif [[ $time_left -gt 0 ]]; then
+            aws=" ${red}with AWS creds ($((time_left))s)"
+        else
+            aws=" ${black_on_red}with EXPIRED AWS creds"
+        fi
+
+    fi
+
+    PS1="\n${status} ${cyan}at \t ${blue}in \w${venv}${aws}${yellow}$(__git_ps1 " on branch %s")${white}\n\$ "
 }
 PROMPT_COMMAND=_prompt
 
