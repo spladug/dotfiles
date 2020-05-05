@@ -89,6 +89,7 @@ function do_install {
     install bin .local/bin
     install lib/passmenu .local/lib/passmenu
 
+    install_dotfile profile
     install_dotfile bashrc
     ensure_xdg_data_dir bash
 
