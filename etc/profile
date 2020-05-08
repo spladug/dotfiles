@@ -5,10 +5,19 @@ fi
 # we can't set the PATH in environment.d because /etc/environment (from PAM)
 # seems to come after environment.d and overrides the PATH there
 # so here we go setting up the PATH:
-if [ -d "$XDG_DATA_HOME/cargo/bin" ]; then
-    PATH="$XDG_DATA_HOME/cargo/bin:$PATH"
-fi
+bindirs=$(cat <<END
+/usr/lib/go-1.14/bin
+$XDG_DATA_HOME/go/bin
+$XDG_DATA_HOME/cargo/bin
+$HOME/.local/bin
+END
+)
 
-if [ -d "$HOME/.local/bin" ] ; then
-    PATH="$HOME/.local/bin:$PATH"
-fi
+for bindir in $bindirs; do
+    if [ -d "$bindir" ]; then
+        PATH="$bindir:$PATH"
+    fi
+done
+
+unset bindir
+unset bindirs
