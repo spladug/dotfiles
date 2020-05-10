@@ -17,6 +17,7 @@ readonly required_packages=(
     ripgrep
     scdaemon
     vim-nox
+    virtualenvwrapper
 )
 
 readonly backup_dir=$(mktemp -d "$HOME/dotfile-backup.XXXXXX")
@@ -105,6 +106,8 @@ function do_install {
     if [[ ! /etc/alternatives/editor -ef /usr/bin/vim.nox ]]; then
         sudo update-alternatives --set editor /usr/bin/vim.nox
     fi
+
+    ensure_xdg_data_dir virtualenvs
 
     gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']"
     gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name "passmenu"

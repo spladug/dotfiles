@@ -1,8 +1,6 @@
 # If not running interactively, don't do anything
 [ -z "$PS1" ] && return
 
-#######################
-# configure the shell itself
 HISTCONTROL=ignoreboth # don't save commands that start with space characters and don't save dupes
 HISTFILE="${XDG_DATA_HOME}/bash/history"
 HISTFILESIZE=2000
@@ -11,9 +9,17 @@ HISTSIZE=1000
 shopt -s histappend
 shopt -s checkwinsize
 
-if [[ -e /usr/share/bash-completion/bash_completion ]]; then
-    source /usr/share/bash-completion/bash_completion
-fi
+scripts=(
+/usr/share/bash-completion/bash_completion
+/usr/share/virtualenvwrapper/virtualenvwrapper_lazy.sh
+)
+for script in "${scripts[@]}"; do
+    if [[ -e "$script" ]]; then
+        source "$script"
+    fi
+done
+unset script
+unset scripts
 
 VIRTUAL_ENV_DISABLE_PROMPT=1 # assuming direct control
 GIT_PS1_SHOWDIRTYSTATE=1 # show * and + when repository is dirty
