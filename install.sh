@@ -89,6 +89,7 @@ function do_install {
 
     install bin .local/bin
     install lib/passmenu .local/lib/passmenu
+    install lib/python .local/lib/python
 
     install_dotfile profile
     install_dotfile bashrc
