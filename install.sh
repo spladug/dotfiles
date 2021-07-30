@@ -17,7 +17,6 @@ readonly required_packages=(
     ripgrep
     scdaemon
     vim-nox
-    virtualenvwrapper
 )
 
 readonly backup_dir=$(mktemp -d "$HOME/dotfile-backup.XXXXXX")
