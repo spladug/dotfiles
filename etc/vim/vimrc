@@ -128,6 +128,7 @@ augroup spladug
     au FileType python setlocal colorcolumn=100 list listchars=tab:>·,trail:·
 
     " html stuff
+    au BufRead *.jinja2 setlocal syntax=html
     au FileType html setlocal softtabstop=2 tabstop=2 shiftwidth=2
 
     " puppet stuff
@@ -153,4 +154,5 @@ augroup spladug
 
     " golang
     au BufRead *.go setlocal filetype=go
+    au BufRead *.star setlocal filetype=python
 augroup END
