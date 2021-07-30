@@ -24,13 +24,6 @@ unset scripts
 VIRTUAL_ENV_DISABLE_PROMPT=1 # assuming direct control
 GIT_PS1_SHOWDIRTYSTATE=1 # show * and + when repository is dirty
 function _prompt {
-    # shellcheck disable=SC2181
-    if [[ $? -eq 0 ]]; then
-        local status="😃"
-    else
-        local status="😞"
-    fi
-
     local red='\[\e[0;31m\]'
     local green='\[\e[0;32m\]'
     local yellow='\[\e[0;33m\]'
@@ -64,7 +57,12 @@ function _prompt {
 
     fi
 
-    PS1="\n${status} ${cyan}at \t ${blue}in \w${venv}${aws}${yellow}$(__git_ps1 " on branch %s")${white}\n\$ "
+    local docker=''
+    if [[ -w /var/run/docker.sock ]]; then
+        docker=" ${red}w/ Docker"
+    fi
+
+    PS1="\n${cyan}\t ${blue}in \w${venv}${aws}${docker}${yellow}$(__git_ps1 " on branch %s")${white}\n\$ "
 }
 PROMPT_COMMAND=_prompt
 
