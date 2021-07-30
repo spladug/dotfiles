@@ -75,7 +75,7 @@ function do_install {
     git submodule update --init
 
     local package_needs_installation=no
-    for package in "${PUPPET_REQUIREMENTS[@]}"; do
+    for package in "${required_packages[@]}"; do
         if ! dpkg -s "${package}" 2>/dev/null | grep -q 'install ok installed'; then
             package_needs_installation=yes
             break
