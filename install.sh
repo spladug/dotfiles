@@ -14,6 +14,7 @@ readonly required_packages=(
     fonts-firacode
     fzf
     pcscd
+    podman
     ripgrep
     scdaemon
     vim-nox
@@ -69,6 +70,27 @@ function ensure_xdg_data_dir {
     done
 }
 
+function install_shell {
+    podman run --rm -v ${root}/src:/src -w /src ubuntu:20.04 ./build-shell.sh
+    make -C src/shell install configure enable
+}
+
+function configure_workspaces {
+    dconf write /org/gnome/shell/overrides/dynamic-workspaces false
+    dconf write /org/gnome/desktop/wm/preferences/num-workspaces 10
+
+    for i in {1..10}
+    do
+       dconf write /org/gnome/shell/keybindings/switch-to-application-$i "@as []"
+       dconf write /org/gnome/desktop/wm/keybindings/switch-to-workspace-$i "['<Super>$i']"
+       dconf write /org/gnome/desktop/wm/keybindings/move-window-to-workspace-$i "['<Super><Shift>$i']"
+    done
+    dconf write /org/gnome/desktop/wm/keybindings/switch-to-workspace-10 "['<Super>0']"
+    dconf write /org/gnome/desktop/wm/keybindings/move-window-to-workspace-10 "['<Super><Shift>10']"
+
+    gsettings set org.gnome.desktop.interface enable-animations false
+}
+
 function do_install {
     # pull in the vim modules etc.
     git submodule update --init
@@ -87,7 +109,6 @@ function do_install {
     fi
 
     install bin .local/bin
-    install lib/passmenu .local/lib/passmenu
     install lib/python .local/lib/python
 
     install_dotfile profile
@@ -95,8 +116,6 @@ function do_install {
     ensure_xdg_data_dir bash
 
     install_xdg_config git
-
-    install_xdg_config regolith
 
     install_xdg_config environment.d
     systemctl --user daemon-reload
@@ -107,12 +126,11 @@ function do_install {
         sudo update-alternatives --set editor /usr/bin/vim.nox
     fi
 
-    ensure_xdg_data_dir virtualenvs
+    install share/gnome-shell/extensions .local/share/gnome-shell/extensions
+    gnome-extensions enable "simply.workspaces@andyrichardson.dev"
 
-    gsettings set org.gnome.settings-daemon.plugins.media-keys custom-keybindings "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']"
-    gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ name "passmenu"
-    gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ command "${HOME}/.local/lib/passmenu/passmenu"
-    gsettings set org.gnome.settings-daemon.plugins.media-keys.custom-keybinding:/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/ binding "<Super>p"
+    install_shell
+    configure_workspaces
 }
 
 # only run the active bits of code if we're not being sourced for someone else

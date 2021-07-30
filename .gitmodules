@@ -25,3 +25,9 @@
 [submodule "vim/pack/spladug/start/fzf"]
 	path = etc/vim/pack/spladug/start/fzf
 	url = https://github.com/junegunn/fzf.vim.git
+[submodule "share/simply.workspaces@andyrichardson.dev"]
+	path = share/gnome-shell/extensions/simply.workspaces@andyrichardson.dev
+	url = https://github.com/andyrichardson/simply-workspaces.git
+[submodule "src/shell"]
+	path = src/shell
+	url = https://github.com/pop-os/shell.git
