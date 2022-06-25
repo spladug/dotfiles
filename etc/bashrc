@@ -12,6 +12,7 @@ shopt -s checkwinsize
 scripts=(
 /usr/share/bash-completion/bash_completion
 /usr/share/virtualenvwrapper/virtualenvwrapper_lazy.sh
+/usr/share/git/git-prompt.sh
 )
 for script in "${scripts[@]}"; do
     if [[ -e "$script" ]]; then

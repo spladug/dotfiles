@@ -54,8 +54,8 @@ let python_slow_sync=1
 " ripgrep
 let g:rg_highlight = 1
 
-" fzf
-set rtp+=/usr/share/doc/fzf/examples/
+" load system plugins
+set rtp+=/usr/share/vim/vimfiles
 
 " syntastic
 let g:syntastic_check_on_open=1  " don't wait 'til saving the file to check syntax

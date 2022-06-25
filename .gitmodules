@@ -7,9 +7,6 @@
 [submodule "vim/bundle/rust"]
 	path = etc/vim/pack/spladug/start/rust
 	url = https://github.com/rust-lang/rust.vim
-[submodule "vim/bundle/thrift"]
-	path = etc/vim/pack/spladug/start/thrift
-	url = https://github.com/solarnz/thrift.vim.git
 [submodule "vim/bundle/terraform"]
 	path = etc/vim/pack/spladug/start/terraform
 	url = https://github.com/hashivim/vim-terraform.git
@@ -25,9 +22,6 @@
 [submodule "vim/pack/spladug/start/fzf"]
 	path = etc/vim/pack/spladug/start/fzf
 	url = https://github.com/junegunn/fzf.vim.git
-[submodule "share/simply.workspaces@andyrichardson.dev"]
-	path = share/gnome-shell/extensions/simply.workspaces@andyrichardson.dev
-	url = https://github.com/andyrichardson/simply-workspaces.git
-[submodule "src/shell"]
-	path = src/shell
-	url = https://github.com/pop-os/shell.git
+[submodule "src/vi-vim-symlink"]
+	path = src/vi-vim-symlink
+	url = https://aur.archlinux.org/vi-vim-symlink.git
