@@ -212,6 +212,8 @@ function do_install {
     ensure_xdg_data_dir vim/{undo,swap,backup}
     install_makepkg src/vi-vim-symlink
 
+    install_xdg_config containers
+
     # do all the makepkg work up front so we only have to restart the shell once
     install_makepkg src/pop-shell-shortcuts-git
     install_makepkg src/pop-launcher-git pop-launcher-git
