@@ -13,9 +13,6 @@
 [submodule "vim/pack/spladug/start/vim-puppet"]
 	path = etc/vim/pack/spladug/start/vim-puppet
 	url = https://github.com/rodjek/vim-puppet
-[submodule "vim/pack/spladug/start/python-syntax"]
-	path = etc/vim/pack/spladug/start/python-syntax
-	url = https://github.com/vim-python/python-syntax.git
 [submodule "vim/pack/spladug/start/commentary"]
 	path = etc/vim/pack/spladug/start/commentary
 	url = https://github.com/tpope/vim-commentary.git
