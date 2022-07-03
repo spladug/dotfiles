@@ -1,15 +1,13 @@
-# TODO: use package from AUR when upstream accepts Gnome 42 support patch
-
 # Maintainer: Andy Richardson <andy.john.richardson@gmail.com>
 pkgname=gnome-shell-extension-simply-workspaces-git
-pkgver=v5.r7.ge470be8
+pkgver=v5.r10.gf0d2037
 pkgrel=1
 pkgdesc="Gnome 3 workspace indicator with an i3/polybar style."
 arch=(any)
 licence=(GPLv3)
 
 makedepends=('git')
-source=("git+https://github.com/spladug/simply-workspaces.git#commit=e470be895bd69e1cd27d2a55b530a39d449b1b2d")
+source=("git+https://github.com/andyrichardson/simply-workspaces.git#commit=f0d203770e55230a4e6d4690ff516c16355221ef")
 sha256sums=('SKIP')
 provides+=("$pkgname=$pkgver")
 conflicts+=("$pkgname")
