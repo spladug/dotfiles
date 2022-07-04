@@ -197,7 +197,6 @@ function do_install {
 
     install_file bin .local/bin
 
-    install_dotfile profile
     install_dotfile bashrc
     ensure_xdg_data_dir bash
 
