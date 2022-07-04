@@ -169,10 +169,10 @@ function configure_workspaces {
     do
        dconf write "/org/gnome/shell/keybindings/switch-to-application-$i" "@as []"
        dconf write "/org/gnome/desktop/wm/keybindings/switch-to-workspace-$i" "['<Super>$i']"
-       dconf write "/org/gnome/desktop/wm/keybindings/move-window-to-workspace-$i" "['<Super><Shift>$i']"
+       dconf write "/org/gnome/desktop/wm/keybindings/move-to-workspace-$i" "['<Super><Shift>$i']"
     done
     dconf write /org/gnome/desktop/wm/keybindings/switch-to-workspace-10 "['<Super>0']"
-    dconf write /org/gnome/desktop/wm/keybindings/move-window-to-workspace-10 "['<Super><Shift>0']"
+    dconf write /org/gnome/desktop/wm/keybindings/move-to-workspace-10 "['<Super><Shift>0']"
 
     # this must come after turning off dynamic workspaces
     enable_gnome_extension simply.workspaces@andyrichardson.dev
