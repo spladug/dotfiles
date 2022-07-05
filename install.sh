@@ -212,6 +212,7 @@ function do_install {
     install_makepkg src/vi-vim-symlink
 
     install_xdg_config containers
+    install_xdg_config gtk-3.0
 
     # do all the makepkg work up front so we only have to restart the shell once
     install_makepkg src/pop-shell-shortcuts-git
