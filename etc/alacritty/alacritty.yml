@@ -1,6 +1,9 @@
 window:
   decorations: none
-  opacity: 0.9
+  opacity: 0.8
+  padding:
+    x: 10
+    y: 5
 
 scrolling:
   history: 10000
@@ -24,7 +27,7 @@ live_config_reload: true
 
 colors:
   primary:
-    background: '#101421'
+    background: '#06070c'
     foreground: '#fffbf6'
   normal:
     black:   '#2e2e2e'

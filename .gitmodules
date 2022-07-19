@@ -1,12 +1,6 @@
 [submodule "vim/bundle/fugitive"]
 	path = etc/vim/pack/spladug/start/fugitive
 	url = https://github.com/tpope/vim-fugitive.git
-[submodule "vim/bundle/syntastic"]
-	path = etc/vim/pack/spladug/start/syntastic
-	url = https://github.com/scrooloose/syntastic.git
-[submodule "vim/bundle/rust"]
-	path = etc/vim/pack/spladug/start/rust
-	url = https://github.com/rust-lang/rust.vim
 [submodule "vim/bundle/terraform"]
 	path = etc/vim/pack/spladug/start/terraform
 	url = https://github.com/hashivim/vim-terraform.git
