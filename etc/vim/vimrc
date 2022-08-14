@@ -45,9 +45,6 @@ set softtabstop=4
 set tabstop=4
 set shiftwidth=4
 
-" hide generated files
-set wildignore+=*.git/*,*.pyc,*.png,*.gif,*.so,*.o,*~,
-
 " slower python syntax parsing (does a better job at multiline docstrings)
 let python_slow_sync=1
 
@@ -120,39 +117,4 @@ augroup spladug
 
     " mark trailing whitespace
     au BufWinEnter * match ExtraWhitespace /\s\+\%#\@<!$/
-
-    " 'make' specific stuff
-    au FileType make setlocal softtabstop=8 tabstop=8 shiftwidth=8 noexpandtab
-
-    " python specific stuff
-    au FileType python setlocal colorcolumn=100 list listchars=tab:>·,trail:·
-
-    " html stuff
-    au BufRead *.jinja2 setlocal syntax=html
-    au FileType html setlocal softtabstop=2 tabstop=2 shiftwidth=2
-
-    " puppet stuff
-    au FileType puppet setlocal softtabstop=2 tabstop=2 shiftwidth=2 colorcolumn=80
-
-    " go stuff
-    au FileType go setlocal noexpandtab
-
-    " javascript
-    au FileType javascript setlocal softtabstop=2 tabstop=2 shiftwidth=2 colorcolumn=80
-
-    " turn on pig syntax highlighting
-    au BufRead *.pig setlocal syntax=pig
-
-    " turn on markdown syntax highlighting
-    au BufRead *.md setlocal filetype=markdown
-
-    " reStructuredText
-    au FileType rst setlocal softtabstop=3 tabstop=3 shiftwidth=3
-
-    " YAML
-    au FileType yaml setlocal softtabstop=2 tabstop=2 shiftwidth=2
-
-    " golang
-    au BufRead *.go setlocal filetype=go
-    au BufRead *.star setlocal filetype=python
 augroup END
