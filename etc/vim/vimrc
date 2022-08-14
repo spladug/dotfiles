@@ -54,15 +54,15 @@ let g:rg_highlight = 1
 " load system plugins
 set rtp+=/usr/share/vim/vimfiles
 
-" syntastic
-let g:syntastic_check_on_open=1  " don't wait 'til saving the file to check syntax
-
-let g:syntastic_python_checkers = ['pyflakes', 'pycodestyle', 'pydocstyle']
-let g:syntastic_python_pycodestyle_args = '--max-line-length=100'
-let g:syntastic_python_pydocstyle_args = '--ignore=D100,D101,D102,D103,D104,D105,D106,D107'
-
-" autoformat terraform on save
+" configure various syntax plugins
+let g:ale_fix_on_save = 1
+let g:ale_sign_column_always = 1
+let g:ale_sign_error = '❌'
+let g:ale_sign_warning = '⚠️'
+let g:ale_use_global_executables = 1
+let g:rst_style = 1
 let g:terraform_fmt_on_save = 1
+let g:yaml_recommended_style = 1
 
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " mappings
