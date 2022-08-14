@@ -77,7 +77,7 @@ alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
 #######################
 # custom functions
 man() {
-    /usr/bin/man -w "$@" && vi -c ":Man $*" -c 'silent only'
+    vim -c 'set ft=man' -c ":Man $*"
 }
 
 #######################
