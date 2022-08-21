@@ -80,6 +80,10 @@ man() {
     vim -c 'set ft=man' -c ":Man $*"
 }
 
+podme() {
+    podman run -it --rm -v "$PWD":/src -w /src --network=host --userns=keep-id "$@"
+}
+
 #######################
 SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 export SSH_AUTH_SOCK
