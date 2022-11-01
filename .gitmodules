@@ -16,3 +16,6 @@
 [submodule "src/vi-vim-symlink"]
 	path = src/vi-vim-symlink
 	url = https://aur.archlinux.org/vi-vim-symlink.git
+[submodule "etc/vim/pack/spladug/start/ale"]
+	path = etc/vim/pack/spladug/start/ale
+	url = https://github.com/dense-analysis/ale.git
