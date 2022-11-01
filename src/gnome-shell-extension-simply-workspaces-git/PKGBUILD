@@ -1,13 +1,15 @@
 # Maintainer: Andy Richardson <andy.john.richardson@gmail.com>
 pkgname=gnome-shell-extension-simply-workspaces-git
-pkgver=v5.r10.gf0d2037
+pkgver=v6.5.g3baadaf
+_commit=3baadaf57be983a08daa5fb406c8148379797a5b
 pkgrel=1
 pkgdesc="Gnome 3 workspace indicator with an i3/polybar style."
 arch=(any)
 licence=(GPLv3)
 
 makedepends=('git')
-source=("git+https://github.com/andyrichardson/simply-workspaces.git#commit=f0d203770e55230a4e6d4690ff516c16355221ef")
+# source=("git+https://github.com/andyrichardson/simply-workspaces.git#commit=$_commit")
+source=("git+https://github.com/spladug/simply-workspaces.git#commit=$_commit")
 sha256sums=('SKIP')
 provides+=("$pkgname=$pkgver")
 conflicts+=("$pkgname")
