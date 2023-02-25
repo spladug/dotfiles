@@ -193,7 +193,7 @@ function configure_just_perfection {
 function do_install {
     git submodule update --init
 
-    install_packages base-devel fzf git ripgrep ttf-fira-code vim gnome-shell-extension-appindicator catatonit
+    install_packages base-devel fzf git ripgrep ttf-fira-code vim gnome-shell-extension-appindicator catatonit ruff
 
     install_file bin .local/bin
 
