@@ -1,6 +1,6 @@
 pkgname=1password
 
-_tarver=8.8.0
+_tarver=8.9.14
 _tar="1password-${_tarver}.x64.tar.gz"
 pkgver=${_tarver//-/_}
 pkgrel=1
