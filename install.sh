@@ -211,6 +211,8 @@ function do_install {
     ensure_xdg_data_dir vim/{undo,swap,backup}
     install_makepkg src/vi-vim-symlink
 
+    install_makepkg src/diceware
+
     install_xdg_config containers
     install_xdg_config gtk-3.0
 

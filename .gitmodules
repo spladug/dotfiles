@@ -19,3 +19,6 @@
 [submodule "etc/vim/pack/spladug/start/ale"]
 	path = etc/vim/pack/spladug/start/ale
 	url = https://github.com/dense-analysis/ale.git
+[submodule "src/diceware"]
+	path = src/diceware
+	url = https://aur.archlinux.org/diceware.git
