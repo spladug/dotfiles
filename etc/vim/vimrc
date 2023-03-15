@@ -95,6 +95,8 @@ map <leader>t :Files<CR>
 map <leader>b :Buffer<CR>
 " ,a is the "ack" command (now ripgrep)
 map <leader>a :Rg 
+" ,e is jump to next ALE error
+map <leader>e :ALENext<CR>
 
 let $FZF_DEFAULT_OPTS = '--bind ctrl-a:select-all'
 
