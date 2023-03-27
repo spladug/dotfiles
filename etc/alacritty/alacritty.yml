@@ -23,6 +23,11 @@ font:
     family: Source Code Pro
     style: Bold Italic
 
+key_bindings:
+  - key: C
+    mods: Control|Shift
+    action: Copy
+
 live_config_reload: true
 
 colors:
