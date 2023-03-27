@@ -193,7 +193,7 @@ function configure_just_perfection {
 function do_install {
     git submodule update --init
 
-    install_packages base-devel fzf git ripgrep ttf-fira-code vim gnome-shell-extension-appindicator catatonit ruff
+    install_packages base-devel fzf git ripgrep ttf-fira-code vim gnome-shell-extension-appindicator catatonit ruff yamllint
 
     install_file bin .local/bin
 
@@ -202,6 +202,7 @@ function do_install {
 
     install_xdg_config alacritty
     install_xdg_config git
+    install_xdg_config yamllint
     install_file lib/python .local/lib/python
 
     install_xdg_config environment.d
