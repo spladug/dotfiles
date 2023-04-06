@@ -1,0 +1,6 @@
+#!/bin/bash
+
+mkdir -p ~/.local/share/psql
+touch ~/.local/share/psql/history
+
+exec podman run -it --rm --init --network=host --userns=keep-id -w /tmp -v ~/.local/share/psql/history:/tmp/.psql_history -v ~/Downloads:/Downloads localhost/spladug/psql psql "$@"

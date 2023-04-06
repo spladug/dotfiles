@@ -74,6 +74,10 @@ function ensure_xdg_data_dir {
     done
 }
 
+function build_docker_image {
+    podman build -t "${1}" -f "dockerfiles/Dockerfile.${1}" dockerfiles/
+}
+
 function install_makepkg {
     # argument 1 should be the directory of the PKGBUILD
     # any subsequent arguments form an allowlist of which packages to install
@@ -195,6 +199,8 @@ function do_install {
 
     install_packages base-devel fzf git ripgrep ttf-fira-code vim gnome-shell-extension-appindicator catatonit ruff yamllint
 
+    build_docker_image psql
+    build_docker_image heroku-cli
     install_file bin .local/bin
 
     install_dotfile bashrc

@@ -1,0 +1,10 @@
+#!/bin/sh
+
+mkdir -p "$XDG_DATA_HOME/heroku" "$XDG_CACHE_HOME/heroku"
+touch ~/.netrc
+
+exec podman run --rm -it --userns=keep-id --init --network=host \
+        -v "$XDG_DATA_HOME/heroku:/home/.local/share/heroku" \
+        -v "$XDG_CACHE_HOME/heroku:/home/.cache/heroku" \
+        -v "$HOME/.netrc:/home/.netrc" \
+        heroku-cli "$@"
