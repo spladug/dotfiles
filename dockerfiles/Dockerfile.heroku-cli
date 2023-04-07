@@ -3,7 +3,7 @@ FROM docker.io/library/node:18 AS build
 WORKDIR /src
 
 RUN git clone https://github.com/heroku/cli /src && \
-    git reset --hard b8292f347101f13c2bb833b1dcf088886c8aa984
+    git reset --hard 77006d1fba6f5edd0c6ca5f1ed611ef86ba271a6
 
 WORKDIR /src/packages/cli
 
@@ -12,7 +12,7 @@ RUN npx oclif-dev pack --targets="linux-x64"
 
 FROM docker.io/library/node:18 AS run
 
-ARG version=v7.60.2
+ARG version=v7.68.2
 
 COPY --from=build /src/packages/cli/dist/heroku-${version}/heroku-${version}-linux-x64.tar.xz /tmp/heroku.tar.xz
 
