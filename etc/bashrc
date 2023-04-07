@@ -40,18 +40,18 @@ function _prompt {
     fi
 
     local aws=''
-    if [[ -n "$AWS_SESSION_EXPIRATION" ]]; then
+    if [[ -n "$AWS_CREDENTIAL_EXPIRATION" ]]; then
         local now
         local expiration
 
         now=$(date +%s)
-        expiration=$(date --date="$AWS_SESSION_EXPIRATION" +%s)
+        expiration=$(date --date="$AWS_CREDENTIAL_EXPIRATION" +%s)
         local time_left=$((expiration - now))
 
         if [[ $time_left -gt 60 ]]; then
-            aws=" ${green}with AWS creds ($((time_left/60))m)"
+            aws=" ${green}with ${AWS_VAULT} AWS creds ($((time_left/60))m)"
         elif [[ $time_left -gt 0 ]]; then
-            aws=" ${red}with AWS creds ($((time_left))s)"
+            aws=" ${red}with ${AWS_VAULT} AWS creds ($((time_left))s)"
         else
             aws=" ${black_on_red}with EXPIRED AWS creds"
         fi
