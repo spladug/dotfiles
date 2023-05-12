@@ -1,4 +1,4 @@
-FROM docker.io/library/postgres
+FROM docker.io/library/postgres:15
 
 RUN apt-get update \
     && apt-get install -y vim-nox \

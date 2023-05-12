@@ -1,4 +1,6 @@
-FROM docker.io/library/node:18 AS build
+ARG DEBIAN_VERSION=bullseye
+
+FROM docker.io/library/node:18-$DEBIAN_VERSION AS build
 
 WORKDIR /src
 
@@ -10,7 +12,7 @@ WORKDIR /src/packages/cli
 RUN yarn install
 RUN npx oclif-dev pack --targets="linux-x64"
 
-FROM docker.io/library/node:18 AS run
+FROM docker.io/library/node:18-$DEBIAN_VERSION AS run
 
 ARG version=v7.68.2
 
@@ -25,8 +27,12 @@ ENV XDG_DATA_HOME=/home/.local/share \
     XDG_CACHE_HOME=/home/.cache \
     HOME=/home
 
+COPY heroku-cli/pgdg.list /etc/apt/sources.list.d/
+COPY heroku-cli/ACCC4CF8.asc /etc/apt/trusted.gpg.d/
+
 RUN apt-get update \
-    && DEBIAN_FRONTEND=noninteractive apt-get install -y postgresql-client-13
+    && DEBIAN_FRONTEND=noninteractive apt-get install -y postgresql-client-15 \
+    && rm -rf /var/lib/apt/lists/*
 
 RUN /usr/local/heroku/bin/run plugins:install heroku-releases-retry
 
