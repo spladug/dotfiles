@@ -71,15 +71,13 @@ PROMPT_COMMAND=_prompt
 # aliases
 alias docker='podman'
 alias grep='grep --color=auto'
-alias ls='ls --color=auto'
+alias ls='exa'
 alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
+alias cat='bat'
+alias man='batman'
 
 #######################
 # custom functions
-man() {
-    vim -c 'set ft=man' -c ":Man $*"
-}
-
 podme() {
     podman run -it --rm -v "$PWD":/src -w /src --network=host --userns=keep-id "$@"
 }

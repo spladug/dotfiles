@@ -5,8 +5,17 @@
 ; 	ignoreRevsFile = .git-blame-ignore-revs
 [diff]
 	algorithm = histogram
+    colorMoved = default
+[interactive]
+    diffFilter = delta --color-only
 [core]
+    pager = delta
 	excludesfile = ~/.config/git/ignore
+[delta]
+    navigate = true
+    light = false
+[marge]
+    conflictstyle = diff3
 [includeIf "gitdir:~/src/wattcarbon/"]
     path = ~/.config/git/wattcarbon
 [init]
