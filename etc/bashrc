@@ -71,7 +71,7 @@ PROMPT_COMMAND=_prompt
 # aliases
 alias docker='podman'
 alias grep='grep --color=auto'
-alias ls='exa'
+alias ls='lsd'
 alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
 alias cat='bat'
 alias man='batman'
