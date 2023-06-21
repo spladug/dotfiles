@@ -163,6 +163,7 @@ function configure_pop_shell {
     dconf write /org/gnome/shell/extensions/pop-shell/hint-color-rgba "'rgb(128, 0, 255)'"
     dconf write /org/gnome/shell/extensions/pop-shell/active-hint true
     dconf write /org/gnome/shell/extensions/pop-shell/tile-by-default true
+    dconf write /org/gnome/shell/extensions/pop-shell/toggle-tiling "@as []"
 }
 
 function configure_workspaces {
