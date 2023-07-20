@@ -69,7 +69,6 @@ PROMPT_COMMAND=_prompt
 
 #######################
 # aliases
-alias docker='podman'
 alias grep='grep --color=auto'
 alias ls='lsd'
 alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
@@ -79,7 +78,19 @@ alias man='batman'
 #######################
 # custom functions
 podme() {
-    podman run -it --rm -v "$PWD":/src -w /src --network=host --userns=keep-id "$@"
+    command podman run -it --rm -v "$PWD":/src -w /src --network=host --userns=keep-id "$@"
+}
+
+docker() {
+    case $1 in
+        compose)
+            shift
+            command docker-compose "$@"
+            ;;
+        *)
+            command podman "$@"
+            ;;
+    esac
 }
 
 #######################
