@@ -248,6 +248,10 @@ function do_install {
     install_makepkg src/mullvad-vpn-bin
 
     install_makepkg src/slack
+
+    gpg --import gpg/hashicorp.asc
+    install_makepkg src/tfenv
+    sudo /opt/tfenv/use-gnupg
 }
 
 # only run the active bits of code if we're not being sourced for someone else

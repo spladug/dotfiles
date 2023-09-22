@@ -22,3 +22,6 @@
 [submodule "src/diceware"]
 	path = src/diceware
 	url = https://aur.archlinux.org/diceware.git
+[submodule "src/tfenv"]
+	path = src/tfenv
+	url = https://aur.archlinux.org/tfenv.git
