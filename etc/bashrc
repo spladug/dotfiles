@@ -74,23 +74,12 @@ alias ls='lsd'
 alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
 alias cat='bat'
 alias man='batman'
+alias docker='podman'
 
 #######################
 # custom functions
 podme() {
     command podman run -it --rm -v "$PWD":/src -w /src --network=host --userns=keep-id "$@"
-}
-
-docker() {
-    case $1 in
-        compose)
-            shift
-            command docker-compose "$@"
-            ;;
-        *)
-            command podman "$@"
-            ;;
-    esac
 }
 
 #######################
