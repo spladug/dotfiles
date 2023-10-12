@@ -58,12 +58,7 @@ function _prompt {
 
     fi
 
-    local docker=''
-    if [[ -w /var/run/docker.sock ]]; then
-        docker=" ${red}w/ Docker"
-    fi
-
-    PS1="\n${cyan}\t ${blue}in \w${venv}${aws}${docker}${yellow}$(__git_ps1 " on branch %s")${white}\n\$ "
+    PS1="\n${cyan}\t ${blue}in \w${venv}${aws}${yellow}$(__git_ps1 " on branch %s")${white}\n\$ "
 }
 PROMPT_COMMAND=_prompt
 
