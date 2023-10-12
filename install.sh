@@ -150,6 +150,8 @@ function configure_gnome {
 
     dconf write /org/gnome/mutter/attach-modal-dialogs false
 
+    dconf write /org/gnome/shell/keybindings/toggle-quick-settings "['<Shift><Super>s']"
+
     dconf write '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/name' "'Launch Terminal'"
     dconf write '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/command' "'/usr/bin/alacritty'"
     dconf write '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/binding' "'<Super>t'"
@@ -191,7 +193,7 @@ function configure_just_perfection {
     dconf write /org/gnome/shell/extensions/just-perfection/weather false
     dconf write /org/gnome/shell/extensions/just-perfection/startup-status 0
     dconf write /org/gnome/shell/extensions/just-perfection/clock-menu-position 1
-    dconf write /org/gnome/shell/extensions/just-perfection/clock-menu-position-offset 9
+    dconf write /org/gnome/shell/extensions/just-perfection/clock-menu-position-offset 7
     dconf write /org/gnome/shell/extensions/just-perfection/notification-banner-position 2
 }
 
