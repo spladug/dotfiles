@@ -64,12 +64,14 @@ PROMPT_COMMAND=_prompt
 
 #######################
 # aliases
+alias cat='bat'
+alias diff='batdiff'
+alias docker='podman'
+alias grep='batgrep'
 alias grep='grep --color=auto'
 alias ls='lsd'
-alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
-alias cat='bat'
 alias man='batman'
-alias docker='podman'
+alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
 
 #######################
 # custom functions
