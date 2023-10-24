@@ -19,7 +19,7 @@ trap _remove_empty_backups EXIT
 function install_packages {
     local package_needs_installation=no
     for package in "$@"; do
-        if ! pacman -Qi "${package}" 2>/dev/null; then
+        if ! pacman -Qi "${package}" &>/dev/null; then
             package_needs_installation=yes
             break
         fi
