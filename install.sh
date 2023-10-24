@@ -213,7 +213,6 @@ function do_install {
         pgcli \
         ripgrep \
         ruff \
-        ttf-fira-code \
         ttf-sourcecodepro-nerd \
         vim \
         yamllint
