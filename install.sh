@@ -204,6 +204,7 @@ function do_install {
 
     build_docker_image psql
     build_docker_image heroku-cli
+    build_docker_image diceware
     install_file bin .local/bin
 
     install_dotfile bashrc
@@ -220,8 +221,6 @@ function do_install {
     install_xdg_config vim
     ensure_xdg_data_dir vim/{undo,swap,backup}
     install_makepkg src/vi-vim-symlink
-
-    install_makepkg src/diceware
 
     install_xdg_config containers
     install_xdg_config gtk-3.0

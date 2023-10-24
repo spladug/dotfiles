@@ -1,0 +1,7 @@
+FROM ubuntu
+
+RUN apt-get update && \
+    apt-get install -y diceware && \
+    rm -rf /var/lib/apt/lists/*
+
+ENTRYPOINT ["/usr/bin/diceware"]
