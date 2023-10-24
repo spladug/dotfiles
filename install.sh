@@ -200,7 +200,23 @@ function configure_just_perfection {
 function do_install {
     git submodule update --init
 
-    install_packages base-devel fzf git ripgrep ttf-fira-code vim gnome-shell-extension-appindicator catatonit ruff yamllint bat bat-extras pgcli lsd git-delta ttf-sourcecodepro-nerd
+    install_packages \
+        base-devel \
+        bat \
+        bat-extras \
+        catatonit \
+        fzf \
+        git \
+        git-delta \
+        gnome-shell-extension-appindicator \
+        lsd \
+        pgcli \
+        ripgrep \
+        ruff \
+        ttf-fira-code \
+        ttf-sourcecodepro-nerd \
+        vim \
+        yamllint
 
     build_docker_image psql
     build_docker_image heroku-cli
