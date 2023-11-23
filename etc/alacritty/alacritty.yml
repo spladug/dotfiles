@@ -11,16 +11,16 @@ scrolling:
 font:
   size: 14.0
   normal:
-    family: Sauce Code Pro Nerd Font
+    family: Sauce Code Pro NF
     style: Regular
   bold:
-    family: Sauce Code Pro Nerd Font
+    family: Sauce Code Pro NF
     style: Bold
   italic:
-    family: Sauce Code Pro Nerd Font
+    family: Sauce Code Pro NF
     style: Italic
   bold_italic:
-    family: Sauce Code Pro Nerd Font
+    family: Sauce Code Pro NF
     style: Bold Italic
 
 key_bindings:
