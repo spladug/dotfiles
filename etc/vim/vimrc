@@ -37,6 +37,7 @@ set visualbell " flash the screen instead of beeping
 set autoindent " continue indentation if not told otherwise
 set relativenumber " show line numbers, relative to current line
 set number " but ensure we also have the real line number for the current line
+set title " put current edited filename in terminal title
 
 " default tabulation
 set expandtab
