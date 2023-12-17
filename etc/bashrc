@@ -34,6 +34,8 @@ function _prompt {
     local white='\[\e[0;37m\]'
     local black_on_red='\[\e[1;30;41m\]'
 
+    local terminal_title="\033]0;$PWD\007"
+
     local venv=''
     if [[ -n "$VIRTUAL_ENV" ]]; then
         local venv=" ${magenta}with venv ${VIRTUAL_ENV##*/}"
@@ -55,10 +57,14 @@ function _prompt {
         else
             aws=" ${black_on_red}with EXPIRED AWS creds"
         fi
-
     fi
 
-    PS1="\n${cyan}\t ${blue}in \w${venv}${aws}${yellow}$(__git_ps1 " on branch %s")${white}\n\$ "
+    local jobs=''
+    if [[ -n "$(jobs -p)" ]]; then
+        jobs=" ${magenta}with \\j job(s)"
+    fi
+
+    PS1="${terminal_title}\n${cyan}\t ${blue}in \w${venv}${aws}${yellow}$(__git_ps1 " on branch %s")${jobs}${white}\n\$ "
 }
 PROMPT_COMMAND=_prompt
 
