@@ -1,28 +1,10 @@
 live_config_reload = true
 
-[colors.bright]
-black = "#565656"
-blue = "#49a4f8"
-cyan = "#99faf2"
-green = "#c0e17d"
-magenta = "#a47de9"
-red = "#ec5357"
-white = "#ffffff"
-yellow = "#f9da6a"
-
-[colors.normal]
-black = "#2e2e2e"
-blue = "#47a0f3"
-cyan = "#64dbed"
-green = "#abe047"
-magenta = "#7b5cb0"
-red = "#eb4129"
-white = "#e5e9f0"
-yellow = "#f6c744"
-
-[colors.primary]
-background = "#06070c"
-foreground = "#fffbf6"
+import = [
+    # This is a symlink to the current color. See alacritty-theme-switcher.sh
+    # and the user systemd units for how it's managed.
+    "~/.config/alacritty/active-theme.toml",
+]
 
 [font]
 size = 14.0
@@ -53,7 +35,7 @@ history = 10000
 
 [window]
 decorations = "none"
-opacity = 0.9
+opacity = 0.8
 
 [window.padding]
 x = 10

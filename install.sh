@@ -215,6 +215,7 @@ function do_install {
         ruff \
         ttf-sourcecodepro-nerd \
         vim \
+        vim-lightline \
         yamllint
 
     build_docker_image psql
@@ -239,6 +240,12 @@ function do_install {
 
     install_xdg_config containers
     install_xdg_config gtk-3.0
+
+    install_xdg_config systemd
+    systemctl --user enable alacritty-theme-switcher.service
+    systemctl --user start alacritty-theme-switcher.service
+    systemctl --user enable alacritty-theme-switcher-restart.path
+    systemctl --user start alacritty-theme-switcher-restart.path
 
     # do all the makepkg work up front so we only have to restart the shell once
     install_makepkg src/pop-shell-shortcuts-git

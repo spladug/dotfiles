@@ -22,3 +22,6 @@
 [submodule "src/tfenv"]
 	path = src/tfenv
 	url = https://aur.archlinux.org/tfenv.git
+[submodule "etc/alacritty/themes"]
+	path = etc/alacritty/themes
+	url = https://github.com/alacritty/alacritty-theme

@@ -11,12 +11,9 @@ set undodir=$XDG_DATA_HOME/vim/undo
 set viewdir=$XDG_DATA_HOME/vim/view
 set viminfo+='1000,n$XDG_DATA_HOME/vim/viminfo
 
-" syntax highlighting on and colorfy
+" syntax highlighting on
 syntax enable
 filetype plugin indent on
-
-" 256 color version of rdark
-colorscheme rdark-terminal
 
 " basic options
 set nowrap " don't wrap text
@@ -38,6 +35,7 @@ set autoindent " continue indentation if not told otherwise
 set relativenumber " show line numbers, relative to current line
 set number " but ensure we also have the real line number for the current line
 set title " put current edited filename in terminal title
+set noshowmode " this is handled by lightline
 
 " default tabulation
 set expandtab
@@ -123,5 +121,6 @@ augroup spladug
     au BufEnter * let &titlestring=expand("%:t")
 
     " mark trailing whitespace
+    hi ExtraWhitespace term=NONE cterm=NONE ctermfg=white ctermbg=red
     au BufWinEnter * match ExtraWhitespace /\s\+\%#\@<!$/
 augroup END
