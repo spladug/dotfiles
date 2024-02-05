@@ -1,9 +1,0 @@
-#!/bin/bash
-
-set -e
-
-new_url="file://$(find ~/Pictures/Wallpapers -type f | shuf -n 1)"
-
-gsettings set org.gnome.desktop.background picture-uri "$new_url"
-gsettings set org.gnome.desktop.background picture-uri-dark "$new_url"
-gsettings set org.gnome.desktop.screensaver picture-uri "$new_url"

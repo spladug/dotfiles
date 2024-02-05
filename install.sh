@@ -246,6 +246,8 @@ function do_install {
     systemctl --user start alacritty-theme-switcher.service
     systemctl --user enable alacritty-theme-switcher-restart.path
     systemctl --user start alacritty-theme-switcher-restart.path
+    systemctl --user enable wallpaper.timer
+    systemctl --user start wallpaper.timer
 
     # do all the makepkg work up front so we only have to restart the shell once
     install_makepkg src/pop-shell-shortcuts-git
