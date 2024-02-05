@@ -4,7 +4,7 @@ readonly ALACRITTY_CONFIG_DIR="$HOME/.config/alacritty"
 readonly ALACRITTY_THEME_DIR="${ALACRITTY_CONFIG_DIR}/themes/themes"
 
 readonly LIGHT_THEME="night_owlish_light"
-readonly DARK_THEME="wombat"
+readonly DARK_THEME="monokai_charcoal"
 
 update_alacritty_color_scheme() {
     case "$1" in
