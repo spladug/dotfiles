@@ -74,6 +74,18 @@ function ensure_xdg_data_dir {
     done
 }
 
+function ensure_xdg_state_dir {
+    for path in "$@"; do
+        mkdir -vp "${HOME}/.local/state/${path}"
+    done
+}
+
+function ensure_xdg_cache_dir {
+    for path in "$@"; do
+        mkdir -vp "${HOME}/.cache/${path}"
+    done
+}
+
 function build_docker_image {
     podman build -t "${1}" -f "dockerfiles/Dockerfile.${1}" dockerfiles/
 }
@@ -213,18 +225,26 @@ function do_install {
         pgcli \
         ripgrep \
         ruff \
+        starship \
         ttf-sourcecodepro-nerd \
         vim \
         vim-airline \
-        yamllint
+        yamllint \
+        zsh \
+        zsh-autosuggestions \
+        zsh-history-substring-search \
+        zsh-syntax-highlighting
 
     build_docker_image psql
     build_docker_image heroku-cli
     build_docker_image diceware
     install_file bin .local/bin
 
-    install_dotfile bashrc
-    ensure_xdg_data_dir bash
+    install_xdg_config zsh
+    ensure_xdg_state_dir zsh
+    ensure_xdg_cache_dir zsh
+
+    install_xdg_config starship.toml
 
     install_xdg_config alacritty
     install_xdg_config git
