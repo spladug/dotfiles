@@ -215,7 +215,7 @@ function do_install {
         ruff \
         ttf-sourcecodepro-nerd \
         vim \
-        vim-lightline \
+        vim-airline \
         yamllint
 
     build_docker_image psql
@@ -272,6 +272,7 @@ function do_install {
     gpg --import gpg/mullvad.asc
     install_makepkg src/mullvad-vpn-bin
 
+    gpg --import gpg/slack.asc
     install_makepkg src/slack
 
     gpg --import gpg/hashicorp.asc

@@ -4,4 +4,4 @@
 # But not these files...
 !.gitignore
 !PKGBUILD
-!slack-desktop.patch
+!slack.sh
