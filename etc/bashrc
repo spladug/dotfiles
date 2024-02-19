@@ -31,7 +31,7 @@ function _prompt {
     local blue='\[\e[0;34m\]'
     local magenta='\[\e[0;35m\]'
     local cyan='\[\e[0;36m\]'
-    local white='\[\e[0;37m\]'
+    local white='\[\e[0;39m\]'
     local black_on_red='\[\e[1;30;41m\]'
 
     local terminal_title="\033]0;$PWD\007"
