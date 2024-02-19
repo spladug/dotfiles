@@ -1,1 +1,1 @@
-setlocal colorcolumn=100 list listchars=tab:>·,trail:·
+setlocal list listchars=tab:>·,trail:·

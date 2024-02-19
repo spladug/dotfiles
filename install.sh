@@ -229,6 +229,7 @@ function do_install {
         ttf-sourcecodepro-nerd \
         vim \
         vim-airline \
+        vim-editorconfig \
         yamllint \
         zsh \
         zsh-autosuggestions \
