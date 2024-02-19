@@ -231,6 +231,7 @@ function do_install {
         vim-airline \
         vim-editorconfig \
         yamllint \
+        zoxide \
         zsh \
         zsh-autosuggestions \
         zsh-history-substring-search \

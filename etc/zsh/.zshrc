@@ -55,5 +55,8 @@ alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
 SSH_AUTH_SOCK=$(gpgconf --list-dirs agent-ssh-socket)
 export SSH_AUTH_SOCK
 
+# zoxide
+eval "$(zoxide init zsh)"
+
 # Prompt configuration (see ~/.config/starship.toml)
 eval "$(starship init zsh)"
