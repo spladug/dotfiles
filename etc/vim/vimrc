@@ -12,6 +12,7 @@ set viewdir=$XDG_DATA_HOME/vim/view
 set viminfo+='1000,n$XDG_DATA_HOME/vim/viminfo
 
 " syntax highlighting on
+colorscheme dim
 syntax enable
 filetype plugin indent on
 
