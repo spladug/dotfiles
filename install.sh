@@ -217,11 +217,11 @@ function do_install {
         bat \
         bat-extras \
         catatonit \
+        eza \
         fzf \
         git \
         git-delta \
         gnome-shell-extension-appindicator \
-        lsd \
         pgcli \
         ripgrep \
         ruff \
@@ -236,6 +236,9 @@ function do_install {
         zsh-autosuggestions \
         zsh-history-substring-search \
         zsh-syntax-highlighting
+
+    sudo mkdir -p /usr/local/share/zsh/site-functions
+    sudo ln -s /usr/share/zsh/site-functions/_eza /usr/local/share/zsh/site-functions/_eza
 
     build_docker_image psql
     build_docker_image heroku-cli

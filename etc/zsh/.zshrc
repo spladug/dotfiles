@@ -47,7 +47,7 @@ alias cat='bat'
 alias diff='batdiff'
 alias grep='batgrep'
 alias grep='grep --color=auto'
-alias ls='lsd'
+alias ls='eza --icons=auto'
 alias man='batman'
 alias wget='wget --hsts-file="$XDG_CACHE_HOME/wget-hsts"'
 
