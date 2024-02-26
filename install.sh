@@ -223,6 +223,7 @@ function do_install {
         git-delta \
         gnome-shell-extension-appindicator \
         pgcli \
+        pyright \
         ripgrep \
         ruff \
         starship \
