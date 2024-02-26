@@ -18,7 +18,7 @@
 	url = https://aur.archlinux.org/vi-vim-symlink.git
 [submodule "etc/vim/pack/spladug/start/ale"]
 	path = etc/vim/pack/spladug/start/ale
-	url = https://github.com/spladug/ale.git
+	url = https://github.com/dense-analysis/ale.git
 [submodule "src/tfenv"]
 	path = src/tfenv
 	url = https://aur.archlinux.org/tfenv.git

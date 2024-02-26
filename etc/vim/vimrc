@@ -60,7 +60,7 @@ let g:ale_linters = {
 \   'python': ['ruff', 'pyright'],
 \}
 let g:ale_fixers = {
-\   'python': ['black', 'ruff'],
+\   'python': ['ruff_format', 'ruff'],
 \}
 let g:ale_python_ruff_options = '--ignore=T100,T201 --unfixable=ERA001,F401,F841,B007'
 let g:ale_fix_on_save = 1
