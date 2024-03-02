@@ -72,6 +72,8 @@ let g:rst_style = 1
 let g:terraform_fmt_on_save = 1
 let g:yaml_recommended_style = 1
 
+let g:SuperTabDefaultCompletionType = "<c-n>"
+
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
 " mappings
 """""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""""
