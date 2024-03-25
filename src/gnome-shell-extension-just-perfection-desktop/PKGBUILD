@@ -10,6 +10,7 @@ url=https://gitlab.gnome.org/jrahmatzadeh/just-perfection
 license=('GPL3' 'CC0 1.0')
 depends=(gnome-shell)
 makedepends=(git unzip)
+install=$pkgname.install
 source=("$pkgname::git+$url.git#commit=$_commit")
 md5sums=(SKIP)
 
