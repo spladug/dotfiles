@@ -1,7 +1,7 @@
 # Maintainer: Andy Richardson <andy.john.richardson@gmail.com>
 pkgname=gnome-shell-extension-simply-workspaces-git
-pkgver=v6.6.ga40c611
-_commit=a40c6116b7ad6ffb278660fe5b786137ff509a78
+pkgver=v6.6.g0af2cd2
+_commit=0af2cd27de0e99f81cc8d0eff38c7735ade15886
 pkgrel=1
 pkgdesc="Gnome 3 workspace indicator with an i3/polybar style."
 arch=(any)
