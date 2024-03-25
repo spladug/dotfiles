@@ -202,10 +202,7 @@ function configure_just_perfection {
 
     dconf write /org/gnome/shell/extensions/just-perfection/activities-button false
     dconf write /org/gnome/shell/extensions/just-perfection/workspace-popup false
-    dconf write /org/gnome/shell/extensions/just-perfection/weather false
     dconf write /org/gnome/shell/extensions/just-perfection/startup-status 0
-    dconf write /org/gnome/shell/extensions/just-perfection/clock-menu-position 1
-    dconf write /org/gnome/shell/extensions/just-perfection/clock-menu-position-offset 7
     dconf write /org/gnome/shell/extensions/just-perfection/notification-banner-position 2
 }
 
