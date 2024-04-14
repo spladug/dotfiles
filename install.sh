@@ -236,7 +236,7 @@ function do_install {
         zsh-syntax-highlighting
 
     sudo mkdir -p /usr/local/share/zsh/site-functions
-    sudo ln -s /usr/share/zsh/site-functions/_eza /usr/local/share/zsh/site-functions/_eza
+    sudo ln -sf /usr/share/zsh/site-functions/_eza /usr/local/share/zsh/site-functions/_eza
 
     build_docker_image psql
     build_docker_image heroku-cli
