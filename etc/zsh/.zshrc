@@ -39,6 +39,14 @@ function xterm_title_preexec () {
     print -Pn -- '\e]2;%~ %# ' && print -n -- "${(q)1}\a"
 }
 
+function dce () {
+    if [[ -z $1 ]]; then
+        docker-compose exec $(basename $PWD) /bin/bash
+    else
+        docker-compose exec $1 /bin/bash
+    fi
+}
+
 add-zsh-hook -Uz precmd xterm_title_precmd
 add-zsh-hook -Uz preexec xterm_title_preexec
 
