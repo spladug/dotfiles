@@ -14,7 +14,7 @@ RUN npx oclif-dev pack --targets="linux-x64"
 
 FROM docker.io/library/node:18-$DEBIAN_VERSION AS run
 
-ARG version=v8.10.0
+ARG version=v7.68.2
 
 COPY --from=build /src/packages/cli/dist/heroku-${version}/heroku-${version}-linux-x64.tar.xz /tmp/heroku.tar.xz
 
