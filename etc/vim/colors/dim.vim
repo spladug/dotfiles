@@ -65,6 +65,9 @@ highlight DimFzfPrompt  ctermfg=12
 highlight DimFzfPointer ctermfg=1
 highlight DimFzfMarker  ctermfg=9
 
+highlight SpellBad cterm=underline ctermfg=red ctermbg=NONE
+highlight SpellCap cterm=underline ctermfg=yellow ctermbg=NONE
+
 let g:fzf_colors = { 'fg':      ['fg', 'DimFzfFg'],
                    \ 'bg':      ['bg', 'DimFzfBg'],
                    \ 'hl':      ['fg', 'DimFzfHl'],
