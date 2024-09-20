@@ -209,7 +209,12 @@ function configure_just_perfection {
 function do_install {
     git submodule update --init
 
+    install_xdg_config environment.d
+    systemctl --user daemon-reload
+    # probably need to log out and in here
+
     install_packages \
+        aws-vault \
         base-devel \
         bat \
         bat-extras \
@@ -219,6 +224,7 @@ function do_install {
         git \
         git-delta \
         gnome-shell-extension-appindicator \
+        pass \
         pgcli \
         pyright \
         ripgrep \
@@ -227,7 +233,7 @@ function do_install {
         ttf-sourcecodepro-nerd \
         vim \
         vim-airline \
-        vim-editorconfig \
+        wmctrl \
         yamllint \
         zoxide \
         zsh \
@@ -300,7 +306,7 @@ function do_install {
 
     gpg --import gpg/hashicorp.asc
     install_makepkg src/tfenv
-    sudo /opt/tfenv/use-gnupg
+    sudo touch /opt/tfenv/use-gnupg
 }
 
 # only run the active bits of code if we're not being sourced for someone else
