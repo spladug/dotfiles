@@ -16,7 +16,7 @@
     light = false
 [marge]
     conflictstyle = diff3
-[includeIf "gitdir:~/src/wattcarbon/"]
+[includeIf "gitdir:~/src/github.com/wattcarbon/"]
     path = ~/.config/git/wattcarbon
 [init]
 	defaultBranch = main
