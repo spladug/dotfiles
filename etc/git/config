@@ -5,7 +5,9 @@
 ; 	ignoreRevsFile = .git-blame-ignore-revs
 [diff]
 	algorithm = histogram
-    colorMoved = default
+    colorMoved = plain
+    renames = true
+    mnemonicPrefix = true
 [interactive]
     diffFilter = delta --color-only
 [core]
@@ -20,3 +22,17 @@
     path = ~/.config/git/wattcarbon
 [init]
 	defaultBranch = main
+[column]
+	ui = auto
+[branch]
+	sort = -committerdate
+[tag]
+	sort = version:refname
+[fetch]
+	prune = true
+	pruneTags = true
+[commit]
+	verbose = true
+[rerere]
+	enabled = true
+	autoupdate = true
