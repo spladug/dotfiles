@@ -168,6 +168,8 @@ function configure_gnome {
     dconf write '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/command' "'/usr/bin/alacritty'"
     dconf write '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/binding' "'<Super>t'"
     dconf write '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings' "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']"
+
+    dconf write '/org/gnome/shell/keybindings/toggle-application-view' "['<Super>slash']"
 }
 
 function configure_pop_shell {
@@ -202,6 +204,7 @@ function configure_just_perfection {
 
     dconf write /org/gnome/shell/extensions/just-perfection/activities-button false
     dconf write /org/gnome/shell/extensions/just-perfection/workspace-popup false
+    dconf write /org/gnome/shell/extensions/just-perfection/quick-settings-night-light false
     dconf write /org/gnome/shell/extensions/just-perfection/startup-status 0
     dconf write /org/gnome/shell/extensions/just-perfection/notification-banner-position 2
 }
@@ -280,7 +283,6 @@ function do_install {
 
     # do all the makepkg work up front so we only have to restart the shell once
     install_makepkg src/pop-shell-shortcuts-git
-    install_makepkg src/pop-launcher-git pop-launcher-git
     install_makepkg src/gnome-shell-extension-pop-shell-git
     install_makepkg src/gnome-shell-extension-simply-workspaces-git
     install_makepkg src/gnome-shell-extension-just-perfection-desktop
