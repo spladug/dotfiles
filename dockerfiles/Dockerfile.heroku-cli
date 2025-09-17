@@ -1,39 +1,20 @@
-ARG DEBIAN_VERSION=bullseye
-
-FROM docker.io/library/node:18-$DEBIAN_VERSION AS build
-
-WORKDIR /src
-
-RUN git clone https://github.com/heroku/cli /src && \
-    git reset --hard 77006d1fba6f5edd0c6ca5f1ed611ef86ba271a6
-
-WORKDIR /src/packages/cli
-
-RUN yarn install
-RUN npx oclif-dev pack --targets="linux-x64"
-
-FROM docker.io/library/node:18-$DEBIAN_VERSION AS run
-
-ARG version=v7.68.2
-
-COPY --from=build /src/packages/cli/dist/heroku-${version}/heroku-${version}-linux-x64.tar.xz /tmp/heroku.tar.xz
-
-RUN mkdir /heroku && \
-    tar xf /tmp/heroku.tar.xz -C /usr/local && \
-    rm /tmp/heroku.tar.xz #&& \
-    rm /usr/local/heroku/bin/{heroku,heroku.cmd,node}
+FROM docker.io/library/node:20-trixie
 
 ENV XDG_DATA_HOME=/home/.local/share \
     XDG_CACHE_HOME=/home/.cache \
+    EDITOR=/usr/bin/vim \
     HOME=/home
 
-COPY heroku-cli/pgdg.list /etc/apt/sources.list.d/
-COPY heroku-cli/ACCC4CF8.asc /etc/apt/trusted.gpg.d/
-
 RUN apt-get update \
-    && DEBIAN_FRONTEND=noninteractive apt-get install -y postgresql-client-15 \
+    && DEBIAN_FRONTEND=noninteractive apt-get install -y \
+        postgresql-client-17 \
+        vim-nox \
     && rm -rf /var/lib/apt/lists/*
 
-RUN /usr/local/heroku/bin/run plugins:install heroku-releases-retry
+ARG HEROKU_VERSION=10.12.0
+RUN npm i -g heroku@v${HEROKU_VERSION}
 
-ENTRYPOINT ["/usr/local/heroku/bin/run"]
+RUN /usr/local/bin/heroku plugins:install heroku-releases-retry
+RUN /usr/local/bin/heroku plugins:install @heroku-cli/plugin-data-maintenance
+
+ENTRYPOINT ["/usr/local/bin/heroku"]
