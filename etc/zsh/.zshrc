@@ -47,6 +47,16 @@ function dce () {
     fi
 }
 
+function dca () {
+    echo "attaching... C^p C^q to detach"
+
+    if [[ -z $1 ]]; then
+        docker-compose attach $(basename $PWD)
+    else
+        docker-compose attach $1
+    fi
+}
+
 add-zsh-hook -Uz precmd xterm_title_precmd
 add-zsh-hook -Uz preexec xterm_title_preexec
 
