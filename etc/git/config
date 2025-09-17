@@ -36,3 +36,7 @@
 [rerere]
 	enabled = true
 	autoupdate = true
+[alias]
+	co = checkout
+	br = branch
+	st = status
