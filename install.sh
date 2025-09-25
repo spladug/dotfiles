@@ -165,7 +165,7 @@ function configure_gnome {
     dconf write /org/gnome/shell/keybindings/toggle-quick-settings "['<Shift><Super>s']"
 
     dconf write '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/name' "'Launch Terminal'"
-    dconf write '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/command' "'/usr/bin/alacritty'"
+    dconf write '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/command' "'/usr/bin/ghostty'"
     dconf write '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/binding' "'<Super>t'"
     dconf write '/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings' "['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']"
 
