@@ -1,13 +1,13 @@
 # Maintainer: Vincent.Ducamps <aur@ducamps.win>
 pkgname=gnome-shell-extension-pop-shell-git
 pkgdesc="Pop Shell - Tiling window management in Gnome (WIP)"
-pkgver=r958.b3fc425
+pkgver=r961.7ebfb00
 pkgrel=1
-_gitorg=pop-os
+_gitorg=spladug
 _gitname=shell
-_commit=b3fc4253dc29b30fb52ac5eef5d3af643a46d18c
+_commit=7ebfb00f0aad6aa2bc58a3b68314ab3cdc70079f
 arch=(any)
-url="https://github.com/pop-os/shell"
+url="https://github.com/spladug/shell"
 license=("GPLv3")
 install="pop-shell.install"
 optdepends=('gnome-shell-extensions: native-window extension for improved window placement')
