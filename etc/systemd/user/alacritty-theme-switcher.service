@@ -1,8 +1,0 @@
-[Unit]
-Description="Update Alacritty theme when Gnome dark mode setting changes"
-
-[Service]
-ExecStart=/usr/bin/bash /home/neil/src/github.com/spladug/dotfiles/lib/alacritty-theme-switcher.sh
-
-[Install]
-WantedBy=default.target

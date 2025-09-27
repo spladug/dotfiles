@@ -1,0 +1,17 @@
+{{- $personalEmail := promptStringOnce . "personal.email" "What is your personal email" -}}
+{{- $workEmail := promptStringOnce . "work.email" "What is your work email (blank for none)" -}} 
+{{- $workOrg := promptStringOnce . "work.github.org" "What is the GitHub org for your work (blank for none)" -}}
+
+encryption = "gpg"
+
+[gpg]
+    recipient = "{{ $personalEmail }}"
+    args = ["--quiet"]
+
+[data]
+    [data.personal]
+        email = {{ $personalEmail | quote }}
+
+    [data.work]
+        email = {{ $workEmail | quote }}
+        github.org = {{ $workOrg | quote }}

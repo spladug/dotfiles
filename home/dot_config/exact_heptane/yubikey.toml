@@ -1,0 +1,5 @@
+packages = [
+  "ccid",
+  "libfido2",
+  "pinentry",
+]

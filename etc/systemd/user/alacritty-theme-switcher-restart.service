@@ -1,3 +1,0 @@
-[Service]
-Type=oneshot
-ExecStart=/usr/bin/systemctl restart --user alacritty-theme-switcher.service

@@ -1,0 +1,165 @@
+#!/usr/bin/python
+# a zero-octane config system inspired by butane. just my personal quick use
+
+import os
+import subprocess
+import tomllib
+
+from pathlib import Path
+from typing import TypedDict
+from typing import Literal
+
+XDG_CONFIG_HOME = Path(os.environ.get("XDG_CONFIG_HOME", "~/.config")).expanduser()
+
+
+class UnitConfig(TypedDict):
+    enabled: bool
+
+
+class FileContentsConfig(TypedDict):
+    inline: Literal[""]
+
+
+class FileConfig(TypedDict):
+    path: str
+    contents: FileContentsConfig
+
+
+class Config(TypedDict):
+    packages: set[str]
+    systemd: dict[str, UnitConfig]
+    files: list[FileConfig]
+
+
+def load_config() -> Config:
+    config = {"packages": set(), "systemd": dict[str, UnitConfig](), "files": list()}
+    config_root = XDG_CONFIG_HOME / "heptane"
+    for file in config_root.glob("*"):
+        with file.open("rb") as f:
+            config_fragment = tomllib.load(f)
+
+            for key, value in config.items():
+                if isinstance(value, dict | set):
+                    value.update(config_fragment.get(key, []))
+                elif isinstance(value, list):
+                    value.extend(config_fragment.get(key, []))
+                else:
+                    assert False, "what"
+    return config  # type: ignore
+
+
+def diff(configured: set[str], observed: set[str]) -> tuple[list[str], list[str]]:
+    to_install = sorted(configured - observed)
+    if to_install:
+        print("  To Add")
+        for pacname in to_install:
+            print("    -", pacname)
+        print()
+
+    to_remove = sorted(observed - configured)
+    if to_remove:
+        print("  To remove")
+        for pacname in to_remove:
+            print("    -", pacname)
+        print()
+
+    if not to_install and not to_remove:
+        print("  In sync!")
+
+    return to_install, to_remove
+
+
+def diff_packages(config: Config) -> tuple[list[str], list[str]]:
+    result = subprocess.run(["pacman", "-Qqe"], capture_output=True, encoding="utf-8")
+    installed_packages = set(result.stdout.splitlines())
+
+    print("Packages:")
+    return diff(config["packages"], installed_packages)
+
+
+def sync_packages(to_install: list[str], to_remove: list[str]) -> None:
+    if to_install:
+        print("Installing packages...")
+        subprocess.run(["paru", "-S", *to_install], check=True)
+
+    if to_remove:
+        print("Removing packages...")
+        subprocess.run(["paru", "-R", *to_remove], check=True)
+
+
+def is_systemd_unit_enabled(unit_name: str) -> bool:
+    result = subprocess.run(
+        ["systemctl", "is-enabled", unit_name],
+        capture_output=True,
+        check=True,
+        encoding="utf-8",
+    )
+    return result.stdout.strip() == "enabled"
+
+
+def diff_systemd(config: Config) -> tuple[list[str], list[str]]:
+    configured_enabled_units = {
+        unit_name
+        for unit_name, unit_config in config["systemd"].items()
+        if unit_config["enabled"]
+    }
+    observed_enabled_units = {
+        unit_name
+        for unit_name in config["systemd"]
+        if is_systemd_unit_enabled(unit_name)
+    }
+
+    print("Systemd units:")
+    return diff(configured_enabled_units, observed_enabled_units)
+
+
+def sync_systemd(to_enable: list[str], to_disable: list[str]) -> None:
+    if to_enable:
+        print("Enabling units...")
+        subprocess.run(["systemctl", "enable", "--now", *to_enable], check=True)
+
+    if to_disable:
+        print("Disabling units...")
+        subprocess.run(["systemctl", "disable", "--now", *to_enable], check=True)
+
+
+def diff_files(config: Config) -> tuple[list[str], list[str]]:
+    assert all(f["contents"]["inline"] == "" for f in config["files"]), (
+        "contents not supported"
+    )
+    configured_files = {f["path"] for f in config["files"]}
+    extant_files = {f["path"] for f in config["files"] if os.path.exists(f["path"])}
+
+    print("Files:")
+    return diff(configured_files, extant_files)
+
+
+def sync_files(to_create: list[str], to_destroy: list[str]) -> None:
+    if to_create:
+        print("Touching files...")
+        subprocess.run(["sudo", "touch", *to_create], check=True)
+
+
+def main() -> None:
+    config = load_config()
+    to_install, to_remove = diff_packages(config)
+    to_enable, to_disable = diff_systemd(config)
+    to_create, to_destroy = diff_files(config)
+
+    if not any((to_install, to_remove, to_enable, to_disable, to_create, to_destroy)):
+        print("nothing to do. byeeeee")
+        return
+
+    print()
+    response = input("Type YES to proceed: ")
+    if response != "YES":
+        print("nm, byeeeee")
+        return
+
+    sync_packages(to_install, to_remove)
+    sync_systemd(to_enable, to_disable)
+    sync_files(to_create, to_destroy)
+
+
+if __name__ == "__main__":
+    main()

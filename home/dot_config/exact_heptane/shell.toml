@@ -1,0 +1,26 @@
+packages = [
+  "bat",
+  "bat-extras",
+  "eza",
+  "fzf",
+  "git",
+  "git-delta",
+  "htop",
+  "jq",
+  "ncdu",
+  "pyright",  # for vim+ale
+  "ripgrep",
+  "ruff",
+  "starship",
+  "vim",
+  "vim-airline",
+  "vim-ale",
+  "vim-fugitive",
+  "vim-fzf-git",
+  "yamllint", # for vim+ale
+  "zoxide",
+  "zsh",
+  "zsh-autosuggestions",
+  "zsh-history-substring-search",
+  "zsh-syntax-highlighting",
+]

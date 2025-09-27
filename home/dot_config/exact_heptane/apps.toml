@@ -1,0 +1,16 @@
+packages = [
+    "1password",
+    "chromium",
+    "cider",
+    "discord",
+    "firefox",
+    "gimp",
+    "inkscape",
+    "mullvad-vpn-bin",
+    "obsidian",
+    "pgcli",
+    "signal-desktop",
+    "slack-electron",
+    "slack-electron-debug",
+    "syncthing",
+]

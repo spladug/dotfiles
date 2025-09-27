@@ -1,27 +1,3 @@
-[submodule "vim/bundle/fugitive"]
-	path = etc/vim/pack/spladug/start/fugitive
-	url = https://github.com/tpope/vim-fugitive.git
-[submodule "vim/bundle/terraform"]
-	path = etc/vim/pack/spladug/start/terraform
-	url = https://github.com/hashivim/vim-terraform.git
-[submodule "vim/pack/spladug/start/vim-puppet"]
-	path = etc/vim/pack/spladug/start/vim-puppet
-	url = https://github.com/rodjek/vim-puppet
 [submodule "vim/pack/spladug/start/commentary"]
-	path = etc/vim/pack/spladug/start/commentary
+	path = home/dot_config/vim/external_pack/spladug/start/commentary
 	url = https://github.com/tpope/vim-commentary.git
-[submodule "vim/pack/spladug/start/fzf"]
-	path = etc/vim/pack/spladug/start/fzf
-	url = https://github.com/junegunn/fzf.vim.git
-[submodule "src/vi-vim-symlink"]
-	path = src/vi-vim-symlink
-	url = https://aur.archlinux.org/vi-vim-symlink.git
-[submodule "etc/vim/pack/spladug/start/ale"]
-	path = etc/vim/pack/spladug/start/ale
-	url = https://github.com/dense-analysis/ale.git
-[submodule "src/tfenv"]
-	path = src/tfenv
-	url = https://aur.archlinux.org/tfenv.git
-[submodule "etc/alacritty/themes"]
-	path = etc/alacritty/themes
-	url = https://github.com/alacritty/alacritty-theme

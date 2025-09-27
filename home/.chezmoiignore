@@ -1,0 +1,29 @@
+# systemd-homed
+.identity
+.identity-blob
+
+# xdg-user-dirs
+Desktop
+Documents
+Downloads
+Music
+Pictures
+Public
+Templates
+Videos
+ZDrive
+
+# not much i can do about these
+# https://wiki.archlinux.org/title/XDG_Base_Directory#Contributing
+.cursor
+.dotnet
+.hplip
+.mozilla
+.netrc
+.pki
+.pulse-cookie
+.steam
+.steampath
+.steampid
+.terraform.d
+.vscode

@@ -1,0 +1,8 @@
+packages = [
+  "cups",
+  "hplip",
+  "system-config-printer",
+]
+
+[systemd]
+"cups.service" = { enabled = true }

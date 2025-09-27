@@ -1,0 +1,14 @@
+packages = [
+    "dmidecode",
+{{ if eq .chezmoi.hostname "papaya" -}}
+    "amdgpu_top",
+    "amd-ucode",
+    "onnxruntime-opt-rocm",  # for firefox
+{{- else if eq .chezmoi.hostname "banana" -}}
+    "iio-sensor-proxy",
+    "intel-media-driver",
+    "intel-ucode",
+    "onnxruntime-opt",  # for firefox
+    "sof-firmware",
+{{- end }}
+]

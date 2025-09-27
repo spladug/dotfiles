@@ -1,0 +1,44 @@
+[user]
+	name = Neil Williams
+	email = {{ .personal.email }}
+; [blame]
+; 	ignoreRevsFile = .git-blame-ignore-revs
+[diff]
+	algorithm = histogram
+    colorMoved = plain
+    renames = true
+    mnemonicPrefix = true
+[interactive]
+    diffFilter = delta --color-only
+[core]
+    pager = delta
+	excludesfile = ~/.config/git/ignore
+[delta]
+    navigate = true
+    light = false
+[marge]
+    conflictstyle = diff3
+{{ if .work.github.org }}
+[includeIf "gitdir:~/src/github.com/{{ .work.github.org }}/"]
+    path = ~/.config/git/work
+{{ end }}
+[init]
+	defaultBranch = main
+[column]
+	ui = auto
+[branch]
+	sort = -committerdate
+[tag]
+	sort = version:refname
+[fetch]
+	prune = true
+	pruneTags = true
+[commit]
+	verbose = true
+[rerere]
+	enabled = true
+	autoupdate = true
+[alias]
+	co = checkout
+	br = branch
+	st = status

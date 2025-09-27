@@ -1,5 +1,0 @@
-[Desktop Entry]
-Type=Application
-Version=1.5
-Name=Launch Standard Stuff
-Exec=/neil/src/dotfiles/lib/start.sh

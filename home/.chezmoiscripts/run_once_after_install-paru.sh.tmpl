@@ -1,0 +1,18 @@
+#!/bin/bash
+
+set -e
+
+{{ $package := "paru-bin" -}}
+{{- $revision := "92a55429afbec4fceeb2cef843245105307444d2" -}}
+{{- $paruCache := joinPath .chezmoi.homeDir ".cache" "paru" "clone" -}}
+{{- $clonePath := joinPath $paruCache $package -}}
+
+{{ if and (eq .chezmoi.os "linux") (eq .chezmoi.osRelease.id "arch") -}}
+mkdir -p {{ $paruCache | quote }}
+git clone --revision {{ $revision }} https://aur.archlinux.org/{{ $package }}.git {{ $clonePath | quote }}
+cd {{ $clonePath | quote }}
+makepkg -si
+
+{{- else -}}
+echo Not running on Arch. Skipping!
+{{- end }}

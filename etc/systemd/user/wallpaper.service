@@ -1,3 +1,0 @@
-[Service]
-Type=oneshot
-ExecStart=/home/neil/src/dotfiles/lib/rotate-background.sh

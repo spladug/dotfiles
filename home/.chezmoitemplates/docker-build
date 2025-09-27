@@ -1,0 +1,8 @@
+#!/bin/bash
+
+{{ $name := .dockerfileName }}
+{{- $dockerRoot := joinPath .chezmoi.sourceDir "../dockerfiles" -}}
+{{- $dockerFile := joinPath $dockerRoot (printf "Dockerfile.%s" $name) -}}
+
+# sha256sum for {{ $dockerFile }}: {{ include $dockerFile | sha256sum }}
+exec podman build -t "{{ $name }}" -f {{ $dockerFile | quote }} {{ $dockerRoot | quote }}

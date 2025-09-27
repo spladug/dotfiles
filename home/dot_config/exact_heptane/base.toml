@@ -1,0 +1,20 @@
+# keep these in sync with the manual install process
+packages = [
+  "apparmor",
+  "audit",
+  "base",
+  "base-devel",
+  "chezmoi",
+  "fwupd",
+  "linux",
+  "linux-firmware",
+  "man-db",
+  "man-pages",
+  "networkmanager",
+  "nftables",
+  "paru-bin",  # should not be in installer
+  "paru-bin-debug",  # should not be in installer
+  "sbctl",  # should not be in installer
+  "sudo",
+  "ufw",
+]

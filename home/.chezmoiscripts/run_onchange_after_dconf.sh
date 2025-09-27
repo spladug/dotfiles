@@ -1,0 +1,112 @@
+#!/bin/bash
+
+set -e
+
+dconf load /org/gnome/ <<END
+[desktop/interface]
+accent-color='purple'
+clock-show-seconds=true
+clock-show-weekday=true
+color-scheme='prefer-dark'
+enable-animations=false
+enable-hot-corners=false
+
+[desktop/wm/keybindings]
+close=['<Super>q', '<Alt>F4']
+maximize=@as []
+minimize=['<Super>comma']
+move-to-monitor-down=@as []
+move-to-monitor-left=@as []
+move-to-monitor-right=@as []
+move-to-monitor-up=@as []
+move-to-workspace-1=['<Super><Shift>1']
+move-to-workspace-10=['<Super><Shift>0']
+move-to-workspace-2=['<Super><Shift>2']
+move-to-workspace-3=['<Super><Shift>3']
+move-to-workspace-4=['<Super><Shift>4']
+move-to-workspace-5=['<Super><Shift>5']
+move-to-workspace-6=['<Super><Shift>6']
+move-to-workspace-7=['<Super><Shift>7']
+move-to-workspace-8=['<Super><Shift>8']
+move-to-workspace-9=['<Super><Shift>9']
+move-to-workspace-down=@as []
+move-to-workspace-up=@as []
+switch-to-workspace-1=['<Super>1']
+switch-to-workspace-10=['<Super>0']
+switch-to-workspace-2=['<Super>2']
+switch-to-workspace-3=['<Super>3']
+switch-to-workspace-4=['<Super>4']
+switch-to-workspace-5=['<Super>5']
+switch-to-workspace-6=['<Super>6']
+switch-to-workspace-7=['<Super>7']
+switch-to-workspace-8=['<Super>8']
+switch-to-workspace-9=['<Super>9']
+switch-to-workspace-down=['<Primary><Super>Down', '<Primary><Super>j']
+switch-to-workspace-left=@as []
+switch-to-workspace-right=@as []
+switch-to-workspace-up=['<Primary><Super>Up', '<Primary><Super>k']
+toggle-maximized=['<Super>m']
+unmaximize=@as []
+
+[desktop/wm/preferences]
+num-workspaces=10
+
+[mutter]
+attach-modal-dialogs=false
+dynamic-workspaces=false
+edge-tiling=false
+overlay-key=''
+workspaces-only-on-primary=false
+
+[mutter/keybindings]
+switch-monitor='[]'
+toggle-tiled-left=@as []
+toggle-tiled-right=@as []
+
+[mutter/wayland/keybindings]
+restore-shortcuts=@as []
+
+[settings-daemon/plugins/color]
+night-light-enabled=true
+
+[settings-daemon/plugins/media-keys]
+custom-keybindings=['/org/gnome/settings-daemon/plugins/media-keys/custom-keybindings/custom0/']
+search=['<Super>slash']
+terminal=['<Super>t']
+
+[settings-daemon/plugins/media-keys/custom-keybindings/custom0]
+binding='<Super>t'
+command='/usr/bin/ghostty'
+name='Launch Terminal'
+
+[shell]
+disable-user-extensions=false
+enabled-extensions=['pop-shell@system76.com', 'appindicatorsupport@rgcjonas.gmail.com', 'native-window-placement@gnome-shell-extensions.gcampax.github.com', 'simply.workspaces@andyrichardson.dev']
+
+[shell/app-switcher]
+current-workspace-only=true
+
+[shell/extensions/pop-shell]
+activate-launcher=@as []
+active-hint=true
+hint-color-rgba='rgb(128, 0, 255)'
+tile-by-default=true
+toggle-tiling=@as []
+
+[shell/keybindings]
+open-application-menu=@as []
+switch-to-application-1=@as []
+switch-to-application-10=@as []
+switch-to-application-2=@as []
+switch-to-application-3=@as []
+switch-to-application-4=@as []
+switch-to-application-5=@as []
+switch-to-application-6=@as []
+switch-to-application-7=@as []
+switch-to-application-8=@as []
+switch-to-application-9=@as []
+toggle-application-view=['<Super>slash']
+toggle-message-tray=['<Super>v']
+toggle-overview=['<Super>a']
+toggle-quick-settings=['<Shift><Super>s']
+END

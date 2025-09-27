@@ -1,0 +1,8 @@
+font-family = "Sauce Code Pro NF"
+font-size = 14
+
+theme = light:Night Owlish Light,dark:Monokai Remastered
+background-opacity = .9
+
+window-padding-x = 8
+window-decoration = none

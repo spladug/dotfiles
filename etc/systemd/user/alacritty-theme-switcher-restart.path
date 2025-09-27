@@ -1,8 +1,0 @@
-[Unit]
-Description="restart alacritty-theme-switcher if source changes"
-
-[Path]
-PathModified=/home/neil/src/dotfiles/lib/alacritty-theme-switcher.sh
-
-[Install]
-WantedBy=default.target

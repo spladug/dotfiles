@@ -1,3 +1,0 @@
-#!/bin/sh
-
-exec podman run --rm -it --userns=keep-id --init localhost/diceware "$@"

@@ -1,0 +1,14 @@
+#!/bin/sh
+
+set -e
+
+if [[ -z "$GNUPGHOME" ]]; then
+    echo "refusing to import GPG keys when GNUPGHOME is not set"
+    echo "you might need to log out and back in to get environment.d to take effect"
+    exit 1
+fi
+
+{{ range $keyFile := joinPath .chezmoi.sourceDir "../gpg/*.asc" | glob }}
+# sha256sum for {{ $keyFile }}: {{ include $keyFile | sha256sum }}
+gpg --import "{{ $keyFile }}"
+{{ end }}
