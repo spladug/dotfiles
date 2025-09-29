@@ -2,5 +2,6 @@
 .bash_profile
 .bashrc
 .cargo
+.gnupg
 .java
 .python_history

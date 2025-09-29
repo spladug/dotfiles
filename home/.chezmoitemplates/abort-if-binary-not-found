@@ -1,0 +1,7 @@
+{{ $absolutePath := lookPath . }}
+
+# path to {{ . }}: '{{ $absolutePath }}'
+if [[ -z "{{ $absolutePath }}" ]]; then
+    echo "could not find {{ . }}. aborting"
+    exit 0
+fi

@@ -91,7 +91,6 @@ def is_systemd_unit_enabled(unit_name: str) -> bool:
     result = subprocess.run(
         ["systemctl", "is-enabled", unit_name],
         capture_output=True,
-        check=True,
         encoding="utf-8",
     )
     return result.stdout.strip() == "enabled"

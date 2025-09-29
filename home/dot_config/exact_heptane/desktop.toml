@@ -51,3 +51,4 @@ packages = [
 
 [systemd]
 "bluetooth.service" = { enabled = true }
+"gdm.service" = { enabled = true }

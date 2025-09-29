@@ -1,4 +1,5 @@
 packages = [
+  "crun",  # vs. runc. this should be faster https://github.com/containers/podman/blob/main/docs/tutorials/performance.md#use-a-fast-oci-runtime
   "docker-compose",
   "fuse-overlayfs",
   "podman",

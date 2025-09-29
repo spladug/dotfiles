@@ -4,8 +4,12 @@ packages = [
   "audit",
   "base",
   "base-devel",
+  "btrfs-progs",
+  "ccid",
   "chezmoi",
   "fwupd",
+  "git",
+  "libfido2",
   "linux",
   "linux-firmware",
   "man-db",
@@ -14,6 +18,7 @@ packages = [
   "nftables",
   "paru-bin",  # should not be in installer
   "paru-bin-debug",  # should not be in installer
+  "pinentry",
   "sbctl",  # should not be in installer
   "sudo",
   "ufw",

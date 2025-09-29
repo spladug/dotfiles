@@ -2,6 +2,8 @@
 
 set -e
 
+{{- template "abort-if-binary-not-found" "dconf" }}
+
 dconf load /org/gnome/ <<END
 [desktop/interface]
 accent-color='purple'
