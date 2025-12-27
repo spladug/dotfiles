@@ -16,5 +16,6 @@ RUN npm i -g heroku@v${HEROKU_VERSION}
 
 RUN /usr/local/bin/heroku plugins:install heroku-releases-retry
 RUN /usr/local/bin/heroku plugins:install @heroku-cli/plugin-data-maintenance
+RUN /usr/local/bin/heroku plugins:install @heroku-cli/heroku-builds
 
 ENTRYPOINT ["/usr/local/bin/heroku"]
