@@ -6,7 +6,6 @@ packages = [
     "firefox",
     "gimp",
     "inkscape",
-    "mullvad-vpn-bin",
     "obsidian",
     "pgcli",
     "signal-desktop",
