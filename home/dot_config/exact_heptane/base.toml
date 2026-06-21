@@ -7,6 +7,7 @@ packages = [
   "btrfs-progs",
   "ccid",
   "chezmoi",
+  "efibootmgr",
   "fwupd",
   "git",
   "libfido2",
@@ -16,10 +17,11 @@ packages = [
   "man-pages",
   "networkmanager",
   "nftables",
-  "paru-bin",  # should not be in installer
   "paru-bin-debug",  # should not be in installer
+  "paru-bin",  # should not be in installer
   "pinentry",
   "sbctl",  # should not be in installer
   "sudo",
+  "tailscale",
   "ufw",
 ]

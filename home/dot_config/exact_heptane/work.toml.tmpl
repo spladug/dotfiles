@@ -1,16 +1,10 @@
 {{ if .work.email }}
 packages = [
     "aws-cli-v2",
-    "aws-vault",
-    "bind",  # for dig
-    "cursor-bin",
-    "mkcert",
-    "pass",  # for aws-vault
-    "tfenv",
-    "xorg-xhost",
+    "aws-session-manager-plugin",
+    "claude-code",
+    "github-cli",
+    "tenv-bin",
+    "uv",
 ]
-
-[[files]]
-path = "/opt/tfenv/use-gnupg"
-contents.inline = ""
 {{ end }}
