@@ -8,7 +8,7 @@ sleep 5
 
 wmctrl -s 8
 obsidian &
-cider &
+cider --ozone-platform=wayland &
 sleep 2
 
 wmctrl -s 9
