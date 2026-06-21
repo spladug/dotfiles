@@ -60,6 +60,11 @@ function dca () {
 add-zsh-hook -Uz precmd xterm_title_precmd
 add-zsh-hook -Uz preexec xterm_title_preexec
 
+_wattctl_completion() {
+  eval $(env _TYPER_COMPLETE_ARGS="${words[1,$CURRENT]}" _WATTCTL_COMPLETE=complete_zsh wattctl)
+}
+compdef _wattctl_completion wattctl
+
 # Aliases
 alias cat='bat'
 alias diff='batdiff'
