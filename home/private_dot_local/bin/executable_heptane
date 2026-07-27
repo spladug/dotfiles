@@ -34,7 +34,10 @@ class Config(TypedDict):
 def load_config() -> Config:
     config = {"packages": set(), "systemd": dict[str, UnitConfig](), "files": list()}
     config_root = XDG_CONFIG_HOME / "heptane"
-    for file in config_root.glob("*"):
+    # *.toml, not *: a stray editor swapfile or backup (base.toml~, .base.toml.swp)
+    # would otherwise be parsed as config, and either crash the run or -- worse --
+    # merge a stale package list in.
+    for file in config_root.glob("*.toml"):
         with file.open("rb") as f:
             config_fragment = tomllib.load(f)
 
@@ -83,8 +86,20 @@ def sync_packages(to_install: list[str], to_remove: list[str]) -> None:
         subprocess.run(["paru", "-S", *to_install], check=True)
 
     if to_remove:
+        # re-check what is still there. installing can remove things by itself:
+        # a package that Conflicts with an installed one replaces it as part of
+        # the -S above, and the -R below would then fail on something that is
+        # already gone -- taking the whole run with it.
+        result = subprocess.run(["pacman", "-Qq"], capture_output=True, encoding="utf-8")
+        still_installed = set(result.stdout.splitlines())
+        to_remove = [pacname for pacname in to_remove if pacname in still_installed]
+
+    if to_remove:
         print("Removing packages...")
-        subprocess.run(["paru", "-R", *to_remove], check=True)
+        # -Rns, not -R: plain -R leaves the removed package's dependencies behind
+        # as orphans. durian had accumulated 17 of them (three electron versions,
+        # nvm, meson, ragel, ...) purely from this.
+        subprocess.run(["paru", "-Rns", *to_remove], check=True)
 
 
 def is_systemd_unit_enabled(unit_name: str) -> bool:
@@ -119,7 +134,7 @@ def sync_systemd(to_enable: list[str], to_disable: list[str]) -> None:
 
     if to_disable:
         print("Disabling units...")
-        subprocess.run(["systemctl", "disable", "--now", *to_enable], check=True)
+        subprocess.run(["systemctl", "disable", "--now", *to_disable], check=True)
 
 
 def diff_files(config: Config) -> tuple[list[str], list[str]]:
@@ -155,9 +170,24 @@ def main() -> None:
         print("nm, byeeeee")
         return
 
-    sync_packages(to_install, to_remove)
-    sync_systemd(to_enable, to_disable)
-    sync_files(to_create, to_destroy)
+    # each phase runs even if an earlier one fails. one unresolvable package name
+    # used to abort the entire run inside sync_packages, so the systemd and file
+    # phases never executed and nothing said so -- the run just stopped. that is
+    # how a box ends up with units silently unsynced for months.
+    failed = []
+    for label, sync, args in (
+        ("packages", sync_packages, (to_install, to_remove)),
+        ("systemd units", sync_systemd, (to_enable, to_disable)),
+        ("files", sync_files, (to_create, to_destroy)),
+    ):
+        try:
+            sync(*args)
+        except subprocess.CalledProcessError as e:
+            print(f"\n!! {label} sync FAILED (exit {e.returncode}), continuing\n")
+            failed.append(label)
+
+    if failed:
+        raise SystemExit(f"failed to sync: {', '.join(failed)}")
 
 
 if __name__ == "__main__":

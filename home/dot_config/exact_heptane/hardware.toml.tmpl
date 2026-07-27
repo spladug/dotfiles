@@ -1,0 +1,36 @@
+{{- /*
+  microcode is chosen from the CPU vendor, NOT from the hostname list below.
+
+  it used to be a hostname branch, and durian -- added after papaya and banana
+  -- simply never got one. the result was an Intel laptop running with no
+  intel-ucode at all, i.e. pinned to whatever revision Dell's BIOS happens to
+  ship, with the `microcode` mkinitcpio hook a permanent no-op. nothing warned,
+  because "no branch matched" and "this box needs nothing" look identical.
+
+  a vendor check cannot be forgotten when a machine is added. the `|| true`
+  keeps a CPU that reports neither vendor from aborting `chezmoi apply`
+  outright -- it just produces no microcode line, same as before.
+*/ -}}
+{{- $cpuVendor := output "sh" "-c" "grep -m1 -oE 'GenuineIntel|AuthenticAMD' /proc/cpuinfo || true" | trim -}}
+packages = [
+    "dmidecode",
+{{- if eq $cpuVendor "GenuineIntel" }}
+    "intel-ucode",
+{{- else if eq $cpuVendor "AuthenticAMD" }}
+    "amd-ucode",
+{{- end }}
+{{- if eq .chezmoi.hostname "papaya" }}
+    "amdgpu_top",
+    "onnxruntime-opt-rocm",  # for firefox
+{{- else if eq .chezmoi.hostname "banana" }}
+    "iio-sensor-proxy",
+    "intel-media-driver",
+    "onnxruntime-opt",  # for firefox
+    "sof-firmware",
+{{- else if eq .chezmoi.hostname "durian" }}
+    # Dell XPS 9320, Alder Lake-P (i5-1240P), Iris Xe -- same generation as banana.
+    "iio-sensor-proxy",     # ambient light sensor / accelerometer
+    "intel-media-driver",   # iHD VA-API driver, for hardware video decode
+    "sof-firmware",         # SOF audio; the XPS 9320 has no sound without it
+{{- end }}
+]

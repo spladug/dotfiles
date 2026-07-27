@@ -14,7 +14,11 @@ packages = [
   "vim",
   "vim-airline",
   "vim-ale",
-  "vim-fugitive",
+  # no vim-fugitive: dropped from the AUR since this was first installed
+  # (2025-12-27, 3.7-3). only vim-fugitive-git and neovim-fugitive remain, so
+  # the name resolved to nothing and made `paru -S` fail -- which, because
+  # `paru -S a b c` installs nothing if any one target is bad, meant NO packages
+  # installed on a fresh box. add vim-fugitive-git if you want it back.
   "vim-fzf-git",
   "yamllint", # for vim+ale
   "zoxide",

@@ -9,7 +9,10 @@ packages = [
     "obsidian",
     "pgcli",
     "signal-desktop",
+    # no slack-electron-debug: it does not exist in the AUR. slack-electron just
+    # repackages an upstream .deb, so there is nothing to build and no debug
+    # symbols to split out. listing it made every `paru -S` fail with
+    # "target not found", which aborted heptane's whole package sync.
     "slack-electron",
-    "slack-electron-debug",
     "syncthing",
 ]

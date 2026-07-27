@@ -6,7 +6,11 @@ packages = [
   "baobab",
   "gdm",
   "ghostty",
-  "gnome-bluetooth",
+  # -3.0 is the current one (47.x, in extra, what gnome-control-center pulls in).
+  # bare "gnome-bluetooth" is an AUR package holding the LEGACY GTK3 3.34 tree
+  # from 2019 -- it resolves, so this was quietly installing an obsolete parallel
+  # copy rather than failing loudly.
+  "gnome-bluetooth-3.0",
   "gnome-calendar",
   "gnome-characters",
   "gnome-clocks",

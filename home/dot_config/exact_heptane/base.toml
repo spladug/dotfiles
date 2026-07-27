@@ -1,4 +1,10 @@
-# keep these in sync with the manual install process
+# keep these in sync with the manual install process (Arch Install.md).
+#
+# this list is not just "what to install" -- heptane REMOVES any explicitly
+# installed package that isn't listed here. so anything pacstrap puts on the box
+# and this file omits gets offered for removal on the first heptane run, on a
+# machine that has not been rebooted since it was built. four of the entries
+# below are here for that reason and are marked DO NOT REMOVE.
 packages = [
   "apparmor",
   "audit",
@@ -13,15 +19,68 @@ packages = [
   "libfido2",
   "linux",
   "linux-firmware",
+  # DO NOT REMOVE. the only rescue path that isn't a live USB when a `linux`
+  # update breaks boot. the "fallback" UKI is the same kernel, so it does not
+  # cover this.
+  "linux-lts",
   "man-db",
   "man-pages",
   "networkmanager",
   "nftables",
-  "paru-bin-debug",  # should not be in installer
-  "paru-bin",  # should not be in installer
+  # DO NOT REMOVE. pacdiff (for .pacnew) and paccache.timer.
+  "pacman-contrib",
+  # "paru", NOT "paru-bin", even though the bootstrap script clones the
+  # aur/paru-bin repo -- it is pinned to 329be21, and at that revision the
+  # paru-bin PKGBUILD is `pkgname=paru` built from source. so the package this
+  # box actually installs is named `paru`, and declaring `paru-bin` made heptane
+  # propose a swap on every single run, forever.
+  #
+  # do NOT "fix" that by switching to the real paru-bin. its prebuilt binary
+  # needs libalpm.so.15 and pacman now ships libalpm.so.16, so it installs
+  # cleanly (depends is `libalpm.so>=14`, which 16 satisfies) and then refuses to
+  # start -- leaving no working AUR helper, which is what heptane drives.
+  # 329be21 is morganamilo's own source-build stopgap for exactly this, and
+  # upstream is still on v2.1.0 (2025-07), so there is no fixed binary to move to.
+  # revisit when a release links against libalpm.so.16.
+  #
+  # there is no paru-debug/paru-bin-debug in the AUR; the old entry here was
+  # unresolvable and aborted every `paru -S` heptane ever attempted.
+  "paru",  # should not be in installer
   "pinentry",
   "sbctl",  # should not be in installer
   "sudo",
+  # DO NOT REMOVE. mkinitcpio only delegates UKI building to ukify when this is
+  # installed, and SILENTLY falls back to its own builder otherwise -- no
+  # .pcrsig, no signed PCR 11 measurements. the box keeps booting until the next
+  # kernel update, and then the LUKS policy refuses the new UKI and you get a
+  # recovery key prompt.
+  "systemd-ukify",
   "tailscale",
   "ufw",
+  # DO NOT REMOVE. there is no swap partition by design (hibernation doesn't mix
+  # with TPM auto-unlock), so zram is the only thing between memory pressure and
+  # the kernel OOM killer. NOTE: the package alone does nothing -- it needs
+  # /etc/systemd/zram-generator.conf, which the installer writes.
+  "zram-generator",
 ]
+
+# heptane is the only thing that ever re-checks these. enabling them by hand in
+# the chroot is a one-shot that nothing verifies afterwards, which is how durian
+# ran from 2025-12 to 2026-07 with fstrim.timer disabled.
+[systemd]
+"apparmor.service" = { enabled = true }
+"auditd.service" = { enabled = true }
+"fstrim.timer" = { enabled = true }
+"NetworkManager.service" = { enabled = true }
+"paccache.timer" = { enabled = true }
+"pcscd.socket" = { enabled = true }
+"systemd-boot-update.service" = { enabled = true }
+"systemd-homed.service" = { enabled = true }
+"systemd-resolved.service" = { enabled = true }
+"systemd-timesyncd.service" = { enabled = true }
+"tailscaled.service" = { enabled = true }
+"ufw.service" = { enabled = true }
+
+# asserted off, not merely absent. openssh comes in as a dependency, so sshd is
+# always available to be enabled by accident.
+"sshd.service" = { enabled = false }
