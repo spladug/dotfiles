@@ -1,0 +1,9 @@
+# makepkg output: sources, build trees, packages, logs. paru builds in place
+# for PKGBUILD repositories configured with Path= (see paru.conf).
+*/src/
+*/pkg/
+*/shell/
+*/simply-workspaces/
+*.pkg.tar*
+*.log
+.SRCINFO

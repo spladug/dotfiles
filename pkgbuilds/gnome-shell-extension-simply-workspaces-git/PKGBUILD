@@ -1,0 +1,27 @@
+# built from my fork, not the AUR package of the same name.
+#
+# upstream (andyrichardson) stopped maintaining this after v7 (GNOME 44), and
+# the AUR package still pins tag v7 -- whose metadata.json only advertises
+# shell-version 40-43, so on any current GNOME it installs fine and then sits
+# there OUT OF DATE. my fork at github.com/spladug/simply-workspaces carries
+# the GNOME 45 ESM port and gets a vNN.0 tag per GNOME release ("Advertise
+# support for Gnome NN"). each cycle: tag the fork, then bump _tag here.
+pkgname=gnome-shell-extension-simply-workspaces-git
+_tag=v51.0
+pkgver=${_tag#v}
+pkgrel=1
+pkgdesc="GNOME Shell workspace indicator with an i3/polybar style (spladug fork)"
+arch=(any)
+url="https://github.com/spladug/simply-workspaces"
+license=(GPL-3.0-or-later)
+depends=('gnome-shell>=1:45')
+makedepends=('git')
+provides=("${pkgname%-git}")
+conflicts=("${pkgname%-git}")
+source=("git+https://github.com/spladug/simply-workspaces.git#tag=$_tag")
+sha256sums=('SKIP')
+
+package() {
+  cd simply-workspaces
+  make PREFIX="$pkgdir/usr" install
+}

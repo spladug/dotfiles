@@ -27,3 +27,9 @@ Include = /etc/paru.conf
 #     rebuilds -git packages from git HEAD regardless of pkgver, and IgnorePkg
 #     does not cover that (see IgnoreDevel in paru.conf(5)).
 IgnoreDevel = pop-launcher-git
+
+# local PKGBUILDs that mask their AUR namesakes -- see pkgbuilds/README.md in
+# the chezmoi source dir. Path= (not Url=) so edits are picked up immediately
+# with no review step; paru builds in place there.
+[spladug]
+Path = {{ dir .chezmoi.sourceDir }}/pkgbuilds
