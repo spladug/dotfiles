@@ -2,7 +2,6 @@
 # for PKGBUILD repositories configured with Path= (see paru.conf).
 */src/
 */pkg/
-*/shell/
 */simply-workspaces/
 *.pkg.tar*
 *.log

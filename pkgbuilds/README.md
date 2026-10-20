@@ -7,5 +7,6 @@ it. heptane doesn't need to know: it just asks paru for the name.
 
 This dir sits outside `home/` on purpose so chezmoi never copies it anywhere.
 
-Each GNOME release, bump the shell extensions here. The AUR packages tend to
-lag by weeks and simply-workspaces is only maintained in my fork.
+Each GNOME release, bump the shell extensions here. simply-workspaces is only
+maintained in my fork. Other extensions come from the AUR; if one lags a
+release, mask it here temporarily and drop the dir once the AUR catches up.
