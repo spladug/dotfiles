@@ -8,6 +8,13 @@ set -e
 {{- $clonePath := joinPath $paruCache $package -}}
 
 {{ if and (eq .chezmoi.os "linux") (eq .chezmoi.osRelease.id "arch") -}}
+# Bootstrap only. heptane keeps paru updated after this, and rerunning would fail
+# on the existing clone and abort the whole `chezmoi apply` (run_once reruns
+# whenever this file's content changes).
+if command -v paru >/dev/null 2>&1; then
+    echo "paru already installed; skipping"
+    exit 0
+fi
 mkdir -p {{ $paruCache | quote }}
 git clone --revision {{ $revision }} https://aur.archlinux.org/{{ $package }}.git {{ $clonePath | quote }}
 cd {{ $clonePath | quote }}
