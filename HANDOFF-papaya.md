@@ -149,10 +149,9 @@ real tools that had never been declared. papaya-specific hardware packages go
 in the `papaya` branch of `hardware.toml.tmpl`. `wireless-regdb` is now
 declared for every machine.
 
-## Open questions for Neil
+## Decided / open
 
-- Firefox: start.sh no longer launches it, but `firefox` is still in
-  `apps.toml`, and `environment.d/50-firefox.conf` and the "for firefox"
-  onnxruntime packages are still declared. Remove them?
+- Firefox stays installed as an option (`apps.toml`, `50-firefox.conf`); it is
+  just no longer launched by start.sh. Don't remove it.
 - `pkgbuilds/gnome-shell-extension-pop-shell-git/` is untracked build output on
   durian (the PKGBUILD was dropped 2026-10-20). Delete it there and on papaya if present.
