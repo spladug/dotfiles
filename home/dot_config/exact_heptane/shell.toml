@@ -3,6 +3,7 @@ packages = [
   "bat-extras",
   "eza",
   "fzf",
+  "github-cli",
   "git-delta",
   "htop",
   "jq",
