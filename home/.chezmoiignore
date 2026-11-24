@@ -36,8 +36,12 @@ ZDrive
 .local/bin/tswattcarbon
 {{ end }}
 
-# durian (Dell XPS 9320) only: colour tuning for its ov01a10 camera sensor.
+# durian (Dell XPS 9320) only: colour tuning for its ov01a10 camera sensor, and
+# its WirePlumber routing (sof_sdw speakers/mics, DisplayLink dock, AirPods,
+# Insta360). The rules match by device name so they'd be inert elsewhere, but
+# other machines haven't been reconciled with them yet -- merge deliberately.
 {{ if ne .chezmoi.hostname "durian" }}
 .config/environment.d/libcamera.conf
 .config/libcamera
+.config/wireplumber
 {{ end }}
