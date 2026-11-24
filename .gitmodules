@@ -1,3 +1,6 @@
 [submodule "vim/pack/spladug/start/commentary"]
 	path = home/dot_config/vim/external_pack/spladug/start/commentary
 	url = https://github.com/tpope/vim-commentary.git
+[submodule "fzf.vim"]
+	path = home/dot_config/vim/external_pack/spladug/start/fzf.vim
+	url = https://github.com/junegunn/fzf.vim
