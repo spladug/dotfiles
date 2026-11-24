@@ -6,3 +6,8 @@ set -e
 # sha256sum for {{ $keyFile }}: {{ include $keyFile | sha256sum }}
 gpg --import "{{ $keyFile }}"
 {{ end }}
+
+# Our own key needs ultimate owner trust, or gpg refuses to encrypt to it without
+# a TTY prompt -- which breaks `chezmoi add --encrypt` (e.g. ~/.ssh/config).
+# Importing a public key never sets owner trust, so a fresh machine has none.
+echo "5B5A70814529DDD6F45995A9A1986BFD48E8FD1E:6:" | gpg --import-ownertrust
