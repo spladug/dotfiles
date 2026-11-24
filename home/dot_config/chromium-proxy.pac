@@ -1,0 +1,27 @@
+// WORK MACHINES ONLY (chezmoi ignores this file where .work.email is unset).
+//
+// Route ONLY the WattCarbon tailnet through the userspace tailscaled's SOCKS5
+// proxy (tailscale-wattcarbon.service). Everything else goes direct -- including the
+// PERSONAL tailnet, which the system-wide tailscaled.service has joined, so it
+// needs no proxy.
+//
+// Chromium applies one proxy config per browser process, so this PAC covers
+// every profile, not just WattCarbon. That's harmless: only work-tailnet hosts
+// match, and they resolve nowhere else.
+//
+// Do NOT broaden this to "*.ts.net" or to the 100.64.0.0/10 CGNAT range. Both
+// tailnets live under .ts.net and both allocate from 100.64/10, so a broader match
+// would route personal-tailnet traffic into the work daemon, which knows nothing
+// about those peers -- the personal tailnet would silently stop working in the
+// browser while continuing to work everywhere else on the box.
+//
+// Do NOT use isInNet() or dnsResolve() here either: they force a synchronous DNS
+// lookup inside the PAC on every single URL load, which is slow and leaks every
+// hostname you visit to the resolver.
+
+function FindProxyForURL(url, host) {
+  if (shExpMatch(host, "*.tailXXXX.ts.net")) {
+    return "SOCKS5 127.0.0.1:1055";
+  }
+  return "DIRECT";
+}

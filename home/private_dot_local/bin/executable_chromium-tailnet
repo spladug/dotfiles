@@ -1,0 +1,59 @@
+#!/bin/sh
+# Launch Chromium in the profile that matches the URL being opened, with the
+# work-tailnet PAC applied on machines that have one.
+#
+# The PAC only exists on work machines (chezmoi ignores it elsewhere), where it
+# sends the WattCarbon tailnet through tailscale-wattcarbon.service's SOCKS proxy. On
+# personal machines there is no PAC and Chromium starts with no proxy: the
+# personal tailnet is joined system-wide, so it needs none.
+#
+# Chromium 151 silently IGNORES --proxy-pac-url=file://... (verified: the page
+# fails with ERR_NAME_NOT_RESOLVED, as if no proxy were configured at all). A
+# data: URL is honoured, so the PAC is inlined at launch time.
+#
+# Reading the PAC here, rather than baking base64 into the .desktop file, keeps
+# ~/.config/chromium-proxy.pac as the single source of truth: edit it and the
+# change takes effect on the next launch, with no file to regenerate.
+PAC="${HOME}/.config/chromium-proxy.pac"
+RESOLVER="${HOME}/.local/bin/chromium-profile"
+
+# Profile routing: the first http(s) URL in the arguments picks the profile, via
+# the rules in ~/.config/chromium-profile-rules.
+#
+# Skipped entirely when the caller already chose a profile or data dir, and when
+# there is no URL at all -- the New Window and Incognito desktop actions pass
+# none, so they keep opening the last-used profile as they always have.
+# chromium-profile stays silent unless it is sure, and an unmatched URL simply
+# gets no flag: never pass a guess, because Chromium responds to an unknown
+# --profile-directory by silently creating a new empty profile.
+explicit=""
+for arg in "$@"; do
+    case $arg in
+        --profile-directory=*|--user-data-dir=*) explicit=yes; break ;;
+    esac
+done
+
+profile_arg=""
+if [ -z "$explicit" ] && [ -x "$RESOLVER" ]; then
+    for arg in "$@"; do
+        case $arg in
+            http://*|https://*)
+                if dir=$("$RESOLVER" "$arg"); then
+                    profile_arg="--profile-directory=$dir"
+                fi
+                break ;;
+        esac
+    done
+fi
+
+# Prepended via set -- so the directory's space ("Profile 1") survives as one
+# argument; a plain unquoted $profile_arg would split it in two.
+[ -n "$profile_arg" ] && set -- "$profile_arg" "$@"
+
+if [ -r "$PAC" ]; then
+    exec /usr/bin/chromium \
+        "--proxy-pac-url=data:application/x-ns-proxy-autoconfig;base64,$(base64 -w0 "$PAC")" \
+        "$@"
+fi
+# No PAC (a personal machine): start normally.
+exec /usr/bin/chromium "$@"

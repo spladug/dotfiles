@@ -1,0 +1,4 @@
+#!/bin/sh
+# Control surface for the WattCarbon work tailnet daemon (tailscale-wattcarbon.service).
+# Without --socket, the tailscale CLI talks to the ROOTFUL personal daemon instead.
+exec tailscale --socket="${XDG_RUNTIME_DIR:-/run/user/$(id -u)}/tailscale-wattcarbon/tailscaled.sock" "$@"

@@ -27,3 +27,11 @@ ZDrive
 .steampid
 .terraform.d
 .vscode
+
+# work tailnet: a userspace tailscaled + SOCKS proxy that only Chromium uses.
+# personal machines have no work tailnet at all.
+{{ if not .work.email }}
+.config/chromium-proxy.pac
+.config/systemd/user/tailscale-wattcarbon.service
+.local/bin/tswattcarbon
+{{ end }}

@@ -1,0 +1,42 @@
+#!/bin/sh
+
+# Chromium marks a profile "Crashed" while it runs and only flips it back to
+# "Normal" on a clean quit, so after a logout/shutdown kill it shows the "Restore
+# pages?" bubble instead of restoring. (--disable-session-crashed-bubble no longer
+# does anything.) Mark every profile clean before launching so "continue where
+# you left off" just restores. Skipped if Chromium is already running, since it
+# owns the files then.
+if ! pgrep -x chromium >/dev/null; then
+    for prefs in "$HOME"/.config/chromium/*/Preferences; do
+        [ -f "$prefs" ] && sed -i 's/"exit_type":"Crashed"/"exit_type":"Normal"/' "$prefs"
+    done
+fi
+
+# Open the profile with this display name. If this machine has no such profile,
+# do nothing rather than pass a guessed --profile-directory: Chromium would
+# silently create a new empty profile.
+browser() {
+    dir=$("$HOME/.local/bin/chromium-profile" --name "$1") || return 0
+    "$HOME/.local/bin/chromium-tailnet" --profile-directory="$dir" &
+}
+
+wmctrl -s 0
+browser Personal
+1password &
+sleep 5
+{{- if .work.email }}
+
+wmctrl -s 1
+browser WattCarbon
+sleep 2
+{{- end }}
+
+wmctrl -s 8
+obsidian &
+# cider: on hold until the AUR package is v2.
+sleep 2
+
+wmctrl -s 9
+slack &
+discord &
+signal-desktop &

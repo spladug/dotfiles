@@ -1,0 +1,56 @@
+[Unit]
+Description=Tailscale node agent (WattCarbon work tailnet, userspace)
+Documentation=https://tailscale.com/kb/1112/userspace-networking
+After=network-online.target
+Wants=network-online.target
+
+# WORK MACHINES ONLY (chezmoi ignores this unit where .work.email is unset).
+#
+# This is a SECOND tailscaled, entirely separate from the system-wide
+# tailscaled.service that is joined to the PERSONAL tailnet. It runs unprivileged in
+# userspace-networking mode: no TUN device, no routes, no nftables rules, and it
+# never rewrites /etc/resolv.conf. Its network exists only inside this process and
+# is reachable solely via the loopback proxy below.
+
+[Service]
+Type=notify
+
+# NOTE: deliberately NO "ExecStopPost=tailscaled --cleanup" here, unlike the
+# packaged system unit. --cleanup flushes Tailscale's nftables chains and routes,
+# which on this host belong to the PERSONAL (system) daemon. In userspace mode we create none
+# of that, so there is nothing to clean and everything to break.
+
+ExecStart=/usr/bin/tailscaled \
+    --tun=userspace-networking \
+    --state=%S/tailscale-wattcarbon/tailscaled.state \
+    --socket=%t/tailscale-wattcarbon/tailscaled.sock \
+    --socks5-server=127.0.0.1:1055 \
+    --outbound-http-proxy-listen=127.0.0.1:1055 \
+    --port=0
+
+# 127.0.0.1 literally, not "localhost:" and not a bare ":1055", so the proxy is
+# not reachable from the LAN. --port=0 picks a random WireGuard UDP port so it
+# cannot collide with the system daemon's 41641.
+
+Restart=on-failure
+RestartSec=5
+
+RuntimeDirectory=tailscale-wattcarbon
+RuntimeDirectoryMode=0700
+StateDirectory=tailscale-wattcarbon
+StateDirectoryMode=0700
+CacheDirectory=tailscale-wattcarbon
+CacheDirectoryMode=0700
+
+NoNewPrivileges=true
+PrivateTmp=true
+ProtectSystem=strict
+ProtectControlGroups=true
+ProtectKernelTunables=true
+ProtectKernelModules=true
+RestrictSUIDSGID=true
+RestrictRealtime=true
+LockPersonality=true
+
+[Install]
+WantedBy=default.target

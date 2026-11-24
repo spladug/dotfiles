@@ -1,0 +1,63 @@
+# Which Chromium profile a clicked link opens in.
+#
+#   <host pattern>   <profile>
+#
+# Profiles are Chromium DISPLAY NAMES ("WattCarbon", "Personal" -- one word
+# each, since the columns are whitespace-separated). chromium-profile looks the
+# directory up in "Local State", so these work unchanged on every machine. A
+# profile this machine doesn't have (WattCarbon on a personal box) just doesn't
+# route: the link opens in whatever profile was last used.
+#
+# Patterns match the URL HOST only, in two forms:
+#   example.com      exact host
+#   *.example.com    example.com and any subdomain of it
+#   *                everything (the fallback)
+#
+# FIRST MATCH WINS, so specific rules must sit above general ones. Add a work
+# tool here the first time it opens in the wrong profile; no restart needed.
+
+# --- WattCarbon -----------------------------------------------------------
+wattcarbon.com          WattCarbon
+*.wattcarbon.com        WattCarbon
+wattcarbon.dev          WattCarbon
+*.wattcarbon.dev        WattCarbon
+
+# --- AWS ------------------------------------------------------------------
+# Scoped to aws.amazon.com, NOT amazon.com, so shopping stays personal.
+# *.aws.amazon.com covers regional consoles (us-west-2.console.aws.amazon.com).
+aws.amazon.com          WattCarbon
+*.aws.amazon.com        WattCarbon
+amazonaws.com           WattCarbon
+*.amazonaws.com         WattCarbon
+*.aws                   WattCarbon
+
+# --- Sentry ---------------------------------------------------------------
+sentry.io               WattCarbon
+*.sentry.io             WattCarbon
+
+# --- Slack ----------------------------------------------------------------
+slack.com               WattCarbon
+*.slack.com             WattCarbon
+
+# --- GitHub ---------------------------------------------------------------
+github.com              WattCarbon
+*.github.com            WattCarbon
+githubusercontent.com   WattCarbon
+*.githubusercontent.com WattCarbon
+
+# --- Linear ---------------------------------------------------------------
+linear.app              WattCarbon
+*.linear.app            WattCarbon
+
+# --- Linkedin -------------------------------------------------------------
+linkedin.com            WattCarbon
+
+# --- Explicitly personal --------------------------------------------------
+# Redundant with the fallback today, but keeps the intent on record and stays
+# correct if a broad work rule is ever added above.
+youtube.com             Personal
+*.youtube.com           Personal
+youtu.be                Personal
+
+# --- Fallback -------------------------------------------------------------
+*                       Personal

@@ -1,0 +1,7 @@
+{{ if .work.email -}}
+#!/bin/sh
+# The WattCarbon tailnet runs as a userspace daemon behind a SOCKS proxy, for
+# Chromium only (see ~/.config/chromium-proxy.pac). First run on a new machine:
+# `tswattcarbon up` to log it in.
+exec systemctl --user enable --now tailscale-wattcarbon.service
+{{ end -}}

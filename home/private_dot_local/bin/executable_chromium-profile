@@ -1,0 +1,99 @@
+#!/bin/sh
+# Resolve a URL (or a profile name) to the Chromium profile directory to open.
+#
+#   chromium-profile https://github.com/foo   ->  Default     (if "WattCarbon" lives there)
+#   chromium-profile https://youtube.com      ->  Profile 1   (if "Personal" lives there)
+#   chromium-profile --name WattCarbon        ->  Default
+#
+# Prints the profile directory and exits 0 on a match. Exits non-zero WITHOUT
+# printing when it has no opinion (not an http(s) URL, no rule matched, rules
+# file missing, no profile with that display name on this machine). Callers must
+# treat that as "add no --profile-directory flag" rather than guessing: an
+# unknown directory passed to Chromium does not error, it silently creates a
+# brand new profile.
+#
+# Profiles are named by their DISPLAY NAME (what Chromium's profile picker
+# shows), and the directory is looked up in "Local State" every time. Directory
+# names differ from machine to machine ("Default" is whichever profile was made
+# first), display names are kept identical everywhere. So a rule naming a profile
+# this machine doesn't have -- WattCarbon on a personal-only box -- simply
+# doesn't route, and the link opens in the last-used profile.
+
+RULES="${HOME}/.config/chromium-profile-rules"
+LOCAL_STATE="${HOME}/.config/chromium/Local State"
+
+# Display name -> directory. Fails (silently) on zero matches, and on more than
+# one, since two profiles sharing a name means we can't know which was meant.
+dir_for_name() {
+    [ -r "$LOCAL_STATE" ] || return 1
+    dirs=$(jq -r --arg n "$1" \
+        '.profile.info_cache | to_entries[] | select(.value.name == $n) | .key' \
+        "$LOCAL_STATE" 2>/dev/null) || return 1
+    [ -n "$dirs" ] || return 1
+    [ "$(printf '%s\n' "$dirs" | wc -l)" -eq 1 ] || {
+        echo "chromium-profile: more than one profile named '$1'; not routing" >&2
+        return 1
+    }
+    printf '%s\n' "$dirs"
+}
+
+case $1 in
+    --name)
+        [ -n "$2" ] || { echo "usage: chromium-profile --name <display name>" >&2; exit 2; }
+        dir_for_name "$2"
+        exit ;;
+    '')
+        echo "usage: chromium-profile <url> | --name <display name>" >&2
+        exit 2 ;;
+esac
+
+url=$1
+
+# Only web URLs get routed; file:// args, flags and the like get no opinion.
+case $url in
+    http://*|https://*) ;;
+    *) exit 1 ;;
+esac
+
+# Reduce the URL to a bare host: drop scheme, path/query/fragment, userinfo and
+# port, lowercase it, and drop the root label's trailing dot ("example.com.").
+authority=${url#*://}
+authority=${authority%%/*}
+authority=${authority%%\?*}
+authority=${authority%%#*}
+authority=${authority##*@}
+case $authority in
+    \[*\]*)  host=${authority%%\]*}; host=${host#\[} ;;   # IPv6 literal
+    *)       host=${authority%%:*} ;;
+esac
+host=$(printf '%s' "$host" | tr '[:upper:]' '[:lower:]')
+host=${host%.}
+[ -n "$host" ] || exit 1
+
+[ -r "$RULES" ] || {
+    echo "chromium-profile: $RULES unreadable; not routing" >&2
+    exit 1
+}
+
+# First match wins. A trailing comment lands in $ignored and is discarded.
+name=""
+while read -r pattern profile ignored; do
+    case $pattern in ''|\#*) continue ;; esac
+    case $profile in ''|\#*) continue ;; esac
+    case $pattern in
+        '*')
+            name=$profile; break ;;
+        '*.'*)
+            base=${pattern#\*.}
+            if [ "$host" = "$base" ] || [ "${host%".$base"}" != "$host" ]; then
+                name=$profile; break
+            fi ;;
+        *)
+            if [ "$host" = "$pattern" ]; then
+                name=$profile; break
+            fi ;;
+    esac
+done < "$RULES"
+
+[ -n "$name" ] || exit 1
+dir_for_name "$name"

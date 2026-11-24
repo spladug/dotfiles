@@ -1,0 +1,29 @@
+# Local override of /usr/share/applications/chromium.desktop (same file name, so
+# it shadows the packaged one). It exists to send every launch -- clicked links,
+# xdg-open, the dock icon -- through chromium-tailnet, which picks the profile
+# from the URL and applies the work-tailnet PAC where there is one.
+#
+# Trimmed from the packaged entry: translations dropped, and the package's
+# literal "@@startup_wm_class" placeholder replaced with the real WM class.
+[Desktop Entry]
+Version=1.0
+Name=Chromium
+GenericName=Web Browser
+Comment=Access the Internet
+Exec={{ .chezmoi.homeDir }}/.local/bin/chromium-tailnet %U
+StartupNotify=true
+StartupWMClass=chromium
+Terminal=false
+Icon=chromium
+Type=Application
+Categories=Network;WebBrowser;
+MimeType=application/pdf;application/rdf+xml;application/rss+xml;application/xhtml+xml;application/xhtml_xml;application/xml;image/gif;image/jpeg;image/png;image/webp;text/html;text/xml;x-scheme-handler/http;x-scheme-handler/https;x-scheme-handler/chromium;
+Actions=new-window;new-private-window;
+
+[Desktop Action new-window]
+Name=New Window
+Exec={{ .chezmoi.homeDir }}/.local/bin/chromium-tailnet
+
+[Desktop Action new-private-window]
+Name=New Incognito Window
+Exec={{ .chezmoi.homeDir }}/.local/bin/chromium-tailnet --incognito
