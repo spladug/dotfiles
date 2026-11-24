@@ -1,0 +1,88 @@
+{{/* Per-host: these rules name specific hardware. Other hosts get an empty
+     file, which chezmoi does not create. */ -}}
+{{ if eq .chezmoi.hostname "durian" -}}
+# Audio devices and nodes that should never take part in routing.
+#
+# Goal: the only audio endpoints on this system are
+#   sinks    AirPods Pro, laptop speakers
+#   sources  Insta360 Link, built-in SoundWire mics
+
+monitor.alsa.rules = [
+  # DisplayLink dock (Dell Universal Hybrid Video Dock) -- its S/PDIF
+  # sink and source were outranking everything else (priority 1108/2108).
+  # Matched by regex, so a replacement dock with a different serial is
+  # still covered.
+  {
+    matches = [
+      {
+        device.name = "~alsa_card.usb-DisplayLink.*"
+      }
+    ]
+    actions = {
+      update-props = {
+        device.disabled = true
+      }
+    }
+  }
+
+  # HDMI / DisplayPort outputs on the built-in sof_sdw card.
+  #
+  # Disabled per-node rather than by dropping a card profile: this card
+  # ships a single "HiFi" UCM profile that bundles speakers, mics and
+  # HDMI together, so removing the profile would take the speakers too.
+  #
+  # To get monitor audio back later, delete this rule block.
+  {
+    matches = [
+      {
+        node.name = "~alsa_output.*sof_sdw.HiFi__HDMI[0-9]+__sink"
+      }
+    ]
+    actions = {
+      update-props = {
+        node.disabled = true
+      }
+    }
+  }
+]
+{{ else if eq .chezmoi.hostname "papaya" -}}
+## Hide audio outputs that aren't wanted in the output list.
+## Goal: leave only "Navi 31 HDMI/DP Audio (PG27UCDM)" as an output.
+## Requested by Neil, 2026-07-20.
+
+monitor.alsa.rules = [
+  {
+    ## Navi 31 GPU audio (card pci-0000_03_00.1): drop ACP profile mode so
+    ## each DisplayPort connector is its own monitor-named sink node that
+    ## can be individually disabled below.
+    matches = [ { device.name = "alsa_card.pci-0000_03_00.1" } ]
+    actions = { update-props = { api.alsa.use-acp = false } }
+  }
+  {
+    ## Hide DP2 (hw:0,7 AORUS), DP3 (hw:0,8 unconnected), DP4 (hw:0,9 AORUS).
+    ## DP1 = playback.3.0 (PG27UCDM) is the only GPU output left visible.
+    matches = [
+      { node.name = "alsa_output.pci-0000_03_00.1.playback.7.0" }
+      { node.name = "alsa_output.pci-0000_03_00.1.playback.8.0" }
+      { node.name = "alsa_output.pci-0000_03_00.1.playback.9.0" }
+    ]
+    actions = { update-props = { node.disabled = true } }
+  }
+  {
+    ## Generic USB Audio DAC: drop ACP so its S/PDIF + analog ports become
+    ## plain nodes, then disable every output node below. Nothing from this
+    ## device appears in the output list. Mic inputs are left untouched.
+    matches = [ { device.name = "alsa_card.usb-Generic_USB_Audio-00" } ]
+    actions = { update-props = { api.alsa.use-acp = false } }
+  }
+  {
+    matches = [
+      { node.name = "alsa_output.usb-Generic_USB_Audio-00.playback.0.0" }
+      { node.name = "alsa_output.usb-Generic_USB_Audio-00.playback.1.0" }
+      { node.name = "alsa_output.usb-Generic_USB_Audio-00.playback.2.0" }
+      { node.name = "alsa_output.usb-Generic_USB_Audio-00.playback.3.0" }
+    ]
+    actions = { update-props = { node.disabled = true } }
+  }
+]
+{{ end -}}
