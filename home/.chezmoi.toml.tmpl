@@ -1,6 +1,7 @@
 {{- $personalEmail := promptStringOnce . "personal.email" "What is your personal email" -}}
 {{- $workEmail := promptStringOnce . "work.email" "What is your work email (blank for none)" -}} 
 {{- $workOrg := promptStringOnce . "work.github.org" "What is the GitHub org for your work (blank for none)" -}}
+{{- $workTailnet := promptStringOnce . "work.tailnet" "What is your work tailnet's MagicDNS suffix like tailXXXX.ts.net (blank for none)" -}}
 
 encryption = "gpg"
 
@@ -15,3 +16,4 @@ encryption = "gpg"
     [data.work]
         email = {{ $workEmail | quote }}
         github.org = {{ $workOrg | quote }}
+        tailnet = {{ $workTailnet | quote }}

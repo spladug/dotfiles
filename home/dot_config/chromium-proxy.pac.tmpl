@@ -1,4 +1,6 @@
-// WORK MACHINES ONLY (chezmoi ignores this file where .work.email is unset).
+// WORK MACHINES ONLY (chezmoi ignores this file unless .work.email and
+// .work.tailnet are set). The tailnet name comes from chezmoi data, not this
+// repo, which is public.
 //
 // Route ONLY the WattCarbon tailnet through the userspace tailscaled's SOCKS5
 // proxy (tailscale-wattcarbon.service). Everything else goes direct -- including the
@@ -20,7 +22,7 @@
 // hostname you visit to the resolver.
 
 function FindProxyForURL(url, host) {
-  if (shExpMatch(host, "*.tailXXXX.ts.net")) {
+  if (shExpMatch(host, "*.{{ .work.tailnet }}")) {
     return "SOCKS5 127.0.0.1:1055";
   }
   return "DIRECT";

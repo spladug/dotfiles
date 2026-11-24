@@ -35,6 +35,10 @@ ZDrive
 .config/systemd/user/tailscale-wattcarbon.service
 .local/bin/tswattcarbon
 {{ end }}
+{{- /* without the tailnet name the PAC would match nothing useful */}}
+{{ if not (index .work "tailnet") }}
+.config/chromium-proxy.pac
+{{ end }}
 
 # durian (Dell XPS 9320) only: colour tuning for its ov01a10 camera sensor.
 # (WirePlumber config is shared; its per-host hide rules are templated in
