@@ -22,7 +22,10 @@
 // hostname you visit to the resolver.
 
 function FindProxyForURL(url, host) {
-  if (shExpMatch(host, "*.{{ .work.tailnet }}")) {
+  // wattcarbon.dev is served only over the work tailnet, so it must take the
+  // same route as the tailnet's own MagicDNS names.
+  if (shExpMatch(host, "*.{{ .work.tailnet }}") ||
+      host == "wattcarbon.dev" || shExpMatch(host, "*.wattcarbon.dev")) {
     return "SOCKS5 127.0.0.1:1055";
   }
   return "DIRECT";
