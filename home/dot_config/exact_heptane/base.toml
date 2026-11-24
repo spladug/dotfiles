@@ -13,6 +13,9 @@ packages = [
   "btrfs-progs",
   "ccid",
   "chezmoi",
+  # fsck.vfat / mkfs.vfat for the EFI partition. fstab gives /efi fsck pass 2,
+  # and without this systemd-fsck silently skips that check on every boot.
+  "dosfstools",
   "efibootmgr",
   "fwupd",
   "git",
