@@ -42,6 +42,7 @@ packages = [
   "pipewire-jack",
   "pipewire-libcamera",
   "pipewire-pulse",
+  "seahorse",  # GUI for gnome-keyring and GPG keys
   "showtime",
   "snapshot",
   "sushi",
