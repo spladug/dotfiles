@@ -3,6 +3,7 @@
 
 import os
 import subprocess
+import sys
 import tomllib
 
 from pathlib import Path
@@ -169,7 +170,20 @@ def sync_files(to_create: list[str], to_destroy: list[str]) -> None:
         subprocess.run(["sudo", "touch", *to_create], check=True)
 
 
+USAGE = """\
+usage: heptane          show what differs from the declared config (changes nothing)
+       heptane apply    show it, then make the changes after you type YES"""
+
+
 def main() -> None:
+    # dry run unless told otherwise. bare `heptane` used to go straight to the
+    # apply prompt, so "let me just see the drift" was one keystroke from removing
+    # every undeclared package -- and on a fresh box that's most of them.
+    args = sys.argv[1:]
+    if args not in ([], ["apply"]):
+        raise SystemExit(USAGE)
+    apply = args == ["apply"]
+
     config = load_config()
     to_install, to_remove = diff_packages(config)
     to_enable, to_disable = diff_systemd(config)
@@ -179,8 +193,15 @@ def main() -> None:
         print("nothing to do. byeeeee")
         return
 
+    if not apply:
+        print("\n(dry run -- `heptane apply` to make these changes)")
+        return
+
     print()
-    response = input("Type YES to proceed: ")
+    try:
+        response = input("Type YES to proceed: ")
+    except EOFError:  # no terminal (piped, or run by a tool): never a yes
+        response = ""
     if response != "YES":
         print("nm, byeeeee")
         return
