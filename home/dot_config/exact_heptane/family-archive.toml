@@ -1,0 +1,8 @@
+# tooling for the family-archive repo: OCR for scanned documents, LFS for the
+# scans themselves, and Cloudflare's CLI for where it's published.
+packages = [
+  "git-lfs",
+  "tesseract",
+  "tesseract-data-spa",
+  "wrangler",
+]

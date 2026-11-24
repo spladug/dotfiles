@@ -1,6 +1,7 @@
 packages = [
   "bat",
   "bat-extras",
+  "bind",  # dig, nslookup
   "eza",
   "fzf",
   "github-cli",
@@ -10,7 +11,10 @@ packages = [
   "ncdu",
   "pyright",  # for vim+ale
   "ripgrep",
+  "restic",
   "ruff",
+  "socat",  # optional dep of claude-code (sandbox)
+  "sops",
   "starship",
   "vim",
   "vim-airline",
@@ -20,7 +24,9 @@ packages = [
   # the name resolved to nothing and made `paru -S` fail -- which, because
   # `paru -S a b c` installs nothing if any one target is bad, meant NO packages
   # installed on a fresh box. add vim-fugitive-git if you want it back.
-  "vim-fzf-git",
+  # no vim-fzf-git: fzf.vim is a pinned git submodule under
+  # ~/.config/vim/pack/spladug/start, same as commentary, so updates are a
+  # reviewed diff instead of a PKGBUILD change.
   "yamllint", # for vim+ale
   "zoxide",
   "zsh",

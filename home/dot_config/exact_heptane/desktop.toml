@@ -48,6 +48,7 @@ packages = [
   "tecla",
   "ttf-sourcecodepro-nerd",
   "wireplumber",
+  "wl-clipboard",
   "wmctrl",
   "xdg-desktop-portal-gnome",
   "xdg-user-dirs-gtk",

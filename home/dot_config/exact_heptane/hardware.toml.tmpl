@@ -14,6 +14,7 @@
 {{- $cpuVendor := output "sh" "-c" "grep -m1 -oE 'GenuineIntel|AuthenticAMD' /proc/cpuinfo || true" | trim -}}
 packages = [
     "dmidecode",
+    "wireless-regdb",  # every machine here has wifi; lets the kernel apply the right regulatory domain
 {{- if eq $cpuVendor "GenuineIntel" }}
     "intel-ucode",
 {{- else if eq $cpuVendor "AuthenticAMD" }}

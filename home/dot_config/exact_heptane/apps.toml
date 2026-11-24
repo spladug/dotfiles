@@ -1,7 +1,8 @@
 packages = [
     "1password",
     "chromium",
-    "cider",
+    # cider: removed 2026-11-24. it is paid; the AUR "cider" package is v1, not
+    # the v2 actually in use, so reinstall it from wherever v2 comes from.
     "discord",
     "firefox",
     "gimp",

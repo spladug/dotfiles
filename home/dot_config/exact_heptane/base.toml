@@ -48,6 +48,7 @@ packages = [
   "paru",  # should not be in installer
   "pinentry",
   "sbctl",  # should not be in installer
+  "smartmontools",  # should not be in installer
   "sudo",
   # DO NOT REMOVE. mkinitcpio only delegates UKI building to ukify when this is
   # installed, and SILENTLY falls back to its own builder otherwise -- no
@@ -57,6 +58,7 @@ packages = [
   "systemd-ukify",
   "tailscale",
   "ufw",
+  "usbutils",  # lsusb. should not be in installer
   # DO NOT REMOVE. there is no swap partition by design (hibernation doesn't mix
   # with TPM auto-unlock), so zram is the only thing between memory pressure and
   # the kernel OOM killer. NOTE: the package alone does nothing -- it needs
