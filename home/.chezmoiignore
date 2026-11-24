@@ -35,3 +35,9 @@ ZDrive
 .config/systemd/user/tailscale-wattcarbon.service
 .local/bin/tswattcarbon
 {{ end }}
+
+# durian (Dell XPS 9320) only: colour tuning for its ov01a10 camera sensor.
+{{ if ne .chezmoi.hostname "durian" }}
+.config/environment.d/libcamera.conf
+.config/libcamera
+{{ end }}
