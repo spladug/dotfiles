@@ -6,3 +6,5 @@ background-opacity = .9
 
 window-padding-x = 8
 window-decoration = none
+
+keybind = ctrl+enter=unbind
